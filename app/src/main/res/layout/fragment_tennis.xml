@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/TennisFragment"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".TennisFragment">
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/topBarHeight"
+        android:background="@drawable/background_topbar"
+        android:gravity="center"
+        android:padding="@dimen/paddingStandard"
+        android:text="@string/tennisHome"
+        android:textSize="@dimen/title"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/marginStandard"
+        android:layout_marginTop="@dimen/arrowMargin"
+        android:contentDescription="@string/contentDescription"
+        android:src="@drawable/ic_backarrow"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tournamentSearch"
+        android:layout_width="@dimen/homeButtonWidth"
+        android:layout_height="@dimen/tennisButtonHeight"
+        android:background="@drawable/background_button"
+        android:gravity="center"
+        android:padding="@dimen/paddingStandard"
+        android:text="@string/tournamentSearch"
+        android:textSize="@dimen/tennisButton"
+        app:drawableStartCompat="@drawable/ic_graph"
+        app:layout_constraintBottom_toTopOf="@+id/athleteSearch"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/title" />
+
+    <TextView
+        android:id="@+id/athleteSearch"
+        android:layout_width="@dimen/homeButtonWidth"
+        android:layout_height="@dimen/tennisButtonHeight"
+        android:background="@drawable/background_button"
+        android:gravity="center"
+        android:padding="@dimen/paddingStandard"
+        android:text="@string/athleteSearch"
+        android:textSize="@dimen/tennisButton"
+        app:drawableStartCompat="@drawable/ic_person"
+        app:layout_constraintBottom_toTopOf="@+id/filterCreation"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tournamentSearch" />
+
+    <TextView
+        android:id="@+id/filterCreation"
+        android:layout_width="@dimen/homeButtonWidth"
+        android:layout_height="@dimen/tennisButtonHeight"
+        android:background="@drawable/background_button"
+        android:gravity="center"
+        android:padding="@dimen/paddingStandard"
+        android:text="@string/filterCreation"
+        android:textSize="@dimen/tennisButton"
+        app:drawableStartCompat="@drawable/ic_filter"
+        app:layout_constraintBottom_toTopOf="@+id/filterEditing"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/athleteSearch" />
+
+    <TextView
+        android:id="@+id/filterEditing"
+        android:layout_width="@dimen/homeButtonWidth"
+        android:layout_height="@dimen/tennisButtonHeight"
+        android:background="@drawable/background_button"
+        android:gravity="center"
+        android:padding="@dimen/paddingStandard"
+        android:text="@string/filterEditing"
+        android:textSize="@dimen/tennisButton"
+        app:drawableStartCompat="@drawable/ic_checklist"
+        app:layout_constraintBottom_toTopOf="@+id/favouriteMatches"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/filterCreation" />
+
+    <TextView
+        android:id="@+id/favouriteMatches"
+        android:layout_width="@dimen/homeButtonWidth"
+        android:layout_height="@dimen/tennisButtonHeight"
+        android:background="@drawable/background_button"
+        android:gravity="center"
+        android:padding="@dimen/paddingStandard"
+        android:text="@string/favouriteMatches"
+        android:textSize="@dimen/tennisButton"
+        app:drawableStartCompat="@drawable/ic_fullstar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/filterEditing" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

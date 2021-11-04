@@ -1,0 +1,41 @@
+<resources>
+    <string name="app_name">SportIntelligenceTesiMolettaDavide</string>
+
+    <!-- HOME -->
+    <string name="tennisHome">TENNIS</string>
+    <string name="soccerHome">CALCIO</string>
+    <string name="volleyHome">PALLAVOLO</string>
+    <string name="basketHome">BASKET</string>
+
+    <!-- TENNIS   HOME -->
+    <string name="tournamentSearch">RICERCA PER TORNEO</string>
+    <string name="athleteSearch">RICERCA PER ATLETA</string>
+    <string name="filterCreation">CREA FILTRO RICERCA</string>
+    <string name="filterEditing">GESTISCI FILTRI RICERCA</string>
+    <string name="favouriteMatches">RICERCHE PREFERITE</string>
+
+    <!-- RISULTATI RICERCA -->
+    <string name="searchResultHeader">RISULTATI RICERCA</string>
+    <string name="matchInfo">INFORMAZIONI PARTITA</string>
+    <string name="matchStats">STATISTICHE PARTITA</string>
+    <string name="matchQuotes">QUOTE</string>
+    <string name="filterSelector">SELEZIONA FILTRO</string>
+    <string name="setSelector">SELEZIONA SET</string>
+
+    <!-- CREAZIONE FILTRO RICERCA -->
+    <string name="filterTitle">CREA FILTRO</string>
+    <string name="setStatsFilter">STATISTICHE SET</string>
+    <string name="setHistoryFilter">STORICO SET</string>
+    <string name="filterName">Nome Ricerca…</string>
+    <string name="save">SALVA</string>
+
+    <!-- GESTIONE FILTRI -->
+    <string name="filterManagement">GESTISCI FILTRI</string>
+
+    <!-- GENERALS -->
+    <string name="search">Cerca…</string>
+    <string name="contentDescription">Image</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+</resources>

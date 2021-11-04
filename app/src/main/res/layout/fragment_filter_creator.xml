@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/FilterCreatorFragment"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".FilterCreatorFragment">
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/topBarHeight"
+        android:background="@drawable/background_topbar"
+        android:gravity="center"
+        android:padding="@dimen/paddingStandard"
+        android:text="@string/filterCreation"
+        android:textSize="@dimen/title"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/marginStandard"
+        android:layout_marginTop="@dimen/arrowMargin"
+        android:contentDescription="@string/contentDescription"
+        android:src="@drawable/ic_backarrow"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/checklist"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/marginStandard"
+        android:background="@drawable/background_button"
+        android:backgroundTint="@color/boxBackground"
+        android:padding="@dimen/littlePadding"
+        app:layout_constraintBottom_toTopOf="@+id/editFilterName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/title">
+
+        <CheckBox
+            android:id="@+id/checkMatchInfo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toTopOf="@+id/checkMatchStats"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="DuplicateSpeakableTextCheck" />
+
+        <CheckBox
+            android:id="@+id/checkMatchStats"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toTopOf="@+id/checkSetStats"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/checkMatchInfo" />
+
+        <CheckBox
+            android:id="@+id/checkSetStats"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toTopOf="@+id/checkSetHistory"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/checkMatchStats" />
+
+        <CheckBox
+            android:id="@+id/checkSetHistory"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toTopOf="@+id/checkQuotes"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/checkSetStats" />
+
+        <CheckBox
+            android:id="@+id/checkQuotes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/checkSetHistory" />
+
+        <TextView
+            android:id="@+id/textMatchInfo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/matchInfo"
+            android:textSize="@dimen/filterLabel"
+            app:layout_constraintBottom_toBottomOf="@+id/checkMatchInfo"
+            app:layout_constraintStart_toEndOf="@+id/checkMatchInfo"
+            app:layout_constraintTop_toTopOf="@+id/checkMatchInfo" />
+
+        <TextView
+            android:id="@+id/textMatchStats"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/matchStats"
+            android:textSize="@dimen/filterLabel"
+            app:layout_constraintBottom_toBottomOf="@+id/checkMatchStats"
+            app:layout_constraintStart_toEndOf="@+id/checkMatchStats"
+            app:layout_constraintTop_toTopOf="@+id/checkMatchStats" />
+
+        <TextView
+            android:id="@+id/textSetStats"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/setStatsFilter"
+            android:textSize="@dimen/filterLabel"
+            app:layout_constraintBottom_toBottomOf="@+id/checkSetStats"
+            app:layout_constraintStart_toEndOf="@+id/checkSetStats"
+            app:layout_constraintTop_toTopOf="@+id/checkSetStats" />
+
+        <TextView
+            android:id="@+id/textSetHistory"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/setHistoryFilter"
+            android:textSize="@dimen/filterLabel"
+            app:layout_constraintBottom_toBottomOf="@+id/checkSetHistory"
+            app:layout_constraintStart_toEndOf="@+id/checkSetHistory"
+            app:layout_constraintTop_toTopOf="@+id/checkSetHistory" />
+
+        <TextView
+            android:id="@+id/textQuotes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/matchQuotes"
+            android:textSize="@dimen/filterLabel"
+            app:layout_constraintBottom_toBottomOf="@+id/checkQuotes"
+            app:layout_constraintStart_toEndOf="@+id/checkQuotes"
+            app:layout_constraintTop_toTopOf="@+id/checkQuotes" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <EditText
+        android:id="@+id/editFilterName"
+        android:layout_width="@dimen/homeButtonWidth"
+        android:layout_height="@dimen/searchButtonHeight"
+        android:autofillHints="name"
+        android:background="@drawable/background_button"
+        android:backgroundTint="@color/searchBackground"
+        android:hint="@string/filterName"
+        android:inputType="text"
+        android:paddingStart="@dimen/littlePadding"
+        android:paddingEnd="@dimen/littlePadding"
+        android:textColorHint="@color/searchText"
+        app:layout_constraintBottom_toTopOf="@+id/saveButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/checklist" />
+
+    <TextView
+        android:id="@+id/saveButton"
+        android:layout_width="@dimen/saveButton"
+        android:layout_height="wrap_content"
+        android:background="@drawable/background_button"
+        android:gravity="center"
+        android:padding="@dimen/paddingStandard"
+        android:paddingStart="@dimen/littlePadding"
+        android:paddingEnd="@dimen/bigPadding"
+        android:text="@string/save"
+        app:drawableStartCompat="@drawable/ic_floppy"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editFilterName" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.example.sportintelligencetesimolettadavide.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_tennisFragment"
+            app:destination="@id/tennisFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/tennisFragment"
+        android:name="com.example.sportintelligencetesimolettadavide.TennisFragment"
+        android:label="fragment_tennis"
+        tools:layout="@layout/fragment_tennis" >
+        <action
+            android:id="@+id/action_tennisFragment_to_filterCreatorFragment"
+            app:destination="@id/filterCreatorFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/filterCreatorFragment"
+        android:name="com.example.sportintelligencetesimolettadavide.FilterCreatorFragment"
+        android:label="fragment_filter_creator"
+        tools:layout="@layout/fragment_filter_creator" />
+</navigation>

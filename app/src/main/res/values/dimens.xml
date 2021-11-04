@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="marginStandard">8dp</dimen>
+    <dimen name="littleMargin">4dp</dimen>
+    <dimen name="bigMargin">30dp</dimen>
+
+    <dimen name="arrowMargin">25dp</dimen>
+    <dimen name="editMargin">40dp</dimen>
+
+    <dimen name="paddingStandard">10dp</dimen>
+    <dimen name="bigPadding">20dp</dimen>
+    <dimen name="littlePadding">6dp</dimen>
+
+    <dimen name="genericImage">25dp</dimen>
+    <dimen name="fullSpaceLabel">0dp</dimen>
+    <dimen name="homeButtonWidth">380dp</dimen>
+    <dimen name="homeButtonHeight">90dp</dimen>
+    <dimen name="tennisButtonHeight">60dp</dimen>
+    <dimen name="homeLogo">100dp</dimen>
+    <dimen name="topBarHeight">85dp</dimen>
+    <dimen name="searchButtonHeight">48dp</dimen>
+    <dimen name="saveButton">170dp</dimen>
+
+
+    <dimen name="homeButton">40sp</dimen>
+    <dimen name="title">40sp</dimen>
+    <dimen name="tennisButton">25sp</dimen>
+    <dimen name="editText">15sp</dimen>
+    <dimen name="filterLabel">20sp</dimen>
+
+
+    <dimen name="genericButton">19sp</dimen>
+    <dimen name="matchLabel">19sp</dimen>
+    <dimen name="boxTitle">19sp</dimen>
+</resources>
