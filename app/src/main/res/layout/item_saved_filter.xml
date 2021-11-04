@@ -30,7 +30,6 @@
                 android:layout_width="@dimen/fullSpaceLabel"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/littleMargin"
-                android:text="@string/filterManagement"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/edit"
                 app:layout_constraintStart_toStartOf="parent"

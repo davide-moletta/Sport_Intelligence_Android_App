@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="@dimen/marginStandard"
+    android:layout_marginTop="@dimen/marginStandard"
+    android:layout_marginEnd="@dimen/marginStandard"
+    android:background="@drawable/background_button"
+    android:padding="@dimen/littlePadding">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:backgroundTint="@color/matchBackground"
+        android:paddingTop="@dimen/paddingStandard"
+        android:paddingBottom="@dimen/paddingStandard"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/tournamentName"
+                android:layout_width="@dimen/fullSpaceLabel"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/littleMargin"
+                android:gravity="start"
+                app:layout_constraintEnd_toStartOf="@id/fullStar"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/fullStar"
+                android:layout_width="@dimen/genericImage"
+                android:layout_height="@dimen/genericImage"
+                android:layout_marginStart="@dimen/littleMargin"
+                android:layout_marginEnd="@dimen/littleMargin"
+                android:contentDescription="@string/contentDescription"
+                android:src="@drawable/ic_fullstar"
+                app:layout_constraintBottom_toBottomOf="@id/tournamentName"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/tournamentName"
+                app:layout_constraintTop_toTopOf="@id/tournamentName" />
+
+            <TextView
+                android:id="@+id/firstPlayer"
+                android:layout_width="@dimen/fullSpaceLabel"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                app:layout_constraintBottom_toBottomOf="@+id/result"
+                app:layout_constraintEnd_toStartOf="@id/result"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/result" />
+
+            <TextView
+                android:id="@+id/result"
+                android:layout_width="@dimen/fullSpaceLabel"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/littleMargin"
+                android:gravity="center"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/secondPlayer"
+                app:layout_constraintStart_toEndOf="@id/firstPlayer"
+                app:layout_constraintTop_toBottomOf="@id/tournamentName" />
+
+            <TextView
+                android:id="@+id/secondPlayer"
+                android:layout_width="@dimen/fullSpaceLabel"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                app:layout_constraintBottom_toBottomOf="@+id/result"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/result"
+                app:layout_constraintTop_toTopOf="@id/result" />
+
+            <ImageView
+                android:id="@+id/tennisBall"
+                android:layout_width="@dimen/genericImage"
+                android:layout_height="@dimen/genericImage"
+                android:layout_marginTop="@dimen/littleMargin"
+                android:contentDescription="@string/contentDescription"
+                android:src="@drawable/ic_tennisball"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/result" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
