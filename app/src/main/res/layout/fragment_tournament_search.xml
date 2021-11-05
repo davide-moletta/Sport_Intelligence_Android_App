@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/TournamentSearchFragment"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".TournamentSearchFragment">
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/topBarHeight"
+        android:background="@drawable/background_topbar"
+        android:gravity="end|center_vertical"
+        android:padding="@dimen/paddingStandard"
+        android:paddingEnd="@dimen/bigPadding"
+        android:text="@string/tournamentSearch"
+        android:textSize="@dimen/title"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/marginStandard"
+        android:layout_marginTop="@dimen/arrowMargin"
+        android:contentDescription="@string/contentDescription"
+        android:src="@drawable/ic_backarrow"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/search"
+        android:layout_width="@dimen/homeButtonWidth"
+        android:layout_height="@dimen/searchButtonHeight"
+        android:layout_marginTop="@dimen/marginStandard"
+        android:autofillHints="name"
+        android:background="@drawable/background_button"
+        android:backgroundTint="@color/searchBackground"
+        android:hint="@string/search"
+        android:inputType="text"
+        android:paddingStart="@dimen/littlePadding"
+        android:paddingEnd="@dimen/littlePadding"
+        android:textColorHint="@color/searchText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/title" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/marginStandard"
+        android:layout_marginTop="@dimen/bigMargin"
+        android:layout_marginEnd="@dimen/marginStandard"
+        android:layout_marginBottom="@dimen/bigMargin"
+        android:background="@drawable/background_button"
+        android:backgroundTint="@color/boxBackground"
+        android:paddingStart="@dimen/paddingStandard"
+        android:paddingEnd="@dimen/paddingStandard"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/search" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -34,9 +34,4 @@
     <dimen name="subTitle">25sp</dimen>
     <dimen name="searchResultLabel">15sp</dimen>
     <dimen name="searchResultStatsLabel">20sp</dimen>
-
-
-
-    <dimen name="matchLabel">19sp</dimen>
-    <dimen name="boxTitle">19sp</dimen>
 </resources>

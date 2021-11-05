@@ -43,4 +43,19 @@
         android:name="com.example.sportintelligencetesimolettadavide.FilterManagementFragment"
         android:label="fragment_filter_management"
         tools:layout="@layout/fragment_filter_management" />
+    <fragment
+        android:id="@+id/athleteSearchFragment"
+        android:name="com.example.sportintelligencetesimolettadavide.AthleteSearchFragment"
+        android:label="fragment_athlete_search"
+        tools:layout="@layout/fragment_athlete_search" />
+    <fragment
+        android:id="@+id/matchSelectorFragment"
+        android:name="com.example.sportintelligencetesimolettadavide.MatchSelectorFragment"
+        android:label="fragment_match_selector"
+        tools:layout="@layout/fragment_match_selector" />
+    <fragment
+        android:id="@+id/tournamentSearchFragment"
+        android:name="com.example.sportintelligencetesimolettadavide.TournamentSearchFragment"
+        android:label="fragment_tournament_search"
+        tools:layout="@layout/fragment_tournament_search" />
 </navigation>
