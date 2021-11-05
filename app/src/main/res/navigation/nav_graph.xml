@@ -22,6 +22,18 @@
         <action
             android:id="@+id/action_tennisFragment_to_filterCreatorFragment"
             app:destination="@id/filterCreatorFragment" />
+        <action
+            android:id="@+id/action_tennisFragment_to_tournamentSearchFragment"
+            app:destination="@id/tournamentSearchFragment" />
+        <action
+            android:id="@+id/action_tennisFragment_to_athleteSearchFragment"
+            app:destination="@id/athleteSearchFragment" />
+        <action
+            android:id="@+id/action_tennisFragment_to_filterManagementFragment"
+            app:destination="@id/filterManagementFragment" />
+        <action
+            android:id="@+id/action_tennisFragment_to_favouriteMatchesFragment"
+            app:destination="@id/favouriteMatchesFragment" />
     </fragment>
     <fragment
         android:id="@+id/filterCreatorFragment"
@@ -47,15 +59,30 @@
         android:id="@+id/athleteSearchFragment"
         android:name="com.example.sportintelligencetesimolettadavide.AthleteSearchFragment"
         android:label="fragment_athlete_search"
-        tools:layout="@layout/fragment_athlete_search" />
+        tools:layout="@layout/fragment_athlete_search" >
+        <action
+            android:id="@+id/action_athleteSearchFragment_to_matchSelectorFragment"
+            app:destination="@id/matchSelectorFragment" />
+    </fragment>
     <fragment
         android:id="@+id/matchSelectorFragment"
         android:name="com.example.sportintelligencetesimolettadavide.MatchSelectorFragment"
         android:label="fragment_match_selector"
-        tools:layout="@layout/fragment_match_selector" />
+        tools:layout="@layout/fragment_match_selector" >
+        <action
+            android:id="@+id/action_matchSelectorFragment_to_searchResultFragment"
+            app:destination="@id/searchResultFragment" />
+    </fragment>
     <fragment
         android:id="@+id/tournamentSearchFragment"
         android:name="com.example.sportintelligencetesimolettadavide.TournamentSearchFragment"
         android:label="fragment_tournament_search"
-        tools:layout="@layout/fragment_tournament_search" />
+        tools:layout="@layout/fragment_tournament_search" >
+        <argument
+            android:name="tournament"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_tournamentSearchFragment_self2"
+            app:destination="@id/tournamentSearchFragment" />
+    </fragment>
 </navigation>
