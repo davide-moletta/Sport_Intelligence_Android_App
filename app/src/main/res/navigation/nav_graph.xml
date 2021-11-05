@@ -28,4 +28,19 @@
         android:name="com.example.sportintelligencetesimolettadavide.FilterCreatorFragment"
         android:label="fragment_filter_creator"
         tools:layout="@layout/fragment_filter_creator" />
+    <fragment
+        android:id="@+id/searchResultFragment"
+        android:name="com.example.sportintelligencetesimolettadavide.SearchResultFragment"
+        android:label="fragment_search_result"
+        tools:layout="@layout/fragment_search_result" />
+    <fragment
+        android:id="@+id/favouriteMatchesFragment"
+        android:name="com.example.sportintelligencetesimolettadavide.FavouriteMatchesFragment"
+        android:label="fragment_favourite_matches"
+        tools:layout="@layout/fragment_favourite_matches" />
+    <fragment
+        android:id="@+id/filterManagementFragment"
+        android:name="com.example.sportintelligencetesimolettadavide.FilterManagementFragment"
+        android:label="fragment_filter_management"
+        tools:layout="@layout/fragment_filter_management" />
 </navigation>

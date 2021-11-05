@@ -1,0 +1,344 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/SearchResultFragment"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SearchResultFragment">
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/topBarHeight"
+        android:background="@drawable/background_topbar"
+        android:gravity="center"
+        android:padding="@dimen/paddingStandard"
+        android:text="@string/searchResultHeader"
+        android:textSize="@dimen/title"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/marginStandard"
+        android:layout_marginTop="@dimen/arrowMargin"
+        android:contentDescription="@string/contentDescription"
+        android:src="@drawable/ic_backarrow"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Spinner
+        android:id="@+id/spinnerFilter"
+        android:layout_width="@dimen/spinnerWidth"
+        android:layout_height="@dimen/spinnerHeight"
+        android:layout_marginStart="@dimen/marginStandard"
+        android:layout_marginTop="@dimen/bigMargin"
+        android:background="@drawable/background_spinner"
+        android:contentDescription="@string/contentDescription"
+        android:gravity="center"
+        android:padding="@dimen/littlePadding"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/title"
+        tools:ignore="DuplicateSpeakableTextCheck,DuplicateSpeakableTextCheck" />
+
+    <ImageView
+        android:layout_width="@dimen/bigImage"
+        android:layout_height="@dimen/bigImage"
+        android:contentDescription="@string/contentDescription"
+        android:src="@drawable/ic_fullstar"
+        app:layout_constraintBottom_toBottomOf="@+id/spinnerFilter"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/spinnerFilter"
+        app:layout_constraintTop_toTopOf="@+id/spinnerFilter" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/matchInfo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/marginStandard"
+        android:layout_marginTop="@dimen/bigMargin"
+        android:layout_marginEnd="@dimen/marginStandard"
+        android:background="@drawable/background_button"
+        android:padding="@dimen/littlePadding"
+        app:layout_constraintBottom_toTopOf="@+id/matchStats"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spinnerFilter">
+
+        <TextView
+            android:id="@+id/subTitleInfo"
+            android:layout_width="@dimen/fullSpaceLabel"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/littleMargin"
+            android:gravity="center"
+            android:text="@string/matchInfo"
+            android:textSize="@dimen/subTitle"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tournamentName"
+            android:layout_width="@dimen/fullSpaceLabel"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/littleMargin"
+            android:gravity="center"
+            android:text="@string/matchInfo"
+            android:textSize="@dimen/searchResultLabel"
+            app:layout_constraintBottom_toTopOf="@id/tournamentInfo"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/subTitleInfo" />
+
+        <TextView
+            android:id="@+id/tournamentInfo"
+            android:layout_width="@dimen/fullSpaceLabel"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/matchInfo"
+            android:textSize="@dimen/searchResultLabel"
+            app:layout_constraintBottom_toTopOf="@+id/result"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tournamentName" />
+
+        <TextView
+            android:id="@+id/firstPlayer"
+            android:layout_width="@dimen/fullSpaceLabel"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/matchInfo"
+            android:textSize="@dimen/searchResultLabel"
+            app:layout_constraintBottom_toBottomOf="@+id/result"
+            app:layout_constraintEnd_toStartOf="@+id/result"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/result" />
+
+        <TextView
+            android:id="@+id/result"
+            android:layout_width="@dimen/fullSpaceLabel"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/littleMargin"
+            android:layout_marginEnd="@dimen/littleMargin"
+            android:gravity="center"
+            android:text="@string/matchInfo"
+            android:textSize="@dimen/searchResultLabel"
+            app:layout_constraintBottom_toTopOf="@id/duration"
+            app:layout_constraintEnd_toStartOf="@id/secondPlayer"
+            app:layout_constraintStart_toEndOf="@+id/firstPlayer"
+            app:layout_constraintTop_toBottomOf="@id/tournamentInfo" />
+
+        <TextView
+            android:id="@+id/secondPlayer"
+            android:layout_width="@dimen/fullSpaceLabel"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/matchInfo"
+            android:textSize="@dimen/searchResultLabel"
+            app:layout_constraintBottom_toBottomOf="@+id/result"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/result"
+            app:layout_constraintTop_toTopOf="@id/result" />
+
+        <TextView
+            android:id="@+id/duration"
+            android:layout_width="@dimen/fullSpaceLabel"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/matchInfo"
+            android:textSize="@dimen/searchResultLabel"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/result" />
+
+        <ImageView
+            android:id="@+id/tennisBall"
+            android:layout_width="@dimen/genericImage"
+            android:layout_height="@dimen/genericImage"
+            android:contentDescription="@string/contentDescription"
+            android:src="@drawable/ic_tennisball"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/duration" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/matchStats"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/marginStandard"
+        android:layout_marginTop="@dimen/bigMargin"
+        android:layout_marginEnd="@dimen/marginStandard"
+        android:background="@drawable/background_button"
+        android:backgroundTint="@color/boxBackground"
+        android:padding="@dimen/littlePadding"
+        app:layout_constraintBottom_toTopOf="@+id/setSpinner"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/matchInfo">
+
+        <TextView
+            android:id="@+id/subTitleStats"
+            android:layout_width="@dimen/fullSpaceLabel"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/littleMargin"
+            android:gravity="center"
+            android:text="@string/matchStats"
+            android:textSize="@dimen/subTitle"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:layout_width="@dimen/fullSpaceLabel"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/littleMargin"
+            android:gravity="center"
+            android:padding="@dimen/paddingStandard"
+            android:textSize="@dimen/searchResultStatsLabel"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/subTitleStats" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <Spinner
+        android:id="@+id/setSpinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/bigMargin"
+        android:contentDescription="@string/contentDescription"
+        app:layout_constraintBottom_toTopOf="@+id/setStats"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/matchStats"
+        tools:ignore="TouchTargetSizeCheck" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/setStats"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/marginStandard"
+        android:layout_marginEnd="@dimen/marginStandard"
+        android:background="@drawable/background_button"
+        android:backgroundTint="@color/boxBackground"
+        android:padding="@dimen/littlePadding"
+        app:layout_constraintBottom_toTopOf="@id/setHistory"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/setSpinner">
+
+        <TextView
+            android:id="@+id/subTitleSetStats"
+            android:layout_width="@dimen/fullSpaceLabel"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/littleMargin"
+            android:gravity="center"
+            android:text="@string/setStatsFilter"
+            android:textSize="@dimen/subTitle"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:layout_width="@dimen/fullSpaceLabel"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/littleMargin"
+            android:gravity="center"
+            android:padding="@dimen/paddingStandard"
+            android:textSize="@dimen/searchResultStatsLabel"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/subTitleSetStats" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/setHistory"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/marginStandard"
+        android:layout_marginTop="@dimen/marginStandard"
+        android:layout_marginEnd="@dimen/marginStandard"
+        android:background="@drawable/background_button"
+        android:backgroundTint="@color/boxBackground"
+        android:padding="@dimen/littlePadding"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/setStats">
+
+        <TextView
+            android:id="@+id/subTitleHistory"
+            android:layout_width="@dimen/fullSpaceLabel"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/littleMargin"
+            android:gravity="center"
+            android:text="@string/setHistoryFilter"
+            android:textSize="@dimen/subTitle"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:layout_width="@dimen/fullSpaceLabel"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/littleMargin"
+            android:gravity="center"
+            android:padding="@dimen/paddingStandard"
+            android:textSize="@dimen/searchResultStatsLabel"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/subTitleHistory" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/matchQuotes"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/marginStandard"
+        android:layout_marginTop="@dimen/bigMargin"
+        android:layout_marginEnd="@dimen/marginStandard"
+        android:background="@drawable/background_button"
+        android:backgroundTint="@color/boxBackground"
+        android:padding="@dimen/littlePadding"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/setHistory">
+
+        <TextView
+            android:id="@+id/subTitleQuotes"
+            android:layout_width="@dimen/fullSpaceLabel"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/littleMargin"
+            android:gravity="center"
+            android:text="@string/matchQuotes"
+            android:textSize="@dimen/subTitle"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:layout_width="@dimen/fullSpaceLabel"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/littleMargin"
+            android:gravity="center"
+            android:padding="@dimen/paddingStandard"
+            android:textSize="@dimen/searchResultStatsLabel"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/subTitleQuotes" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
