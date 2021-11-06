@@ -69,7 +69,7 @@ public class MatchSelectorFragment extends Fragment {
         recycler.setAdapter(matchAdapter);
         recycler.setLayoutManager(new LinearLayoutManager(this.getContext()));
 
-        back.setOnClickListener(view1 -> {
+        back.setOnClickListener(v -> {
             searchInfo[2] = "noData";
             navController.navigateUp();
         });

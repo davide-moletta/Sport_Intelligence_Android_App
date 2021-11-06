@@ -7,7 +7,9 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.navigation.NavController;
+import androidx.navigation.NavDirections;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
@@ -50,7 +52,12 @@ public class MatchAdapter extends RecyclerView.Adapter<MatchAdapter.ViewHolder> 
         secondPlayerView.setText(match.getSecondPlayer());
         durationView.setText(match.getDuration());
 
-        //on click listener
+        ConstraintLayout constraintLayout = holder.constraintLayout;
+
+        constraintLayout.setOnClickListener(v -> {
+            NavDirections action = MatchSelectorFragmentDirections.actionMatchSelectorFragmentToSearchResultFragment(match.getId());
+            navController.navigate(action);
+        });
     }
 
     @Override
@@ -61,6 +68,7 @@ public class MatchAdapter extends RecyclerView.Adapter<MatchAdapter.ViewHolder> 
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
         private final TextView tournamentName, firstPlayer, result, secondPlayer, duration;
+        private final ConstraintLayout constraintLayout;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -70,6 +78,7 @@ public class MatchAdapter extends RecyclerView.Adapter<MatchAdapter.ViewHolder> 
             result = itemView.findViewById(R.id.result);
             secondPlayer = itemView.findViewById(R.id.secondPlayer);
             duration = itemView.findViewById(R.id.duration);
+            constraintLayout = itemView.findViewById(R.id.match);
         }
     }
 }
