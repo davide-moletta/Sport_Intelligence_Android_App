@@ -26,9 +26,6 @@
             android:id="@+id/action_tennisFragment_to_tournamentSearchFragment"
             app:destination="@id/tournamentSearchFragment" />
         <action
-            android:id="@+id/action_tennisFragment_to_athleteSearchFragment"
-            app:destination="@id/athleteSearchFragment" />
-        <action
             android:id="@+id/action_tennisFragment_to_filterManagementFragment"
             app:destination="@id/filterManagementFragment" />
         <action
@@ -59,11 +56,7 @@
         android:id="@+id/athleteSearchFragment"
         android:name="com.example.sportintelligencetesimolettadavide.AthleteSearchFragment"
         android:label="fragment_athlete_search"
-        tools:layout="@layout/fragment_athlete_search" >
-        <action
-            android:id="@+id/action_athleteSearchFragment_to_matchSelectorFragment"
-            app:destination="@id/matchSelectorFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_athlete_search" />
     <fragment
         android:id="@+id/matchSelectorFragment"
         android:name="com.example.sportintelligencetesimolettadavide.MatchSelectorFragment"
@@ -72,17 +65,23 @@
         <action
             android:id="@+id/action_matchSelectorFragment_to_searchResultFragment"
             app:destination="@id/searchResultFragment" />
+        <argument
+            android:name="searchInfo"
+            app:argType="string[]" />
     </fragment>
     <fragment
         android:id="@+id/tournamentSearchFragment"
         android:name="com.example.sportintelligencetesimolettadavide.TournamentSearchFragment"
         android:label="fragment_tournament_search"
         tools:layout="@layout/fragment_tournament_search" >
-        <argument
-            android:name="tournament"
-            app:argType="string" />
         <action
             android:id="@+id/action_tournamentSearchFragment_self2"
             app:destination="@id/tournamentSearchFragment" />
+        <argument
+            android:name="searchInfo"
+            app:argType="string[]" />
+        <action
+            android:id="@+id/action_tournamentSearchFragment_to_matchSelectorFragment"
+            app:destination="@id/matchSelectorFragment" />
     </fragment>
 </navigation>

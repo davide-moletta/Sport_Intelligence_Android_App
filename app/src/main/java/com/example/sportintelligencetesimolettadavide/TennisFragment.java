@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
+import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
@@ -34,6 +35,7 @@ public class TennisFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        String[] searchInfo = new String[3];
 
         //Controller per gestire la navigazione tra i vari fragment
         NavController navController = Navigation.findNavController(view);
@@ -50,9 +52,21 @@ public class TennisFragment extends Fragment {
         back.setOnClickListener(v -> navController.navigateUp());
 
         //Se l'utente clicca sugli altri pulsanti viene portato alle relative schermate
-        tournamentSearch.setOnClickListener(v -> navController.navigate(R.id.action_tennisFragment_to_tournamentSearchFragment));
+        tournamentSearch.setOnClickListener(v -> {
+            searchInfo[0] = "tournament";
+            searchInfo[1] = "noData";
+            searchInfo[2] = "noData";
+            NavDirections action = TennisFragmentDirections.actionTennisFragmentToTournamentSearchFragment(searchInfo);
+            navController.navigate(action);
+        });
 
-        athleteSearch.setOnClickListener(v -> navController.navigate(R.id.action_tennisFragment_to_athleteSearchFragment));
+        athleteSearch.setOnClickListener(v -> {
+            searchInfo[0] = "athlete";
+            searchInfo[1] = "noData";
+            searchInfo[2] = "noData";
+            NavDirections action = TennisFragmentDirections.actionTennisFragmentToTournamentSearchFragment(searchInfo);
+            navController.navigate(action);
+        });
 
         filterCreation.setOnClickListener(v -> navController.navigate(R.id.action_tennisFragment_to_filterCreatorFragment));
 

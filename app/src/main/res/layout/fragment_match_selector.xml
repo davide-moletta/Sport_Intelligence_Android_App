@@ -32,17 +32,16 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/fullSpaceLabel"
         android:layout_marginStart="@dimen/marginStandard"
         android:layout_marginTop="@dimen/bigMargin"
         android:layout_marginEnd="@dimen/marginStandard"
         android:layout_marginBottom="@dimen/bigMargin"
-        android:background="@drawable/background_button"
-        android:backgroundTint="@color/boxBackground"
         android:paddingStart="@dimen/paddingStandard"
         android:paddingEnd="@dimen/paddingStandard"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/title" />
+        app:layout_constraintTop_toBottomOf="@+id/title"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
