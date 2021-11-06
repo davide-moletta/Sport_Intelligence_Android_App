@@ -13,6 +13,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import java.util.List;
 
@@ -43,6 +45,8 @@ public class MatchSelectorFragment extends Fragment {
 
         NavController navController = Navigation.findNavController(view);
 
+        TextView title = view.findViewById(R.id.title);
+        ImageView back = view.findViewById(R.id.back);
         RecyclerView recycler = view.findViewById(R.id.recycler);
 
         searchInfo = MatchSelectorFragmentArgs.fromBundle(getArguments()).getSearchInfo();
@@ -50,10 +54,13 @@ public class MatchSelectorFragment extends Fragment {
         if (searchInfo[0].equals("tournament")) {
             //RICERCA MATCH PER TORNEO
 
+            title.setText(searchInfo[2]);
             recyclerMatches = neo4j.fetchTournamentMatches(searchInfo[2]);
             neo4j.close();
         } else {
             //RICERCA MATCH PER GIOCATORE O EDIZIONE
+
+            title.setText(searchInfo[1]);
             recyclerMatches = neo4j.fetchAthletesMatches(searchInfo[1], searchInfo[2]);
             neo4j.close();
         }
@@ -61,5 +68,10 @@ public class MatchSelectorFragment extends Fragment {
         MatchAdapter matchAdapter = new MatchAdapter(recyclerMatches, navController);
         recycler.setAdapter(matchAdapter);
         recycler.setLayoutManager(new LinearLayoutManager(this.getContext()));
+
+        back.setOnClickListener(view1 -> {
+            searchInfo[2] = "noData";
+            navController.navigateUp();
+        });
     }
 }

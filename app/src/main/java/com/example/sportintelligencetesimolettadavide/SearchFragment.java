@@ -15,13 +15,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class TournamentSearchFragment extends Fragment {
+public class SearchFragment extends Fragment {
 
-    public TournamentSearchFragment() {
+    public SearchFragment() {
         // Required empty public constructor
     }
 
@@ -33,7 +34,7 @@ public class TournamentSearchFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_tournament_search, container, false);
+        return inflater.inflate(R.layout.fragment_search, container, false);
     }
 
     @Override
@@ -49,19 +50,22 @@ public class TournamentSearchFragment extends Fragment {
 
         ImageView back = view.findViewById(R.id.back);
         EditText search = view.findViewById(R.id.search);
+        TextView title = view.findViewById(R.id.title);
         RecyclerView recycler = view.findViewById(R.id.recycler);
 
-        searchInfo = TournamentSearchFragmentArgs.fromBundle(getArguments()).getSearchInfo();
+        searchInfo = SearchFragmentArgs.fromBundle(getArguments()).getSearchInfo();
 
         if (searchInfo[0].equals("tournament")) {
             if (searchInfo[1].equals("noData")) {
                 //RICERCA TORNEO
 
+                title.setText(R.string.tournamentSearch);
                 recyclerData = neo4j.fetchChampionships();
                 neo4j.close();
             } else if (searchInfo[2].equals("noData")) {
                 //RICERCA EDIZIONI
 
+                title.setText(searchInfo[1]);
                 recyclerData = neo4j.fetchTournamentEditions(searchInfo[1]);
                 neo4j.close();
             }
@@ -69,11 +73,13 @@ public class TournamentSearchFragment extends Fragment {
             if (searchInfo[1].equals("noData")) {
                 //RICERCA GIOCATORI
 
+                title.setText(R.string.athleteSearch);
                 recyclerData = neo4j.fetchAthletes();
                 neo4j.close();
             } else if (searchInfo[2].equals("noData")) {
                 //RICERCA EDIZIONI PER GIOCATORE
 
+                title.setText(searchInfo[1]);
                 recyclerData = neo4j.fetchAthletesEditions(searchInfo[1]);
                 neo4j.close();
             }
@@ -93,32 +99,3 @@ public class TournamentSearchFragment extends Fragment {
         });
     }
 }
-
-/*
-else if (searchInfo[0].equals("athlete")) {
-            if (searchInfo[1].equals("noData")) {
-                //RICERCA GIOCATORI
-
-                recyclerData = neo4j.fetchAthletes();
-                neo4j.close();
-            } else if (searchInfo[2].equals("noData")) {
-                //RICERCA EDIZIONI PER GIOCATORE
-
-                recyclerData = neo4j.fetchAthletesEditions();
-                neo4j.close();
-            } else {
-                //RICERCA MATCH PER GIOCATORE
-
-                List<Match> recyclerMatches = neo4j.fetchTournamentMatches(searchInfo[2]);
-                neo4j.close();
-
-                MatchAdapter matchAdapter = new MatchAdapter(recyclerMatches, navController);
-                recycler.setAdapter(matchAdapter);
-                recycler.setLayoutManager(new LinearLayoutManager(this.getContext()));
-            }
-
-            buttonAdapter = new ButtonAdapter(recyclerData, searchInfo, navController);
-            recycler.setAdapter(buttonAdapter);
-            recycler.setLayoutManager(new LinearLayoutManager(this.getContext()));
-        }
- */

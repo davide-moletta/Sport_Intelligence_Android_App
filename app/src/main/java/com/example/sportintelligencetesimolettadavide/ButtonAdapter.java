@@ -46,11 +46,11 @@ public class ButtonAdapter extends RecyclerView.Adapter<ButtonAdapter.ViewHolder
         textView.setOnClickListener(v -> {
             if (searchInfo[1].equals("noData")) {
                 searchInfo[1] = textView.getText().toString();
-                NavDirections action = TournamentSearchFragmentDirections.actionTournamentSearchFragmentSelf2(searchInfo);
+                NavDirections action = SearchFragmentDirections.actionTournamentSearchFragmentSelf2(searchInfo);
                 navController.navigate(action);
             } else {
                 searchInfo[2] = textView.getText().toString();
-                NavDirections action = TournamentSearchFragmentDirections.actionTournamentSearchFragmentToMatchSelectorFragment(searchInfo);
+                NavDirections action = SearchFragmentDirections.actionTournamentSearchFragmentToMatchSelectorFragment(searchInfo);
                 navController.navigate(action);
             }
         });

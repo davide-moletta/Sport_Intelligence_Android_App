@@ -25,6 +25,7 @@
     <dimen name="saveButton">170dp</dimen>
     <dimen name="spinnerWidth">300dp</dimen>
     <dimen name="spinnerHeight">48dp</dimen>
+    <dimen name="matchItemHeight">150dp</dimen>
 
     <dimen name="homeButton">40sp</dimen>
     <dimen name="title">30sp</dimen>

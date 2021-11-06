@@ -2,10 +2,10 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/AthleteSearchFragment"
+    android:id="@+id/SearchFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AthleteSearchFragment">
+    tools:context=".SearchFragment">
 
     <TextView
         android:id="@+id/title"
@@ -13,14 +13,14 @@
         android:layout_height="@dimen/topBarHeight"
         android:background="@drawable/background_topbar"
         android:gravity="center"
-        android:padding="@dimen/paddingStandard"
-        android:text="@string/athleteSearch"
+        android:paddingStart="@dimen/paddingStandard"
         android:textSize="@dimen/title"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
+        android:id="@+id/back"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/marginStandard"
@@ -34,7 +34,7 @@
         android:id="@+id/search"
         android:layout_width="@dimen/homeButtonWidth"
         android:layout_height="@dimen/searchButtonHeight"
-        android:layout_marginTop="@dimen/marginStandard"
+        android:layout_marginTop="@dimen/bigPadding"
         android:autofillHints="name"
         android:background="@drawable/background_button"
         android:backgroundTint="@color/searchBackground"
@@ -50,17 +50,13 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/marginStandard"
-        android:layout_marginTop="@dimen/bigMargin"
-        android:layout_marginEnd="@dimen/marginStandard"
-        android:layout_marginBottom="@dimen/bigMargin"
-        android:background="@drawable/background_button"
-        android:backgroundTint="@color/boxBackground"
-        android:paddingStart="@dimen/paddingStandard"
-        android:paddingEnd="@dimen/paddingStandard"
+        android:layout_height="@dimen/fullSpaceLabel"
+        android:layout_margin="@dimen/marginStandard"
+        android:padding="@dimen/paddingStandard"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/search" />
+        app:layout_constraintTop_toBottomOf="@id/search" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

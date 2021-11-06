@@ -38,25 +38,17 @@ public class MatchAdapter extends RecyclerView.Adapter<MatchAdapter.ViewHolder> 
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Match match = matches.get(position);
 
-        String edition = match.getEdition();
-        String firstPlayer = match.getFirstPlayer();
-        String result = match.getResult();
-        String secondPlayer = match.getSecondPlayer();
-        String duration = match.getDuration();
-
-        System.out.println("\n\neccoli: " + edition + firstPlayer + result + secondPlayer + duration + "\n\n");
-
         TextView tournamentNameView = holder.tournamentName;
         TextView firstPlayerView = holder.firstPlayer;
         TextView resultView = holder.result;
         TextView secondPlayerView = holder.secondPlayer;
         TextView durationView = holder.duration;
 
-        tournamentNameView.setText(edition);
-        firstPlayerView.setText(firstPlayer);
-        resultView.setText(result);
-        secondPlayerView.setText(secondPlayer);
-        durationView.setText(duration);
+        tournamentNameView.setText(match.getEdition());
+        firstPlayerView.setText(match.getFirstPlayer());
+        resultView.setText(match.getResult());
+        secondPlayerView.setText(match.getSecondPlayer());
+        durationView.setText(match.getDuration());
 
         //on click listener
     }
