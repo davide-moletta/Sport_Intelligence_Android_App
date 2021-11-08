@@ -2,7 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="@dimen/savedFilterItemHeight"
     android:layout_marginStart="@dimen/marginStandard"
     android:layout_marginTop="@dimen/marginStandard"
     android:layout_marginEnd="@dimen/marginStandard"
@@ -30,6 +30,7 @@
                 android:layout_width="@dimen/fullSpaceLabel"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/littleMargin"
+                android:textSize="@dimen/filterLabel"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/edit"
                 app:layout_constraintStart_toStartOf="parent"
@@ -37,8 +38,8 @@
 
             <ImageView
                 android:id="@+id/edit"
-                android:layout_width="@dimen/genericImage"
-                android:layout_height="@dimen/genericImage"
+                android:layout_width="@dimen/bigImage"
+                android:layout_height="@dimen/bigImage"
                 android:layout_marginStart="@dimen/littleMargin"
                 android:layout_marginEnd="@dimen/littleMargin"
                 android:contentDescription="@string/contentDescription"
@@ -50,8 +51,8 @@
 
             <ImageView
                 android:id="@+id/delete"
-                android:layout_width="@dimen/genericImage"
-                android:layout_height="@dimen/genericImage"
+                android:layout_width="@dimen/bigImage"
+                android:layout_height="@dimen/bigImage"
                 android:layout_marginEnd="@dimen/littleMargin"
                 android:contentDescription="@string/contentDescription"
                 android:src="@drawable/ic_thrashcan"

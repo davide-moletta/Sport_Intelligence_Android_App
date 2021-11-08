@@ -31,10 +31,15 @@
 
     <!-- GESTIONE FILTRI -->
     <string name="filterManagement">GESTISCI FILTRI</string>
+    <string name="deleteAll">ELIMINA TUTTI</string>
 
     <!-- GENERALS -->
     <string name="search">Cerca…</string>
     <string name="contentDescription">Image</string>
+    <string name="noFilterTitle">ASSEGNA UN NOME AL FILTRO</string>
+    <string name="noFilterSelected">SELEZIONA ALMENO UN FILTRO</string>
+    <string name="savedFilter">FILTRO SALVATO</string>
+    <string name="allFilterDeleted">FILTRI ELIMINATI</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

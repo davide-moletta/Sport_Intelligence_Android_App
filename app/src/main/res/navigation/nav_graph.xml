@@ -36,7 +36,11 @@
         android:id="@+id/filterCreatorFragment"
         android:name="com.example.sportintelligencetesimolettadavide.FilterCreatorFragment"
         android:label="fragment_filter_creator"
-        tools:layout="@layout/fragment_filter_creator" />
+        tools:layout="@layout/fragment_filter_creator" >
+        <action
+            android:id="@+id/action_filterCreatorFragment_to_tennisFragment"
+            app:destination="@id/tennisFragment" />
+    </fragment>
     <fragment
         android:id="@+id/searchResultFragment"
         android:name="com.example.sportintelligencetesimolettadavide.SearchResultFragment"
@@ -45,17 +49,34 @@
         <argument
             android:name="matchId"
             app:argType="integer" />
+        <action
+            android:id="@+id/action_searchResultFragment_to_matchSelectorFragment"
+            app:destination="@id/matchSelectorFragment" />
     </fragment>
     <fragment
         android:id="@+id/favouriteMatchesFragment"
         android:name="com.example.sportintelligencetesimolettadavide.FavouriteMatchesFragment"
         android:label="fragment_favourite_matches"
-        tools:layout="@layout/fragment_favourite_matches" />
+        tools:layout="@layout/fragment_favourite_matches" >
+        <action
+            android:id="@+id/action_favouriteMatchesFragment_to_tennisFragment"
+            app:destination="@id/tennisFragment" />
+        <action
+            android:id="@+id/action_favouriteMatchesFragment_to_searchResultFragment"
+            app:destination="@id/searchResultFragment" />
+    </fragment>
     <fragment
         android:id="@+id/filterManagementFragment"
         android:name="com.example.sportintelligencetesimolettadavide.FilterManagementFragment"
         android:label="fragment_filter_management"
-        tools:layout="@layout/fragment_filter_management" />
+        tools:layout="@layout/fragment_filter_management" >
+        <action
+            android:id="@+id/action_filterManagementFragment_to_tennisFragment"
+            app:destination="@id/tennisFragment" />
+        <action
+            android:id="@+id/action_filterManagementFragment_to_filterCreatorFragment"
+            app:destination="@id/filterCreatorFragment" />
+    </fragment>
     <fragment
         android:id="@+id/matchSelectorFragment"
         android:name="com.example.sportintelligencetesimolettadavide.MatchSelectorFragment"

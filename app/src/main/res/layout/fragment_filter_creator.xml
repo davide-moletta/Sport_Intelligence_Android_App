@@ -22,6 +22,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
+        android:id="@+id/back"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/marginStandard"
@@ -48,6 +49,8 @@
             android:id="@+id/checkMatchInfo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="@string/matchInfo"
+            android:textSize="@dimen/filterLabel"
             app:layout_constraintBottom_toTopOf="@+id/checkMatchStats"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -57,6 +60,8 @@
             android:id="@+id/checkMatchStats"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="@string/matchStats"
+            android:textSize="@dimen/filterLabel"
             app:layout_constraintBottom_toTopOf="@+id/checkSetStats"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/checkMatchInfo" />
@@ -65,6 +70,8 @@
             android:id="@+id/checkSetStats"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="@string/setStatsFilter"
+            android:textSize="@dimen/filterLabel"
             app:layout_constraintBottom_toTopOf="@+id/checkSetHistory"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/checkMatchStats" />
@@ -73,6 +80,8 @@
             android:id="@+id/checkSetHistory"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="@string/setHistoryFilter"
+            android:textSize="@dimen/filterLabel"
             app:layout_constraintBottom_toTopOf="@+id/checkQuotes"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/checkSetStats" />
@@ -81,59 +90,11 @@
             android:id="@+id/checkQuotes"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="@string/matchQuotes"
+            android:textSize="@dimen/filterLabel"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/checkSetHistory" />
-
-        <TextView
-            android:id="@+id/textMatchInfo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/matchInfo"
-            android:textSize="@dimen/filterLabel"
-            app:layout_constraintBottom_toBottomOf="@+id/checkMatchInfo"
-            app:layout_constraintStart_toEndOf="@+id/checkMatchInfo"
-            app:layout_constraintTop_toTopOf="@+id/checkMatchInfo" />
-
-        <TextView
-            android:id="@+id/textMatchStats"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/matchStats"
-            android:textSize="@dimen/filterLabel"
-            app:layout_constraintBottom_toBottomOf="@+id/checkMatchStats"
-            app:layout_constraintStart_toEndOf="@+id/checkMatchStats"
-            app:layout_constraintTop_toTopOf="@+id/checkMatchStats" />
-
-        <TextView
-            android:id="@+id/textSetStats"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/setStatsFilter"
-            android:textSize="@dimen/filterLabel"
-            app:layout_constraintBottom_toBottomOf="@+id/checkSetStats"
-            app:layout_constraintStart_toEndOf="@+id/checkSetStats"
-            app:layout_constraintTop_toTopOf="@+id/checkSetStats" />
-
-        <TextView
-            android:id="@+id/textSetHistory"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/setHistoryFilter"
-            android:textSize="@dimen/filterLabel"
-            app:layout_constraintBottom_toBottomOf="@+id/checkSetHistory"
-            app:layout_constraintStart_toEndOf="@+id/checkSetHistory"
-            app:layout_constraintTop_toTopOf="@+id/checkSetHistory" />
-
-        <TextView
-            android:id="@+id/textQuotes"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/matchQuotes"
-            android:textSize="@dimen/filterLabel"
-            app:layout_constraintBottom_toBottomOf="@+id/checkQuotes"
-            app:layout_constraintStart_toEndOf="@+id/checkQuotes"
-            app:layout_constraintTop_toTopOf="@+id/checkQuotes" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

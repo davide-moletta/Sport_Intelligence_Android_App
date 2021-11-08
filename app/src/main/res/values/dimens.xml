@@ -26,12 +26,13 @@
     <dimen name="spinnerWidth">300dp</dimen>
     <dimen name="spinnerHeight">48dp</dimen>
     <dimen name="matchItemHeight">150dp</dimen>
+    <dimen name="savedFilterItemHeight">75dp</dimen>
 
     <dimen name="homeButton">40sp</dimen>
     <dimen name="title">30sp</dimen>
     <dimen name="tennisButton">25sp</dimen>
     <dimen name="editText">15sp</dimen>
-    <dimen name="filterLabel">20sp</dimen>
+    <dimen name="filterLabel">25sp</dimen>
     <dimen name="subTitle">25sp</dimen>
     <dimen name="searchResultLabel">15sp</dimen>
     <dimen name="searchResultStatsLabel">20sp</dimen>

@@ -20,6 +20,10 @@ public class MatchAdapter extends RecyclerView.Adapter<MatchAdapter.ViewHolder> 
     private final List<Match> matches;
     private final NavController navController;
 
+    TextView tournamentNameView, firstPlayerView, resultView, secondPlayerView, durationView;
+    ConstraintLayout constraintLayout;
+    Match match;
+
     public MatchAdapter(List<Match> matches, NavController navController) {
         this.matches = matches;
         this.navController = navController;
@@ -38,21 +42,21 @@ public class MatchAdapter extends RecyclerView.Adapter<MatchAdapter.ViewHolder> 
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Match match = matches.get(position);
+        match = matches.get(position);
 
-        TextView tournamentNameView = holder.tournamentName;
-        TextView firstPlayerView = holder.firstPlayer;
-        TextView resultView = holder.result;
-        TextView secondPlayerView = holder.secondPlayer;
-        TextView durationView = holder.duration;
+        tournamentNameView = holder.tournamentName;
+        firstPlayerView = holder.firstPlayer;
+        resultView = holder.result;
+        secondPlayerView = holder.secondPlayer;
+        durationView = holder.duration;
 
-        tournamentNameView.setText(match.getEdition());
+        tournamentNameView.setText(match.getLocation());
         firstPlayerView.setText(match.getFirstPlayer());
         resultView.setText(match.getResult());
         secondPlayerView.setText(match.getSecondPlayer());
         durationView.setText(match.getDuration());
 
-        ConstraintLayout constraintLayout = holder.constraintLayout;
+        constraintLayout = holder.constraintLayout;
 
         constraintLayout.setOnClickListener(v -> {
             NavDirections action = MatchSelectorFragmentDirections.actionMatchSelectorFragmentToSearchResultFragment(match.getId());

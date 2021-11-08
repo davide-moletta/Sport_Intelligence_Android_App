@@ -22,6 +22,20 @@ import java.util.List;
 
 public class SearchFragment extends Fragment {
 
+    ImageView back;
+    EditText search;
+    TextView title;
+    RecyclerView recycler;
+
+    String[] searchInfo;
+    List<String> recyclerData = new ArrayList<>();
+
+    ButtonAdapter buttonAdapter;
+
+    NavController navController;
+
+    Neo4J neo4j = new Neo4J();
+
     public SearchFragment() {
         // Required empty public constructor
     }
@@ -41,17 +55,12 @@ public class SearchFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        String[] searchInfo;
-        List<String> recyclerData = new ArrayList<>();
-        Neo4J neo4j = new Neo4J();
-        ButtonAdapter buttonAdapter;
+        navController = Navigation.findNavController(view);
 
-        NavController navController = Navigation.findNavController(view);
-
-        ImageView back = view.findViewById(R.id.back);
-        EditText search = view.findViewById(R.id.search);
-        TextView title = view.findViewById(R.id.title);
-        RecyclerView recycler = view.findViewById(R.id.recycler);
+        back = view.findViewById(R.id.back);
+        search = view.findViewById(R.id.search);
+        title = view.findViewById(R.id.title);
+        recycler = view.findViewById(R.id.recycler);
 
         searchInfo = SearchFragmentArgs.fromBundle(getArguments()).getSearchInfo();
 
