@@ -40,6 +40,9 @@
         <action
             android:id="@+id/action_filterCreatorFragment_to_tennisFragment"
             app:destination="@id/tennisFragment" />
+        <argument
+            android:name="editFilter"
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/searchResultFragment"

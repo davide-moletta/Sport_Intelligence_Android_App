@@ -49,13 +49,13 @@
         android:id="@+id/deleteAll"
         android:layout_width="@dimen/saveButton"
         android:layout_height="wrap_content"
+        android:layout_margin="@dimen/bigMargin"
         android:background="@drawable/background_button"
         android:gravity="center"
         android:padding="@dimen/paddingStandard"
         android:text="@string/deleteAll"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/recycler" />
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

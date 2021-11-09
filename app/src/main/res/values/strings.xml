@@ -32,6 +32,8 @@
     <!-- GESTIONE FILTRI -->
     <string name="filterManagement">GESTISCI FILTRI</string>
     <string name="deleteAll">ELIMINA TUTTI</string>
+    <string name="deleteFilter">FILTRO ELIMINATO</string>
+    <string name="noFilters">NON SONO ANCORA STATI CREATI FILTRI</string>
 
     <!-- GENERALS -->
     <string name="search">Cerca…</string>

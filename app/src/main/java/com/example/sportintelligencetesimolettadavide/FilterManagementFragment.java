@@ -7,6 +7,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
+import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -66,11 +67,21 @@ public class FilterManagementFragment extends Fragment {
 
         Collections.addAll(fileRows, load(view).split("\n"));
 
-        filterAdapter = new SavedFilterAdapter(fileRows, navController);
-        recycler.setAdapter(filterAdapter);
-        recycler.setLayoutManager(new LinearLayoutManager(this.getContext()));
+        if (fileRows.get(0).equals("")) {
+            Toast.makeText(view.getContext(), R.string.noFilters, Toast.LENGTH_LONG).show();
+        } else {
+            filterAdapter = new SavedFilterAdapter(fileRows, navController, load(view));
+            recycler.setAdapter(filterAdapter);
+            recycler.setLayoutManager(new LinearLayoutManager(this.getContext()));
+        }
 
-        deleteAll.setOnClickListener(this::clearFile);
+        deleteAll.setOnClickListener(v -> {
+            clearFile(v);
+            fileRows.clear();
+            filterAdapter = new SavedFilterAdapter(fileRows, navController, load(v));
+            recycler.setAdapter(filterAdapter);
+            recycler.setLayoutManager(new LinearLayoutManager(v.getContext()));
+        });
 
         back.setOnClickListener(v -> navController.navigateUp());
     }
