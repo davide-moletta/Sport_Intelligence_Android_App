@@ -38,6 +38,10 @@ public class SavedFilterAdapter extends RecyclerView.Adapter<SavedFilterAdapter.
         this.fileData = fileData;
     }
 
+    public void setFileData(String fileData) {
+        this.fileData = fileData;
+    }
+
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -63,7 +67,9 @@ public class SavedFilterAdapter extends RecyclerView.Adapter<SavedFilterAdapter.
 
         edit.setOnClickListener(view -> {
             NavDirections action = FilterManagementFragmentDirections.actionFilterManagementFragmentToFilterCreatorFragment(fileFilter);
+            filters.clear();
             navController.navigate(action);
+
         });
 
         delete.setOnClickListener(v -> {
@@ -133,14 +139,15 @@ public class SavedFilterAdapter extends RecyclerView.Adapter<SavedFilterAdapter.
             newFileDataString += fileEntry + "\n";
         }
 
+        setFileData(newFileDataString);
         overwriteFile(newFileDataString, v);
     }
 
-    private void overwriteFile(String newFileData, View v) {
+    private void overwriteFile(String newFileDataString, View v) {
         FileOutputStream fos = null;
         try {
             fos = v.getContext().openFileOutput(FILE_NAME, Context.MODE_PRIVATE);
-            fos.write(newFileData.getBytes());
+            fos.write(newFileDataString.getBytes());
 
             Toast.makeText(v.getContext(), R.string.deleteFilter, Toast.LENGTH_LONG).show();
         } catch (IOException e) {
@@ -154,6 +161,5 @@ public class SavedFilterAdapter extends RecyclerView.Adapter<SavedFilterAdapter.
                 }
             }
         }
-
     }
 }

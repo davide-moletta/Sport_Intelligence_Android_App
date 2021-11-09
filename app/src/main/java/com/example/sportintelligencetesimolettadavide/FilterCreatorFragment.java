@@ -23,6 +23,8 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
 
 public class FilterCreatorFragment extends Fragment {
 
@@ -55,6 +57,7 @@ public class FilterCreatorFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         navController = Navigation.findNavController(view);
+        String editFilter = FilterCreatorFragmentArgs.fromBundle(getArguments()).getEditFilter();
 
         editFilterName = view.findViewById(R.id.editFilterName);
         save = view.findViewById(R.id.saveButton);
@@ -65,9 +68,100 @@ public class FilterCreatorFragment extends Fragment {
         checkSetHistory = view.findViewById(R.id.checkSetHistory);
         checkQuotes = view.findViewById(R.id.checkQuotes);
 
-        save.setOnClickListener(this::save);
+        if (editFilter.equals("noEdit")) {
+            save.setOnClickListener(this::save);
+        } else {
+            setUpFilter(editFilter);
+            save.setOnClickListener(v -> {
+                String newFilterName = editFilterName.getText().toString();
+                String filterSelected = filterBuilder();
+                String newFilter = newFilterName + ":" + filterSelected;
+
+                if (newFilterName.equals("") || filterSelected.equals("")) {
+
+                    if (newFilterName.equals("")) {
+                        Toast.makeText(v.getContext(), R.string.noFilterTitle, Toast.LENGTH_LONG).show();
+                    } else {
+                        Toast.makeText(v.getContext(), R.string.noFilterSelected, Toast.LENGTH_LONG).show();
+                    }
+                }else{
+                    replaceFilter(editFilter, newFilter, v);
+                    clearAll();
+                }
+            });
+        }
 
         back.setOnClickListener(v -> navController.navigateUp());
+    }
+
+    private void setUpFilter(String editFilter) {
+        editFilterName.setText(editFilter.split(":")[0]);
+
+        String[] filterTypes = editFilter.split(":")[1].split("-");
+
+        for (String filterType : filterTypes) {
+            if (filterType.equals("matchInfo")) {
+                checkMatchInfo.setChecked(true);
+            }
+            if (filterType.equals("matchStats")) {
+                checkMatchStats.setChecked(true);
+            }
+            if (filterType.equals("setStats")) {
+                checkSetStats.setChecked(true);
+            }
+            if (filterType.equals("setHistory")) {
+                checkSetHistory.setChecked(true);
+            }
+            if (filterType.equals("quotes")) {
+                checkQuotes.setChecked(true);
+            }
+        }
+    }
+
+    private void replaceFilter(String editFilter, String newFilter, View v) {
+        List<String> newFileData = new ArrayList<>();
+        String newFileDataString = "";
+        boolean found = false;
+
+        String fileData = load(v);
+
+        String[] fileRows = fileData.split("\n");
+
+        for (String fileRow : fileRows) {
+            if (!fileRow.equals(editFilter) || found) {
+                newFileData.add(fileRow);
+            }else {
+                found = true;
+            }
+        }
+
+        newFileData.add(newFilter);
+
+        for (String fileEntry : newFileData) {
+            newFileDataString += fileEntry + "\n";
+        }
+
+        overwriteFile(newFileDataString, v);
+    }
+
+    private void overwriteFile(String newFileDataString, View v) {
+        FileOutputStream fos = null;
+        try {
+            fos = v.getContext().openFileOutput(FILE_NAME, Context.MODE_PRIVATE);
+            fos.write(newFileDataString.getBytes());
+
+            Toast.makeText(v.getContext(), R.string.updateFilter, Toast.LENGTH_LONG).show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (fos != null) {
+                try {
+                    fos.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
     }
 
     private String filterBuilder() {
@@ -89,7 +183,9 @@ public class FilterCreatorFragment extends Fragment {
             appliedFilters += "quotes-";
         }
 
-        appliedFilters = appliedFilters.substring(0, appliedFilters.length() - 1);
+        if(!appliedFilters.equals("")){
+            appliedFilters = appliedFilters.substring(0, appliedFilters.length() - 1);
+        }
 
         return appliedFilters;
     }
@@ -108,7 +204,7 @@ public class FilterCreatorFragment extends Fragment {
         } else {
             FileOutputStream fos = null;
 
-            String fileData = read(v);
+            String fileData = load(v);
             String filter = filterName + ":" + filterSelected;
             String dataToWrite = fileData + filter;
             try {
@@ -132,7 +228,7 @@ public class FilterCreatorFragment extends Fragment {
         }
     }
 
-    public String read(View v) {
+    public String load(View v) {
         FileInputStream fis = null;
         String fileData = "";
 

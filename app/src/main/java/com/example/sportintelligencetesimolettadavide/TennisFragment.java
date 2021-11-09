@@ -68,7 +68,11 @@ public class TennisFragment extends Fragment {
             navController.navigate(action);
         });
 
-        filterCreation.setOnClickListener(v -> navController.navigate(R.id.action_tennisFragment_to_filterCreatorFragment));
+        filterCreation.setOnClickListener(v -> {
+            NavDirections action = TennisFragmentDirections.actionTennisFragmentToFilterCreatorFragment("noEdit");
+            navController.navigate(action);
+
+        });
 
         FilterEditing.setOnClickListener(v -> navController.navigate(R.id.action_tennisFragment_to_filterManagementFragment));
 

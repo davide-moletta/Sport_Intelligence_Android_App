@@ -34,6 +34,7 @@
     <string name="deleteAll">ELIMINA TUTTI</string>
     <string name="deleteFilter">FILTRO ELIMINATO</string>
     <string name="noFilters">NON SONO ANCORA STATI CREATI FILTRI</string>
+    <string name="updateFilter">FILTRO AGGIORNATO</string>
 
     <!-- GENERALS -->
     <string name="search">Cerca…</string>
