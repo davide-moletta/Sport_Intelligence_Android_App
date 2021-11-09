@@ -13,9 +13,6 @@ import androidx.navigation.NavController;
 import androidx.navigation.NavDirections;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -30,6 +27,7 @@ public class SavedFilterAdapter extends RecyclerView.Adapter<SavedFilterAdapter.
 
     String fileData;
 
+    FileOperations fileOperations;
     Filter filter;
 
     public SavedFilterAdapter(List<String> filters, NavController navController, String fileData) {
@@ -59,6 +57,8 @@ public class SavedFilterAdapter extends RecyclerView.Adapter<SavedFilterAdapter.
 
         filter = filterSplitter(fileFilter);
 
+        fileOperations = new FileOperations(FILE_NAME, holder.itemView);
+
         filterName = holder.filterName;
         filterName.setText(filter.getName());
 
@@ -73,7 +73,9 @@ public class SavedFilterAdapter extends RecyclerView.Adapter<SavedFilterAdapter.
         });
 
         delete.setOnClickListener(v -> {
-            searchAndDelete(fileFilter, fileData, v);
+            String newFileData = fileOperations.searchAndDelete(fileFilter, fileData);
+            Toast.makeText(v.getContext(), R.string.deleteFilter, Toast.LENGTH_LONG).show();
+            setFileData(newFileData);
             filters.remove(position);
             this.notifyItemRemoved(position);
         });
@@ -121,45 +123,5 @@ public class SavedFilterAdapter extends RecyclerView.Adapter<SavedFilterAdapter.
         }
 
         return new Filter(splittedFilter[0], matchInfo, matchStats, setStats, setHistory, quotes);
-    }
-
-    private void searchAndDelete(String filterToDelete, String fileData, View v) {
-        List<String> newFileData = new ArrayList<>();
-        String newFileDataString = "";
-
-        String[] fileRows = fileData.split("\n");
-
-        for (String fileRow : fileRows) {
-            if (!fileRow.equals(filterToDelete)) {
-                newFileData.add(fileRow);
-            }
-        }
-
-        for (String fileEntry : newFileData) {
-            newFileDataString += fileEntry + "\n";
-        }
-
-        setFileData(newFileDataString);
-        overwriteFile(newFileDataString, v);
-    }
-
-    private void overwriteFile(String newFileDataString, View v) {
-        FileOutputStream fos = null;
-        try {
-            fos = v.getContext().openFileOutput(FILE_NAME, Context.MODE_PRIVATE);
-            fos.write(newFileDataString.getBytes());
-
-            Toast.makeText(v.getContext(), R.string.deleteFilter, Toast.LENGTH_LONG).show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            if (fos != null) {
-                try {
-                    fos.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
     }
 }

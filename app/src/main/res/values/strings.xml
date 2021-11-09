@@ -36,6 +36,9 @@
     <string name="noFilters">NON SONO ANCORA STATI CREATI FILTRI</string>
     <string name="updateFilter">FILTRO AGGIORNATO</string>
 
+    <!-- MATCH PREFERITI -->
+    <string name="noFavouriteMatches">NON CI SONO MATCH PREFERITI</string>
+
     <!-- GENERALS -->
     <string name="search">Cerca…</string>
     <string name="contentDescription">Image</string>

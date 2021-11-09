@@ -1,13 +1,11 @@
 package com.example.sportintelligencetesimolettadavide;
 
-import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
-import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -19,11 +17,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.io.BufferedReader;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -37,6 +30,8 @@ public class FilterManagementFragment extends Fragment {
 
     SavedFilterAdapter filterAdapter;
     RecyclerView recycler;
+
+    FileOperations fileOperations;
 
     NavController navController;
 
@@ -65,76 +60,27 @@ public class FilterManagementFragment extends Fragment {
         deleteAll = view.findViewById(R.id.deleteAll);
         recycler = view.findViewById(R.id.recycler);
 
-        Collections.addAll(fileRows, load(view).split("\n"));
+        fileOperations = new FileOperations(FILE_NAME, view);
+
+        Collections.addAll(fileRows, fileOperations.load().split("\n"));
 
         if (fileRows.get(0).equals("")) {
             Toast.makeText(view.getContext(), R.string.noFilters, Toast.LENGTH_LONG).show();
         } else {
-            filterAdapter = new SavedFilterAdapter(fileRows, navController, load(view));
+            filterAdapter = new SavedFilterAdapter(fileRows, navController, fileOperations.load());
             recycler.setAdapter(filterAdapter);
             recycler.setLayoutManager(new LinearLayoutManager(this.getContext()));
         }
 
         deleteAll.setOnClickListener(v -> {
-            clearFile(v);
+            fileOperations.clearFile();
+            Toast.makeText(v.getContext(), R.string.allFilterDeleted, Toast.LENGTH_LONG).show();
             fileRows.clear();
-            filterAdapter = new SavedFilterAdapter(fileRows, navController, load(v));
+            filterAdapter = new SavedFilterAdapter(fileRows, navController, fileOperations.load());
             recycler.setAdapter(filterAdapter);
             recycler.setLayoutManager(new LinearLayoutManager(v.getContext()));
         });
 
         back.setOnClickListener(v -> navController.navigateUp());
-    }
-
-    public String load(View v) {
-        FileInputStream fis = null;
-        String filters = "";
-
-        try {
-            fis = v.getContext().openFileInput(FILE_NAME);
-            InputStreamReader isr = new InputStreamReader(fis);
-            BufferedReader br = new BufferedReader(isr);
-            StringBuilder sb = new StringBuilder();
-            String text;
-
-            while ((text = br.readLine()) != null) {
-                sb.append(text).append("\n");
-            }
-
-            filters += sb.toString();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            if (fis != null) {
-                try {
-                    fis.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-        return filters;
-    }
-
-    public void clearFile(View v) {
-        FileOutputStream fos = null;
-
-        try {
-            fos = v.getContext().openFileOutput(FILE_NAME, Context.MODE_PRIVATE);
-            fos.write("".getBytes());
-
-            Toast.makeText(v.getContext(), R.string.allFilterDeleted, Toast.LENGTH_LONG).show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            if (fos != null) {
-                try {
-                    fos.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
     }
 }
