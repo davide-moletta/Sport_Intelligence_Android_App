@@ -2,6 +2,7 @@
 <resources>
     <dimen name="marginStandard">8dp</dimen>
     <dimen name="littleMargin">4dp</dimen>
+    <dimen name="mediumMargin">15dp</dimen>
     <dimen name="bigMargin">30dp</dimen>
 
     <dimen name="arrowMargin">25dp</dimen>

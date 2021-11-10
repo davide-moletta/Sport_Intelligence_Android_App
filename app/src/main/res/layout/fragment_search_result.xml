@@ -21,6 +21,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
+        android:id="@+id/back"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/marginStandard"
@@ -35,7 +36,7 @@
         android:layout_width="@dimen/spinnerWidth"
         android:layout_height="@dimen/spinnerHeight"
         android:layout_marginStart="@dimen/marginStandard"
-        android:layout_marginTop="@dimen/bigMargin"
+        android:layout_marginTop="@dimen/mediumMargin"
         android:background="@drawable/background_spinner"
         android:contentDescription="@string/contentDescription"
         android:gravity="center"
@@ -45,6 +46,7 @@
         tools:ignore="DuplicateSpeakableTextCheck,DuplicateSpeakableTextCheck" />
 
     <ImageView
+        android:id="@+id/star"
         android:layout_width="@dimen/bigImage"
         android:layout_height="@dimen/bigImage"
         android:contentDescription="@string/contentDescription"
@@ -59,11 +61,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/marginStandard"
-        android:layout_marginTop="@dimen/bigMargin"
+        android:layout_marginTop="@dimen/mediumMargin"
         android:layout_marginEnd="@dimen/marginStandard"
         android:background="@drawable/background_button"
         android:padding="@dimen/littlePadding"
-        app:layout_constraintBottom_toTopOf="@+id/matchStats"
+        app:layout_constraintBottom_toTopOf="@+id/scrollView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/spinnerFilter">
@@ -161,178 +163,195 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/matchStats"
+    <ScrollView
+        android:id="@+id/scrollView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/marginStandard"
-        android:layout_marginTop="@dimen/bigMargin"
-        android:layout_marginEnd="@dimen/marginStandard"
-        android:background="@drawable/background_button"
-        android:backgroundTint="@color/boxBackground"
-        android:padding="@dimen/littlePadding"
-        app:layout_constraintBottom_toTopOf="@+id/setSpinner"
+        android:layout_height="@dimen/fullSpaceLabel"
+        android:layout_margin="@dimen/marginStandard"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/matchInfo">
 
-        <TextView
-            android:id="@+id/subTitleStats"
-            android:layout_width="@dimen/fullSpaceLabel"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/littleMargin"
-            android:gravity="center"
-            android:text="@string/matchStats"
-            android:textSize="@dimen/subTitle"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_height="@dimen/fullSpaceLabel">
 
-        <TextView
-            android:layout_width="@dimen/fullSpaceLabel"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/littleMargin"
-            android:gravity="center"
-            android:padding="@dimen/paddingStandard"
-            android:textSize="@dimen/searchResultStatsLabel"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/subTitleStats" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/matchStats"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/marginStandard"
+                android:layout_marginTop="@dimen/bigMargin"
+                android:layout_marginEnd="@dimen/marginStandard"
+                android:background="@drawable/background_button"
+                android:backgroundTint="@color/boxBackground"
+                android:padding="@dimen/littlePadding"
+                app:layout_constraintBottom_toTopOf="@+id/setSpinner"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/matchInfo">
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+                <TextView
+                    android:id="@+id/subTitleStats"
+                    android:layout_width="@dimen/fullSpaceLabel"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/littleMargin"
+                    android:gravity="center"
+                    android:text="@string/matchStats"
+                    android:textSize="@dimen/subTitle"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-    <Spinner
-        android:id="@+id/setSpinner"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/bigMargin"
-        android:contentDescription="@string/contentDescription"
-        app:layout_constraintBottom_toTopOf="@+id/setStats"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/matchStats"
-        tools:ignore="TouchTargetSizeCheck" />
+                <TextView
+                    android:id="@+id/matchStatsLabel"
+                    android:layout_width="@dimen/fullSpaceLabel"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/littleMargin"
+                    android:gravity="center"
+                    android:padding="@dimen/paddingStandard"
+                    android:textSize="@dimen/searchResultStatsLabel"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/subTitleStats" />
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/setStats"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/marginStandard"
-        android:layout_marginEnd="@dimen/marginStandard"
-        android:background="@drawable/background_button"
-        android:backgroundTint="@color/boxBackground"
-        android:padding="@dimen/littlePadding"
-        app:layout_constraintBottom_toTopOf="@id/setHistory"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/setSpinner">
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <TextView
-            android:id="@+id/subTitleSetStats"
-            android:layout_width="@dimen/fullSpaceLabel"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/littleMargin"
-            android:gravity="center"
-            android:text="@string/setStatsFilter"
-            android:textSize="@dimen/subTitle"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            <Spinner
+                android:id="@+id/setSpinner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/bigMargin"
+                android:contentDescription="@string/contentDescription"/>
 
-        <TextView
-            android:layout_width="@dimen/fullSpaceLabel"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/littleMargin"
-            android:gravity="center"
-            android:padding="@dimen/paddingStandard"
-            android:textSize="@dimen/searchResultStatsLabel"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/subTitleSetStats" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/setStats"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/marginStandard"
+                android:layout_marginEnd="@dimen/marginStandard"
+                android:background="@drawable/background_button"
+                android:backgroundTint="@color/boxBackground"
+                android:padding="@dimen/littlePadding"
+                app:layout_constraintBottom_toTopOf="@id/setHistory"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/setSpinner">
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+                <TextView
+                    android:id="@+id/subTitleSetStats"
+                    android:layout_width="@dimen/fullSpaceLabel"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/littleMargin"
+                    android:gravity="center"
+                    android:text="@string/setStatsFilter"
+                    android:textSize="@dimen/subTitle"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/setHistory"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/marginStandard"
-        android:layout_marginTop="@dimen/marginStandard"
-        android:layout_marginEnd="@dimen/marginStandard"
-        android:background="@drawable/background_button"
-        android:backgroundTint="@color/boxBackground"
-        android:padding="@dimen/littlePadding"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/setStats">
+                <TextView
+                    android:id="@+id/setStatsLabel"
+                    android:layout_width="@dimen/fullSpaceLabel"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/littleMargin"
+                    android:gravity="center"
+                    android:padding="@dimen/paddingStandard"
+                    android:textSize="@dimen/searchResultStatsLabel"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/subTitleSetStats" />
 
-        <TextView
-            android:id="@+id/subTitleHistory"
-            android:layout_width="@dimen/fullSpaceLabel"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/littleMargin"
-            android:gravity="center"
-            android:text="@string/setHistoryFilter"
-            android:textSize="@dimen/subTitle"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <TextView
-            android:layout_width="@dimen/fullSpaceLabel"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/littleMargin"
-            android:gravity="center"
-            android:padding="@dimen/paddingStandard"
-            android:textSize="@dimen/searchResultStatsLabel"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/subTitleHistory" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/setHistory"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/marginStandard"
+                android:layout_marginTop="@dimen/marginStandard"
+                android:layout_marginEnd="@dimen/marginStandard"
+                android:background="@drawable/background_button"
+                android:backgroundTint="@color/boxBackground"
+                android:padding="@dimen/littlePadding"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/setStats">
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+                <TextView
+                    android:id="@+id/subTitleHistory"
+                    android:layout_width="@dimen/fullSpaceLabel"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/littleMargin"
+                    android:gravity="center"
+                    android:text="@string/setHistoryFilter"
+                    android:textSize="@dimen/subTitle"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/matchQuotes"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/marginStandard"
-        android:layout_marginTop="@dimen/bigMargin"
-        android:layout_marginEnd="@dimen/marginStandard"
-        android:background="@drawable/background_button"
-        android:backgroundTint="@color/boxBackground"
-        android:padding="@dimen/littlePadding"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/setHistory">
+                <TextView
+                    android:id="@+id/setHistoryLabel"
+                    android:layout_width="@dimen/fullSpaceLabel"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/littleMargin"
+                    android:gravity="center"
+                    android:padding="@dimen/paddingStandard"
+                    android:textSize="@dimen/searchResultStatsLabel"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/subTitleHistory" />
 
-        <TextView
-            android:id="@+id/subTitleQuotes"
-            android:layout_width="@dimen/fullSpaceLabel"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/littleMargin"
-            android:gravity="center"
-            android:text="@string/matchQuotes"
-            android:textSize="@dimen/subTitle"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <TextView
-            android:layout_width="@dimen/fullSpaceLabel"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/littleMargin"
-            android:gravity="center"
-            android:padding="@dimen/paddingStandard"
-            android:textSize="@dimen/searchResultStatsLabel"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/subTitleQuotes" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/matchQuotes"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/marginStandard"
+                android:layout_marginTop="@dimen/bigMargin"
+                android:layout_marginEnd="@dimen/marginStandard"
+                android:background="@drawable/background_button"
+                android:backgroundTint="@color/boxBackground"
+                android:padding="@dimen/littlePadding"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/setHistory">
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+                <TextView
+                    android:id="@+id/subTitleQuotes"
+                    android:layout_width="@dimen/fullSpaceLabel"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/littleMargin"
+                    android:gravity="center"
+                    android:text="@string/matchQuotes"
+                    android:textSize="@dimen/subTitle"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
+                <TextView
+                    android:id="@+id/quotesLabel"
+                    android:layout_width="@dimen/fullSpaceLabel"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/littleMargin"
+                    android:gravity="center"
+                    android:padding="@dimen/paddingStandard"
+                    android:textSize="@dimen/searchResultStatsLabel"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/subTitleQuotes" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

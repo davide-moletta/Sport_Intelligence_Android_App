@@ -49,12 +49,12 @@
         android:name="com.example.sportintelligencetesimolettadavide.SearchResultFragment"
         android:label="fragment_search_result"
         tools:layout="@layout/fragment_search_result" >
-        <argument
-            android:name="matchId"
-            app:argType="integer" />
         <action
             android:id="@+id/action_searchResultFragment_to_matchSelectorFragment"
             app:destination="@id/matchSelectorFragment" />
+        <argument
+            android:name="matchId"
+            app:argType="integer" />
     </fragment>
     <fragment
         android:id="@+id/favouriteMatchesFragment"

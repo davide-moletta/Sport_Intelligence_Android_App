@@ -59,7 +59,7 @@ public class MatchAdapter extends RecyclerView.Adapter<MatchAdapter.ViewHolder> 
         constraintLayout = holder.constraintLayout;
 
         constraintLayout.setOnClickListener(v -> {
-            NavDirections action = MatchSelectorFragmentDirections.actionMatchSelectorFragmentToSearchResultFragment(match.getId());
+            NavDirections action = MatchSelectorFragmentDirections.actionMatchSelectorFragmentToSearchResultFragment(matches.get(holder.getAbsoluteAdapterPosition()).getId());
             navController.navigate(action);
         });
     }

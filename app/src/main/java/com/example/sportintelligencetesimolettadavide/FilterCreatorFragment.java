@@ -76,7 +76,8 @@ public class FilterCreatorFragment extends Fragment {
                         Toast.makeText(v.getContext(), R.string.noFilterSelected, Toast.LENGTH_LONG).show();
                     }
                 } else {
-                    fileOperations.save(filterName, filterSelected);
+                    String filter = filterName + ":" + filterSelected;
+                    fileOperations.save(filter);
                     clearAll();
                     Toast.makeText(view.getContext(), R.string.savedFilter, Toast.LENGTH_LONG).show();
                 }

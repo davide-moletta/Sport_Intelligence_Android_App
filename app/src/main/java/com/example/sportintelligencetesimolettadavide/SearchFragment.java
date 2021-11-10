@@ -34,7 +34,7 @@ public class SearchFragment extends Fragment {
 
     NavController navController;
 
-    Neo4J neo4j = new Neo4J();
+    Neo4J neo4j;
 
     public SearchFragment() {
         // Required empty public constructor
@@ -68,12 +68,14 @@ public class SearchFragment extends Fragment {
             if (searchInfo[1].equals("noData")) {
                 //RICERCA TORNEO
 
+                neo4j = new Neo4J();
                 title.setText(R.string.tournamentSearch);
                 recyclerData = neo4j.fetchChampionships();
                 neo4j.close();
             } else if (searchInfo[2].equals("noData")) {
                 //RICERCA EDIZIONI
 
+                neo4j = new Neo4J();
                 title.setText(searchInfo[1]);
                 recyclerData = neo4j.fetchTournamentEditions(searchInfo[1]);
                 neo4j.close();
@@ -82,12 +84,14 @@ public class SearchFragment extends Fragment {
             if (searchInfo[1].equals("noData")) {
                 //RICERCA GIOCATORI
 
+                neo4j = new Neo4J();
                 title.setText(R.string.athleteSearch);
                 recyclerData = neo4j.fetchAthletes();
                 neo4j.close();
             } else if (searchInfo[2].equals("noData")) {
                 //RICERCA EDIZIONI PER GIOCATORE
 
+                neo4j = new Neo4J();
                 title.setText(searchInfo[1]);
                 recyclerData = neo4j.fetchAthletesEditions(searchInfo[1]);
                 neo4j.close();

@@ -78,12 +78,11 @@ public class FileOperations {
         return fileData;
     }
 
-    public void save(String filterName, String filterSelected) {
+    public void save(String dataToAdd) {
         FileOutputStream fos = null;
 
         String fileData = load();
-        String filter = filterName + ":" + filterSelected;
-        String dataToWrite = fileData + filter;
+        String dataToWrite = fileData + dataToAdd;
         try {
             fos = view.getContext().openFileOutput(FILE_NAME, Context.MODE_PRIVATE);
             fos.write(dataToWrite.getBytes());
