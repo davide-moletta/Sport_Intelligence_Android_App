@@ -133,9 +133,8 @@ public class SearchFragment extends Fragment {
 
                     if (!searchedList.isEmpty()) {
                         recycler.setAdapter(new ButtonAdapter(searchedList, searchInfo, navController));
-                        //buttonAdapter.setValues(searchedList);
                     }
-                }else {
+                } else {
                     recycler.setAdapter(buttonAdapter);
                 }
             }

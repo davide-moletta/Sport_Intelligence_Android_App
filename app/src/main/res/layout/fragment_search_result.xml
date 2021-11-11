@@ -37,7 +37,6 @@
         android:layout_height="@dimen/spinnerHeight"
         android:layout_marginStart="@dimen/marginStandard"
         android:layout_marginTop="@dimen/mediumMargin"
-        android:background="@drawable/background_spinner"
         android:contentDescription="@string/contentDescription"
         android:gravity="center"
         android:padding="@dimen/littlePadding"
@@ -188,11 +187,7 @@
                 android:layout_marginEnd="@dimen/marginStandard"
                 android:background="@drawable/background_button"
                 android:backgroundTint="@color/boxBackground"
-                android:padding="@dimen/littlePadding"
-                app:layout_constraintBottom_toTopOf="@+id/setSpinner"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/matchInfo">
+                android:padding="@dimen/littlePadding">
 
                 <TextView
                     android:id="@+id/subTitleStats"
@@ -236,11 +231,7 @@
                 android:layout_marginEnd="@dimen/marginStandard"
                 android:background="@drawable/background_button"
                 android:backgroundTint="@color/boxBackground"
-                android:padding="@dimen/littlePadding"
-                app:layout_constraintBottom_toTopOf="@id/setHistory"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/setSpinner">
+                android:padding="@dimen/littlePadding">
 
                 <TextView
                     android:id="@+id/subTitleSetStats"
@@ -278,10 +269,7 @@
                 android:layout_marginEnd="@dimen/marginStandard"
                 android:background="@drawable/background_button"
                 android:backgroundTint="@color/boxBackground"
-                android:padding="@dimen/littlePadding"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/setStats">
+                android:padding="@dimen/littlePadding">
 
                 <TextView
                     android:id="@+id/subTitleHistory"
@@ -319,10 +307,7 @@
                 android:layout_marginEnd="@dimen/marginStandard"
                 android:background="@drawable/background_button"
                 android:backgroundTint="@color/boxBackground"
-                android:padding="@dimen/littlePadding"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/setHistory">
+                android:padding="@dimen/littlePadding">
 
                 <TextView
                     android:id="@+id/subTitleQuotes"

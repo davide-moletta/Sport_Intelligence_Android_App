@@ -136,14 +136,14 @@ public class FileOperations {
         }
     }
 
-    public String searchAndDelete(String filterToDelete, String fileData) {
+    public String searchAndDelete(String dataToDelete, String fileData) {
         List<String> newFileData = new ArrayList<>();
         String newFileDataString = "";
 
         String[] fileRows = fileData.split("\n");
 
         for (String fileRow : fileRows) {
-            if (!fileRow.equals(filterToDelete)) {
+            if (!fileRow.equals(dataToDelete)) {
                 newFileData.add(fileRow);
             }
         }

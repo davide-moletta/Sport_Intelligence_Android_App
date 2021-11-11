@@ -5,7 +5,6 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -13,7 +12,10 @@ import androidx.navigation.Navigation;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -26,7 +28,10 @@ public class SearchResultFragment extends Fragment {
 
     ImageView back, star;
     TextView tournamentName, tournamentInfo, firstPlayer, result, secondPlayer, duration, matchStatsLabel, setStatsLabel, setHistoryLabel, quotesLabel;
+    Spinner filterSpinner, setSpinner;
     ConstraintLayout matchStatsLayout, setStatsLayout, setHistoryLayout, quotesLayout;
+
+    boolean favourite = false;
 
     FileOperations fileFilters, fileFavouriteMatches;
     Neo4J neo4J;
@@ -69,6 +74,8 @@ public class SearchResultFragment extends Fragment {
         result = view.findViewById(R.id.result);
         secondPlayer = view.findViewById(R.id.secondPlayer);
         duration = view.findViewById(R.id.duration);
+        filterSpinner = view.findViewById(R.id.spinnerFilter);
+        setSpinner = view.findViewById(R.id.setSpinner);
 
         matchStatsLabel = view.findViewById(R.id.matchStatsLabel);
         setStatsLabel = view.findViewById(R.id.setStatsLabel);
@@ -80,11 +87,26 @@ public class SearchResultFragment extends Fragment {
         setHistoryLayout = view.findViewById(R.id.setHistory);
         quotesLayout = view.findViewById(R.id.matchQuotes);
 
-        String[] favouriteMatches = fileFavouriteMatches.load().split("\n");
+        String fileFiltersString = fileFilters.load();
+        String[] filters = fileFiltersString.split("\n");
+        String[] spinnerFilters = new String[filters.length + 1];
+        spinnerFilters[0] = "SELEZIONA IL FILTRO";
 
+        for (int i = 0; i < filters.length; i++) {
+            spinnerFilters[i + 1] = filters[i].split(":")[0];
+        }
+
+
+        ArrayAdapter filterAdapter = new ArrayAdapter(this.getContext(), android.R.layout.simple_spinner_item, spinnerFilters);
+        filterAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        filterSpinner.setAdapter(filterAdapter);
+
+
+        String[] favouriteMatches = fileFavouriteMatches.load().split("\n");
         for (String favouriteMatch : favouriteMatches) {
             if (favouriteMatch.equals(String.valueOf(matchId))) {
-                //star.setImageDrawable(ResourcesCompat.getDrawable());
+                star.setBackgroundResource(R.drawable.ic_fullstar);
+                favourite = true;
             }
         }
 
@@ -92,32 +114,56 @@ public class SearchResultFragment extends Fragment {
 
         String editionAndDate = neo4J.fetchEditionFromId(matchId) + " - " + match.getDate();
         String tournamentInfoString = match.getLocation() + ", " + match.getField() + " - " + match.getRound();
+        List<String> setGames = new ArrayList<>(), setFifteens = new ArrayList<>(), setStat = new ArrayList<>(), setTiebreaks = new ArrayList<>();
 
         matchStat = match.getMatchStats();
         quotes = match.getQuotes();
-
-
-        matchStatsLabel.setText(ObjectListToString(matchStat));
-
         setsStat = match.getSetsStats();
         setsFifteens = match.getSetsFifteens();
         setsHistory = match.getSetsHistory();
         setsTiebreaks = match.getSetsTiebreaks();
 
+        if (ObjectListToString(matchStat).equals("")) {
+            matchStatsLayout.setVisibility(View.INVISIBLE);
+        } else {
+            matchStatsLabel.setText(ObjectListToString(matchStat));
+        }
 
-        List<String> setGames, setFifteens, setStat = new ArrayList<>(), setTiebreaks;
+        if (ObjectListToString(quotes).equals("")) {
+            quotesLabel.setVisibility(View.INVISIBLE);
+        } else {
+            quotesLabel.setText(ObjectListToString(quotes));
+        }
 
         for (List list : setsStat) {
-            if (list != null) {
-                String set = "";
-                for (Object object : list) {
-                    set += object.toString() + "\n\n";
-                }
-                setStat.add(set);
+            setStat.add(ObjectListToString(list));
+        }
+        for (List list : setsHistory) {
+            setGames.add(ObjectListToString(list));
+        }
+        for (List list : setsFifteens) {
+            setFifteens.add(ObjectListToString(list));
+        }
+        for (List list : setsTiebreaks) {
+            setTiebreaks.add(ObjectListToString(list));
+        }
+
+        int numberOfSets = 0;
+        for (String set : setGames) {
+            if (!set.equals("")) {
+                numberOfSets++;
             }
         }
-        System.out.println(setStat);
 
+        String[] sets = new String[numberOfSets];
+        for (int i = 0; i < numberOfSets; i++) {
+            int j = i + 1;
+            sets[i] = "Set " + j;
+        }
+
+        ArrayAdapter setAdapter = new ArrayAdapter(this.getContext(), android.R.layout.simple_spinner_item, sets);
+        setAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        setSpinner.setAdapter(setAdapter);
 
         tournamentName.setText(editionAndDate);
         tournamentInfo.setText(tournamentInfoString);
@@ -126,14 +172,31 @@ public class SearchResultFragment extends Fragment {
         secondPlayer.setText(match.getSecondPlayer());
         duration.setText(match.getDuration());
 
-
-        //settare il codice per l'hide se null e impostare invece le scritte se esiste qualcosa nelle liste
-
-        //Lettura da file per vedere se è un preferito
-
         neo4J.close();
 
-        star.setOnClickListener(v -> fileFavouriteMatches.save(String.valueOf(matchId)));
+        filterSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+        star.setOnClickListener(v -> {
+            if (favourite) {
+                fileFavouriteMatches.searchAndDelete(String.valueOf(matchId), fileFavouriteMatches.load());
+                star.setBackgroundResource(R.drawable.ic_emptystar);
+                favourite = false;
+            } else {
+                fileFavouriteMatches.save(String.valueOf(matchId));
+                star.setBackgroundResource(R.drawable.ic_fullstar);
+                favourite = true;
+            }
+        });
 
         back.setOnClickListener(v -> navController.navigateUp());
     }
@@ -144,6 +207,9 @@ public class SearchResultFragment extends Fragment {
             for (Object object : list) {
                 fullString += object.toString() + "\n\n";
             }
+        }
+        if (!fullString.equals("")) {
+            fullString = fullString.substring(0, fullString.length() - 2);
         }
         return fullString;
     }
