@@ -76,8 +76,8 @@ public class SavedFilterAdapter extends RecyclerView.Adapter<SavedFilterAdapter.
             String newFileData = fileOperations.searchAndDelete(fileFilter, fileData);
             Toast.makeText(v.getContext(), R.string.deleteFilter, Toast.LENGTH_LONG).show();
             setFileData(newFileData);
-            filters.remove(position);
-            this.notifyItemRemoved(position);
+            filters.remove(holder.getAbsoluteAdapterPosition());
+            this.notifyItemRemoved(holder.getAbsoluteAdapterPosition());
         });
     }
 
