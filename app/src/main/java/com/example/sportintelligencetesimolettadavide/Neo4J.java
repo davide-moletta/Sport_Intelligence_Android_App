@@ -205,7 +205,6 @@ public class Neo4J {
 
             List<Value> values = record.values();
 
-            int Id = id;
             String location = "", firstPlayer = "", result = "", secondPlayer = "", duration = "", date = "", field = "", round = "";
             List<Object> matchStats = null, quotes = null;
             List[] setsStats = new List[10];
@@ -279,7 +278,7 @@ public class Neo4J {
 
             }
 
-            match = new Match(Id, location, firstPlayer, result, secondPlayer, duration, date, field, round, matchStats, setsStats, setsHistory, setsFifteens, setsTiebreaks, quotes);
+            match = new Match(id, location, firstPlayer, result, secondPlayer, duration, date, field, round, matchStats, setsStats, setsHistory, setsFifteens, setsTiebreaks, quotes);
         }
         transaction.commit();
 

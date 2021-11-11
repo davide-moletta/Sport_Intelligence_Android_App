@@ -15,7 +15,7 @@ import java.util.List;
 
 public class ButtonAdapter extends RecyclerView.Adapter<ButtonAdapter.ViewHolder> {
 
-    private final List<String> values;
+    private List<String> values;
     private final String[] searchInfo;
     private final NavController navController;
 
@@ -23,6 +23,11 @@ public class ButtonAdapter extends RecyclerView.Adapter<ButtonAdapter.ViewHolder
         this.values = values;
         this.searchInfo = searchInfo;
         this.navController = navController;
+    }
+
+    public void setValues(List<String> newValues){
+        this.values = newValues;
+        this.notifyDataSetChanged();
     }
 
     @NonNull
