@@ -67,7 +67,7 @@ public class SavedFilterAdapter extends RecyclerView.Adapter<SavedFilterAdapter.
         delete = holder.delete;
 
         //Imposta un OnClickListener per permettere la navigazione verso il fragment per la modifica del filtro selezionato
-        edit.setOnClickListener(view -> {
+        edit.setOnClickListener(v -> {
             NavDirections action = FilterManagementFragmentDirections.actionFilterManagementFragmentToFilterCreatorFragment(fileFilter);
             //Pulisce la lista dei filtri per aggiornarla
             filters.clear();
@@ -79,7 +79,7 @@ public class SavedFilterAdapter extends RecyclerView.Adapter<SavedFilterAdapter.
         delete.setOnClickListener(v -> {
             //Creca ed elimina il filtro selezionato dal file di testo
             String newFileData = fileOperations.searchAndDelete(fileFilter, fileData);
-            Toast.makeText(v.getContext(), R.string.deleteFilter, Toast.LENGTH_LONG).show();
+            Toast.makeText(v.getContext(), R.string.deleteFilter, Toast.LENGTH_SHORT).show();
             //Aggiorna la lista e la stringa contenente i filtri trovati nel file
             setFileData(newFileData);
             filters.remove(holder.getAbsoluteAdapterPosition());

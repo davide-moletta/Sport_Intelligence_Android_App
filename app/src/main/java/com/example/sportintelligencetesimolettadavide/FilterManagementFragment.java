@@ -69,7 +69,7 @@ public class FilterManagementFragment extends Fragment {
         //Controlla se sono presenti filtri da mostrare
         if (fileRows.get(0).equals("")) {
             //FILTRI NON PRESENTI
-            Toast.makeText(view.getContext(), R.string.noFilters, Toast.LENGTH_LONG).show();
+            Toast.makeText(view.getContext(), R.string.noFilters, Toast.LENGTH_SHORT).show();
         } else {
             //FILTRI PRESENTI
             //Se trova dei filtri li passa ad un SavedFilterAdapter per poi inserirli nella recyclerView
@@ -81,7 +81,7 @@ public class FilterManagementFragment extends Fragment {
         //Imposta un OnClickListener sul pulsante elimina tutti per l'eliminazione di tutti i filtri salvati
         deleteAll.setOnClickListener(v -> {
             fileOperations.clearFile();
-            Toast.makeText(v.getContext(), R.string.allFilterDeleted, Toast.LENGTH_LONG).show();
+            Toast.makeText(v.getContext(), R.string.allFilterDeleted, Toast.LENGTH_SHORT).show();
             //Pulisce la lista dei filtri e ricarica la recyclerView aggiornata
             fileRows.clear();
             filterAdapter = new SavedFilterAdapter(fileRows, navController, fileOperations.load());

@@ -22,7 +22,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SearchResultFragment extends Fragment {
-
     private static final String FILE_FILTERS_NAME = "filters.txt";
     private static final String FILE_FAVOURITE_NAME = "favouriteMatches.txt";
 
@@ -33,6 +32,7 @@ public class SearchResultFragment extends Fragment {
 
     boolean favourite = false;
 
+    NavController navController;
     FileOperations fileFilters, fileFavouriteMatches;
     Neo4J neo4J;
     Match match;
@@ -58,16 +58,16 @@ public class SearchResultFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        NavController navController = Navigation.findNavController(view);
+        navController = Navigation.findNavController(view);
         fileFilters = new FileOperations(FILE_FILTERS_NAME, view);
         fileFavouriteMatches = new FileOperations(FILE_FAVOURITE_NAME, view);
         neo4J = new Neo4J();
 
+        //Ottiene l'id del match selezionato
         int matchId = SearchResultFragmentArgs.fromBundle(getArguments()).getMatchId();
 
         back = view.findViewById(R.id.back);
         star = view.findViewById(R.id.star);
-
         tournamentName = view.findViewById(R.id.tournamentName);
         tournamentInfo = view.findViewById(R.id.tournamentInfo);
         firstPlayer = view.findViewById(R.id.firstPlayer);
@@ -76,32 +76,29 @@ public class SearchResultFragment extends Fragment {
         duration = view.findViewById(R.id.duration);
         filterSpinner = view.findViewById(R.id.spinnerFilter);
         setSpinner = view.findViewById(R.id.setSpinner);
-
         matchStatsLabel = view.findViewById(R.id.matchStatsLabel);
         setStatsLabel = view.findViewById(R.id.setStatsLabel);
         setHistoryLabel = view.findViewById(R.id.setHistoryLabel);
         quotesLabel = view.findViewById(R.id.quotesLabel);
-
         matchStatsLayout = view.findViewById(R.id.matchStats);
         setStatsLayout = view.findViewById(R.id.setStats);
         setHistoryLayout = view.findViewById(R.id.setHistory);
         quotesLayout = view.findViewById(R.id.matchQuotes);
 
+        //Carica da file i filtri presenti e ne inserisce i valori nello spinner
         String fileFiltersString = fileFilters.load();
         String[] filters = fileFiltersString.split("\n");
         String[] spinnerFilters = new String[filters.length + 1];
         spinnerFilters[0] = "SELEZIONA IL FILTRO";
-
         for (int i = 0; i < filters.length; i++) {
             spinnerFilters[i + 1] = filters[i].split(":")[0];
         }
-
-
-        ArrayAdapter filterAdapter = new ArrayAdapter(this.getContext(), android.R.layout.simple_spinner_item, spinnerFilters);
+        //Imposta i valori trovati come adapter per lo spinner
+        ArrayAdapter<String> filterAdapter = new ArrayAdapter<>(this.getContext(), android.R.layout.simple_spinner_item, spinnerFilters);
         filterAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         filterSpinner.setAdapter(filterAdapter);
 
-
+        //Controlla se il match è tra i preferiti o no e in base al risultato imposta la stella come piena o vuota
         String[] favouriteMatches = fileFavouriteMatches.load().split("\n");
         for (String favouriteMatch : favouriteMatches) {
             if (favouriteMatch.equals(String.valueOf(matchId))) {
@@ -110,6 +107,7 @@ public class SearchResultFragment extends Fragment {
             }
         }
 
+        //Ottiene i dati del match dal database
         match = neo4J.fetchAllDataFromId(matchId);
 
         String editionAndDate = neo4J.fetchEditionFromId(matchId) + " - " + match.getDate();
@@ -148,6 +146,11 @@ public class SearchResultFragment extends Fragment {
             setTiebreaks.add(ObjectListToString(list));
         }
 
+
+        //CODICE PER MOSTRARE I DATI DEI SET
+
+
+        //Calcola il numero di set e crea il vettore da inserire nell'adapter
         int numberOfSets = 0;
         for (String set : setGames) {
             if (!set.equals("")) {
@@ -160,8 +163,8 @@ public class SearchResultFragment extends Fragment {
             int j = i + 1;
             sets[i] = "Set " + j;
         }
-
-        ArrayAdapter setAdapter = new ArrayAdapter(this.getContext(), android.R.layout.simple_spinner_item, sets);
+        //Inserisce il vettore creato in un adapter e lo assegna allo spinner dei set
+        ArrayAdapter<String> setAdapter = new ArrayAdapter<>(this.getContext(), android.R.layout.simple_spinner_item, sets);
         setAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         setSpinner.setAdapter(setAdapter);
 
@@ -174,6 +177,7 @@ public class SearchResultFragment extends Fragment {
 
         neo4J.close();
 
+        //Imposta on Listener sullo spinner dei filtri per controllare quando viene selezionato un elemento diverso
         filterSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
@@ -186,6 +190,20 @@ public class SearchResultFragment extends Fragment {
             }
         });
 
+        //Imposta on Listener sullo spinner dei set per controllare quando viene selezionato un elemento diverso
+        setSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+        //Imposta un OnClickListener sulla stella in modo da poter rendere preferito il match attuale o di rimuoverlo dai preferiti
         star.setOnClickListener(v -> {
             if (favourite) {
                 fileFavouriteMatches.searchAndDelete(String.valueOf(matchId), fileFavouriteMatches.load());
@@ -198,19 +216,21 @@ public class SearchResultFragment extends Fragment {
             }
         });
 
+        //Imposta un OnClickListener per permettere la navigazione verso il fragment precedente
         back.setOnClickListener(v -> navController.navigateUp());
     }
 
+    //Trasforma una lista di oggetti in una stringa da inserire poi nelle label
     private String ObjectListToString(List list) {
-        String fullString = "";
+        StringBuilder fullString = new StringBuilder();
         if (list != null) {
             for (Object object : list) {
-                fullString += object.toString() + "\n\n";
+                fullString.append(object.toString()).append("\n\n");
             }
         }
-        if (!fullString.equals("")) {
-            fullString = fullString.substring(0, fullString.length() - 2);
+        if (!fullString.toString().equals("")) {
+            fullString = new StringBuilder(fullString.substring(0, fullString.length() - 2));
         }
-        return fullString;
+        return fullString.toString();
     }
 }

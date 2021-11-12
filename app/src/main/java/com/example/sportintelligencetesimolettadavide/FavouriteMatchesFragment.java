@@ -66,7 +66,7 @@ public class FavouriteMatchesFragment extends Fragment {
         //Controlla se esistono dei match preferiti da mostrare
         if (fileRows.get(0).equals("")) {
             //MATCH NON TROVATI
-            Toast.makeText(view.getContext(), R.string.noFavouriteMatches, Toast.LENGTH_LONG).show();
+            Toast.makeText(view.getContext(), R.string.noFavouriteMatches, Toast.LENGTH_SHORT).show();
         } else {
             //MATCH TROVATI
             //Se trova dei match preferiti crea un FavouriteMatchAdapter e lo assegna alla recyclerView per la visualizzazione

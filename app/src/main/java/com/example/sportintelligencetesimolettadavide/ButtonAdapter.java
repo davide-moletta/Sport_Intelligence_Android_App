@@ -5,11 +5,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.navigation.NavController;
 import androidx.navigation.NavDirections;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.List;
 
@@ -47,6 +50,7 @@ public class ButtonAdapter extends RecyclerView.Adapter<ButtonAdapter.ViewHolder
         //Imposta un OnClickListener sull'elemento della recyclerView che permette di aggiornare il vettore searchInfo
         //e di navigare nella ricerca per poi arrivare ai risultati cercati
         textView.setOnClickListener(v -> {
+            //Snackbar.make(v, R.string.snackBarText, Snackbar.LENGTH_SHORT).show();
             if (searchInfo[1].equals("noData")) {
                 searchInfo[1] = textView.getText().toString();
                 NavDirections action = SearchFragmentDirections.actionTournamentSearchFragmentSelf2(searchInfo);

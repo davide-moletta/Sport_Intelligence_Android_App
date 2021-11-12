@@ -76,14 +76,14 @@ public class FilterCreatorFragment extends Fragment {
                 //Controlla se il nome del filtro non è vuoto e se è stato selezionato almeno un filtro
                 if (filterName.equals("") || filterSelected.equals("")) {
                     if (filterName.equals("")) {
-                        Toast.makeText(v.getContext(), R.string.noFilterTitle, Toast.LENGTH_LONG).show();
+                        Toast.makeText(v.getContext(), R.string.noFilterTitle, Toast.LENGTH_SHORT).show();
                     } else {
-                        Toast.makeText(v.getContext(), R.string.noFilterSelected, Toast.LENGTH_LONG).show();
+                        Toast.makeText(v.getContext(), R.string.noFilterSelected, Toast.LENGTH_SHORT).show();
                     }
                 } else {
                     String filter = filterName + ":" + filterSelected;
                     fileOperations.save(filter);
-                    Toast.makeText(view.getContext(), R.string.savedFilter, Toast.LENGTH_LONG).show();
+                    Toast.makeText(view.getContext(), R.string.savedFilter, Toast.LENGTH_SHORT).show();
                     clearAll();
                 }
             });
@@ -102,13 +102,13 @@ public class FilterCreatorFragment extends Fragment {
                 //Controlla se il nome del filtro non è vuoto e se è stato selezionato almeno un filtro
                 if (newFilterName.equals("") || filterSelected.equals("")) {
                     if (newFilterName.equals("")) {
-                        Toast.makeText(v.getContext(), R.string.noFilterTitle, Toast.LENGTH_LONG).show();
+                        Toast.makeText(v.getContext(), R.string.noFilterTitle, Toast.LENGTH_SHORT).show();
                     } else {
-                        Toast.makeText(v.getContext(), R.string.noFilterSelected, Toast.LENGTH_LONG).show();
+                        Toast.makeText(v.getContext(), R.string.noFilterSelected, Toast.LENGTH_SHORT).show();
                     }
                 } else {
                     fileOperations.replaceFilter(editFilter, newFilter);
-                    Toast.makeText(v.getContext(), R.string.updateFilter, Toast.LENGTH_LONG).show();
+                    Toast.makeText(v.getContext(), R.string.updateFilter, Toast.LENGTH_SHORT).show();
                     clearAll();
                 }
             });

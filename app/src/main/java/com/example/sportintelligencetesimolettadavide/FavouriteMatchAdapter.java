@@ -88,7 +88,7 @@ public class FavouriteMatchAdapter extends RecyclerView.Adapter<FavouriteMatchAd
         fullStar.setOnClickListener(v -> {
             //Cerca ed elimina il match selezionato
             String newFileData = fileOperations.searchAndDelete(favouriteMatch, fileData);
-            Toast.makeText(v.getContext(), R.string.deleteMatch, Toast.LENGTH_LONG).show();
+            Toast.makeText(v.getContext(), R.string.deleteMatch, Toast.LENGTH_SHORT).show();
             //Aggiorna i dati della recyclerView per una corretta visualizzazione
             setFileData(newFileData);
             favouriteMatches.remove(holder.getAbsoluteAdapterPosition());
