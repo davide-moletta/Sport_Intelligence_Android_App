@@ -21,9 +21,10 @@ public class FileOperations {
         this.view = view;
     }
 
+    //Trova il filtro ricercato e lo sostituisce con uno nuovo
     public void replaceFilter(String editFilter, String newFilter) {
         List<String> newFileData = new ArrayList<>();
-        String newFileDataString = "";
+        StringBuilder newFileDataString = new StringBuilder();
         boolean found = false;
 
         String fileData = load();
@@ -41,12 +42,13 @@ public class FileOperations {
         newFileData.add(newFilter);
 
         for (String fileEntry : newFileData) {
-            newFileDataString += fileEntry + "\n";
+            newFileDataString.append(fileEntry).append("\n");
         }
 
-        overwriteFile(newFileDataString);
+        overwriteFile(newFileDataString.toString());
     }
 
+    //Carica tutti i dati presenti sul file di testo e li ritorna come stringa
     public String load() {
         FileInputStream fis = null;
         String fileData = "";
@@ -78,6 +80,7 @@ public class FileOperations {
         return fileData;
     }
 
+    //Salva i dati ricevuti nel file senza sovrascrivere quelli già presenti
     public void save(String dataToAdd) {
         FileOutputStream fos = null;
 
@@ -99,6 +102,7 @@ public class FileOperations {
         }
     }
 
+    //Sovrascrive il file eliminando tutti i dati e inserendo quelli ricevuti
     private void overwriteFile(String newFileDataString) {
         FileOutputStream fos = null;
         try {
@@ -117,6 +121,7 @@ public class FileOperations {
         }
     }
 
+    //Pulisce il file eliminando tutti i dati presenti
     public void clearFile() {
         FileOutputStream fos = null;
 
@@ -136,9 +141,10 @@ public class FileOperations {
         }
     }
 
+    //Creca un valore da eliminare e lo rimuove dal file lasciando inalterati gli altri dati
     public String searchAndDelete(String dataToDelete, String fileData) {
         List<String> newFileData = new ArrayList<>();
-        String newFileDataString = "";
+        StringBuilder newFileDataString = new StringBuilder();
 
         String[] fileRows = fileData.split("\n");
 
@@ -149,10 +155,10 @@ public class FileOperations {
         }
 
         for (String fileEntry : newFileData) {
-            newFileDataString += fileEntry + "\n";
+            newFileDataString.append(fileEntry).append("\n");
         }
 
-        overwriteFile(newFileDataString);
-        return newFileDataString;
+        overwriteFile(newFileDataString.toString());
+        return newFileDataString.toString();
     }
 }

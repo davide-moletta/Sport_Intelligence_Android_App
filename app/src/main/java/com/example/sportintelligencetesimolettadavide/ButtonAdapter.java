@@ -15,7 +15,7 @@ import java.util.List;
 
 public class ButtonAdapter extends RecyclerView.Adapter<ButtonAdapter.ViewHolder> {
 
-    private List<String> values;
+    private final List<String> values;
     private final String[] searchInfo;
     private final NavController navController;
 
@@ -23,11 +23,6 @@ public class ButtonAdapter extends RecyclerView.Adapter<ButtonAdapter.ViewHolder
         this.values = values;
         this.searchInfo = searchInfo;
         this.navController = navController;
-    }
-
-    public void setValues(List<String> newValues){
-        this.values = newValues;
-        this.notifyDataSetChanged();
     }
 
     @NonNull
@@ -45,9 +40,12 @@ public class ButtonAdapter extends RecyclerView.Adapter<ButtonAdapter.ViewHolder
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         String value = values.get(position);
 
+        //Adapter che andrà inserito nella recyclerView del frgamnet SearchFragment
         TextView textView = holder.textLabel;
         textView.setText(value);
 
+        //Imposta un OnClickListener sull'elemento della recyclerView che permette di aggiornare il vettore searchInfo
+        //e di navigare nella ricerca per poi arrivare ai risultati cercati
         textView.setOnClickListener(v -> {
             if (searchInfo[1].equals("noData")) {
                 searchInfo[1] = textView.getText().toString();

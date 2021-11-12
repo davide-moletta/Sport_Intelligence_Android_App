@@ -58,53 +58,54 @@ public class SearchFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        //Controller per gestire la navigazione tra i vari fragment
         navController = Navigation.findNavController(view);
 
+        //Ogni textView e imageView prende l'id dichiarato nel file xml
         back = view.findViewById(R.id.back);
         search = view.findViewById(R.id.search);
         title = view.findViewById(R.id.title);
         recycler = view.findViewById(R.id.recycler);
 
+        //Prende il valore del vettore searchInfo passato dal fragment precedente
         searchInfo = SearchFragmentArgs.fromBundle(getArguments()).getSearchInfo();
 
+        //Crea un oggetto Neo4J che permette la comunicazione con il database
+        neo4j = new Neo4J();
+
+        //Controlla che tipo di ricerca effettuare in base ai valori contenuti nel vettore SearchInfo
         if (searchInfo[0].equals("tournament")) {
             if (searchInfo[1].equals("noData")) {
                 //RICERCA TORNEO
 
-                neo4j = new Neo4J();
                 title.setText(R.string.tournamentSearch);
                 recyclerData = neo4j.fetchChampionships();
-                neo4j.close();
             } else if (searchInfo[2].equals("noData")) {
-                //RICERCA EDIZIONI
+                //RICERCA EDIZIONI PER TORNEO
 
-                neo4j = new Neo4J();
                 title.setText(searchInfo[1]);
                 recyclerData = neo4j.fetchTournamentEditions(searchInfo[1]);
-                neo4j.close();
             }
         } else if (searchInfo[0].equals("athlete")) {
             if (searchInfo[1].equals("noData")) {
                 //RICERCA GIOCATORI
 
-                neo4j = new Neo4J();
                 title.setText(R.string.athleteSearch);
                 recyclerData = neo4j.fetchAthletes();
-                neo4j.close();
             } else if (searchInfo[2].equals("noData")) {
                 //RICERCA EDIZIONI PER GIOCATORE
 
-                neo4j = new Neo4J();
                 title.setText(searchInfo[1]);
                 recyclerData = neo4j.fetchAthletesEditions(searchInfo[1]);
-                neo4j.close();
             }
         }
 
+        //Una volta ottenuti i dati dal database imposta l'adapter per la recyclerView come un buttonAdapter per la visualizzazione degli elementi
         buttonAdapter = new ButtonAdapter(recyclerData, searchInfo, navController);
         recycler.setAdapter(buttonAdapter);
         recycler.setLayoutManager(new LinearLayoutManager(this.getContext()));
 
+        //Imposta un listener sulla barra di ricerca che si attiva ogni volta che il contenuto dell'editText cambia
         search.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -117,6 +118,8 @@ public class SearchFragment extends Fragment {
                 List<String> searchedList = new ArrayList<>();
                 double maxSimilarity = 0.0;
 
+                //Controlla la somiglianza tra gli elementi della recyclerView e il testo digitato dall'utente nella barra di ricerca,
+                //una volta trovati gli elementi somiglianti almeno per la metà del somiglianza massima trovata aggiorna la lista con gli elementi trovati
                 if (!searchedText.equals("")) {
                     for (String element : recyclerData) {
                         double similarity = similarity(element, searchedText);
@@ -124,13 +127,11 @@ public class SearchFragment extends Fragment {
                             maxSimilarity = similarity;
                         }
                     }
-
                     for (String element : recyclerData) {
                         if (similarity(searchedText, element) > maxSimilarity / 2) {
                             searchedList.add(element);
                         }
                     }
-
                     if (!searchedList.isEmpty()) {
                         recycler.setAdapter(new ButtonAdapter(searchedList, searchInfo, navController));
                     }
@@ -145,18 +146,20 @@ public class SearchFragment extends Fragment {
             }
         });
 
-        back.setOnClickListener(v ->
-
-        {
+        //Imposta un onClickListener sulla freccia per tornare indietro,
+        //sul click vengono acnhe aggiornati i dati nel vettore searchInfo e viene chiusa la comunicazione col database
+        back.setOnClickListener(v -> {
             if (!searchInfo[2].equals("noData")) {
                 searchInfo[2] = "noData";
             } else if (!searchInfo[1].equals("noData")) {
                 searchInfo[1] = "noData";
             }
+            neo4j.close();
             navController.navigateUp();
         });
     }
 
+    //Codice per calcolare la somiglianza tra due stringe
     private double similarity(String s1, String s2) {
         String longer = s1, shorter = s2;
         if (s1.length() < s2.length()) { // longer should always have greater length

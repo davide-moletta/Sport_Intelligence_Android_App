@@ -20,6 +20,16 @@ import java.util.List;
 
 public class MatchSelectorFragment extends Fragment {
 
+    String[] searchInfo;
+    Neo4J neo4j;
+    List<Match> recyclerMatches;
+
+    NavController navController;
+
+    TextView title;
+    ImageView back;
+    RecyclerView recycler;
+
     public MatchSelectorFragment() {
         // Required empty public constructor
     }
@@ -39,38 +49,39 @@ public class MatchSelectorFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        String[] searchInfo;
-        Neo4J neo4j = new Neo4J();
-        List<Match> recyclerMatches;
+        neo4j = new Neo4J();
 
-        NavController navController = Navigation.findNavController(view);
+        navController = Navigation.findNavController(view);
 
-        TextView title = view.findViewById(R.id.title);
-        ImageView back = view.findViewById(R.id.back);
-        RecyclerView recycler = view.findViewById(R.id.recycler);
+        title = view.findViewById(R.id.title);
+        back = view.findViewById(R.id.back);
+        recycler = view.findViewById(R.id.recycler);
 
+        //Prende il valore del vettore searchInfo arrivato del fragment SearchFragment
         searchInfo = MatchSelectorFragmentArgs.fromBundle(getArguments()).getSearchInfo();
 
+        //Controlla se i match da cercare nel database sono per torneo o giocatore e li ricerca
         if (searchInfo[0].equals("tournament")) {
-            //RICERCA MATCH PER TORNEO
+            //RICERCA MATCH PER TORNEO E EDIZIONE
 
             title.setText(searchInfo[2]);
             recyclerMatches = neo4j.fetchTournamentMatches(searchInfo[2]);
-            neo4j.close();
         } else {
-            //RICERCA MATCH PER GIOCATORE O EDIZIONE
+            //RICERCA MATCH PER GIOCATORE E EDIZIONE
 
             title.setText(searchInfo[1]);
             recyclerMatches = neo4j.fetchAthletesMatches(searchInfo[1], searchInfo[2]);
-            neo4j.close();
         }
 
+        //Imposta l'Adapter per la recyclerView cosi da permettere la visualizzazione degli elementi
         MatchAdapter matchAdapter = new MatchAdapter(recyclerMatches, navController);
         recycler.setAdapter(matchAdapter);
         recycler.setLayoutManager(new LinearLayoutManager(this.getContext()));
 
+        //Imposta un OnClickListenere sulla freccia per chiudera la comunicazione col database, aggiornare il vettore searchInfo e tornare al fragmnent precedente
         back.setOnClickListener(v -> {
             searchInfo[2] = "noData";
+            neo4j.close();
             navController.navigateUp();
         });
     }

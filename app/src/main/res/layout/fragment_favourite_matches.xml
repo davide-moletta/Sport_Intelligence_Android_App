@@ -14,6 +14,7 @@
         android:background="@drawable/background_topbar"
         android:gravity="end|center_vertical"
         android:padding="@dimen/paddingStandard"
+        android:paddingStart="@dimen/noPadding"
         android:paddingEnd="@dimen/bigPadding"
         android:text="@string/favouriteMatches"
         android:textSize="@dimen/title"

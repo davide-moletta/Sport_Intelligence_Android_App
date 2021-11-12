@@ -50,8 +50,10 @@ public class FilterCreatorFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         navController = Navigation.findNavController(view);
+        //Ottiene il valore ricevuto dal fragment precedente che segnala se si sta creando un filtro o se si sta modificando un filtro esistente
         String editFilter = FilterCreatorFragmentArgs.fromBundle(getArguments()).getEditFilter();
 
+        //Crea un elemento FileOperations per permettere la scrittura e lettura su file di testo
         fileOperations = new FileOperations(FILE_NAME, view);
 
         editFilterName = view.findViewById(R.id.editFilterName);
@@ -63,13 +65,16 @@ public class FilterCreatorFragment extends Fragment {
         checkSetHistory = view.findViewById(R.id.checkSetHistory);
         checkQuotes = view.findViewById(R.id.checkQuotes);
 
+        //Controlla se il filtro è da aggiornare o da creare
         if (editFilter.equals("noEdit")) {
+            //FILTRO DA CREARE
+            //Imposta un OnClickListener che una volta premuto su salva prende il nome del filtro e i valori selezionati per poi salvari sul file di testo
             save.setOnClickListener(v -> {
                 String filterName = editFilterName.getText().toString();
                 String filterSelected = filterBuilder();
 
+                //Controlla se il nome del filtro non è vuoto e se è stato selezionato almeno un filtro
                 if (filterName.equals("") || filterSelected.equals("")) {
-
                     if (filterName.equals("")) {
                         Toast.makeText(v.getContext(), R.string.noFilterTitle, Toast.LENGTH_LONG).show();
                     } else {
@@ -78,19 +83,24 @@ public class FilterCreatorFragment extends Fragment {
                 } else {
                     String filter = filterName + ":" + filterSelected;
                     fileOperations.save(filter);
-                    clearAll();
                     Toast.makeText(view.getContext(), R.string.savedFilter, Toast.LENGTH_LONG).show();
+                    clearAll();
                 }
             });
         } else {
+            //FILTRO DA MODIFICARE
+            //Aggiorna la schermata con i dati relativi al filtro che si intende modificare
             setUpFilter(editFilter);
+
+            //Imposta un OnClickListener che una volta premuto su salva prende il nome del filtro e i valori selezionati per poi salvari sul file di testo
+            //dopo aver eliminato il filtro che andava modificato
             save.setOnClickListener(v -> {
                 String newFilterName = editFilterName.getText().toString();
                 String filterSelected = filterBuilder();
                 String newFilter = newFilterName + ":" + filterSelected;
 
+                //Controlla se il nome del filtro non è vuoto e se è stato selezionato almeno un filtro
                 if (newFilterName.equals("") || filterSelected.equals("")) {
-
                     if (newFilterName.equals("")) {
                         Toast.makeText(v.getContext(), R.string.noFilterTitle, Toast.LENGTH_LONG).show();
                     } else {
@@ -104,9 +114,11 @@ public class FilterCreatorFragment extends Fragment {
             });
         }
 
+        //Imposta un OnClickListener per la navigazione verso il fragment precedente
         back.setOnClickListener(v -> navController.navigateUp());
     }
 
+    //In base al filtro ricevuto imposta i campi della pagina come il filtro segnala
     private void setUpFilter(String editFilter) {
         editFilterName.setText(editFilter.split(":")[0]);
 
@@ -131,6 +143,7 @@ public class FilterCreatorFragment extends Fragment {
         }
     }
 
+    //In base ai filtri selezionati dall'utente crea una stringa da inserire nel file di testo
     private String filterBuilder() {
         String appliedFilters = "";
 
@@ -157,6 +170,7 @@ public class FilterCreatorFragment extends Fragment {
         return appliedFilters;
     }
 
+    //Pulisce tutti i campi della pagina
     private void clearAll() {
         editFilterName.getText().clear();
         checkMatchInfo.setChecked(false);

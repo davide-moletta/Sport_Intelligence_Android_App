@@ -14,7 +14,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
-
 public class MatchAdapter extends RecyclerView.Adapter<MatchAdapter.ViewHolder> {
 
     private final List<Match> matches;
@@ -50,6 +49,7 @@ public class MatchAdapter extends RecyclerView.Adapter<MatchAdapter.ViewHolder> 
         secondPlayerView = holder.secondPlayer;
         durationView = holder.duration;
 
+        //Imposta i valori da visualizzare negli elementi della recyclerView per ogni match
         tournamentNameView.setText(match.getLocation());
         firstPlayerView.setText(match.getFirstPlayer());
         resultView.setText(match.getResult());
@@ -58,6 +58,7 @@ public class MatchAdapter extends RecyclerView.Adapter<MatchAdapter.ViewHolder> 
 
         constraintLayout = holder.constraintLayout;
 
+        //Imposta un OnClickListener per passare alla completa visualizzazione dei dati del match selezionato
         constraintLayout.setOnClickListener(v -> {
             NavDirections action = MatchSelectorFragmentDirections.actionMatchSelectorFragmentToSearchResultFragment(matches.get(holder.getAbsoluteAdapterPosition()).getId());
             navController.navigate(action);

@@ -31,7 +31,6 @@ public class Match {
 
     public Match(int id, String location, String firstPlayer, String result, String secondPlayer, String duration, String date, String field, String round,
                  List<Object> matchStats, List[] setsStats, List[] setsHistory, List[] setsFifteens, List[] setsTiebreaks, List<Object> quotes) {
-
         this.id = id;
         this.location = location;
         this.firstPlayer = firstPlayer;

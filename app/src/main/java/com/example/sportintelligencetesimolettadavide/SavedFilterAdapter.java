@@ -28,7 +28,6 @@ public class SavedFilterAdapter extends RecyclerView.Adapter<SavedFilterAdapter.
     String fileData;
 
     FileOperations fileOperations;
-    Filter filter;
 
     public SavedFilterAdapter(List<String> filters, NavController navController, String fileData) {
         this.filters = filters;
@@ -55,26 +54,33 @@ public class SavedFilterAdapter extends RecyclerView.Adapter<SavedFilterAdapter.
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         String fileFilter = filters.get(position);
 
-        filter = filterSplitter(fileFilter);
+        //Ottiene il nome del filtro
+        String filterNameString = fileFilter.split(":")[0];
 
+        //Crea un oggetto FileOperations per la scrittura e lettura su file di testo
         fileOperations = new FileOperations(FILE_NAME, holder.itemView);
 
         filterName = holder.filterName;
-        filterName.setText(filter.getName());
+        filterName.setText(filterNameString);
 
         edit = holder.edit;
         delete = holder.delete;
 
+        //Imposta un OnClickListener per permettere la navigazione verso il fragment per la modifica del filtro selezionato
         edit.setOnClickListener(view -> {
             NavDirections action = FilterManagementFragmentDirections.actionFilterManagementFragmentToFilterCreatorFragment(fileFilter);
+            //Pulisce la lista dei filtri per aggiornarla
             filters.clear();
             navController.navigate(action);
 
         });
 
+        //Imposta un OnClickListener per permettere l'eliminazione del filtro selezionato
         delete.setOnClickListener(v -> {
+            //Creca ed elimina il filtro selezionato dal file di testo
             String newFileData = fileOperations.searchAndDelete(fileFilter, fileData);
             Toast.makeText(v.getContext(), R.string.deleteFilter, Toast.LENGTH_LONG).show();
+            //Aggiorna la lista e la stringa contenente i filtri trovati nel file
             setFileData(newFileData);
             filters.remove(holder.getAbsoluteAdapterPosition());
             this.notifyItemRemoved(holder.getAbsoluteAdapterPosition());
@@ -97,31 +103,5 @@ public class SavedFilterAdapter extends RecyclerView.Adapter<SavedFilterAdapter.
             edit = itemView.findViewById(R.id.edit);
             delete = itemView.findViewById(R.id.delete);
         }
-    }
-
-    private Filter filterSplitter(String fileFilter) {
-        boolean matchInfo = false, matchStats = false, setStats = false, setHistory = false, quotes = false;
-
-        String[] splittedFilter = fileFilter.split(":");
-
-        String[] filterTypes = splittedFilter[1].split("-");
-
-        for (String filterType : filterTypes) {
-            switch (filterType) {
-                case "matchInfo":
-                    matchInfo = true;
-                case "matchStats":
-                    matchStats = true;
-                case "setStats":
-                    setStats = true;
-                case "setHistory":
-                    setHistory = true;
-                case "quotes":
-                    quotes = true;
-                default:
-            }
-        }
-
-        return new Filter(splittedFilter[0], matchInfo, matchStats, setStats, setHistory, quotes);
     }
 }

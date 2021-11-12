@@ -55,26 +55,30 @@ public class FavouriteMatchesFragment extends Fragment {
 
         navController = Navigation.findNavController(view);
         neo4j = new Neo4J();
-
         fileOperations = new FileOperations(FILE_NAME, view);
+
         back = view.findViewById(R.id.back);
         recycler = view.findViewById(R.id.recycler);
 
-        System.out.println(fileOperations.load());
-
+        //Prende tutti i match preferiti dal file di testo relativo e li inserisce in una lista
         Collections.addAll(fileRows, fileOperations.load().split("\n"));
 
+        //Controlla se esistono dei match preferiti da mostrare
         if (fileRows.get(0).equals("")) {
+            //MATCH NON TROVATI
             Toast.makeText(view.getContext(), R.string.noFavouriteMatches, Toast.LENGTH_LONG).show();
         } else {
+            //MATCH TROVATI
+            //Se trova dei match preferiti crea un FavouriteMatchAdapter e lo assegna alla recyclerView per la visualizzazione
             favouriteMatchAdapter = new FavouriteMatchAdapter(fileRows, navController, neo4j, fileOperations.load());
             recycler.setAdapter(favouriteMatchAdapter);
             recycler.setLayoutManager(new LinearLayoutManager(this.getContext()));
         }
 
+        //Imposta un OnClickListener sulla freccia per la chiusura della comunicazione col database e per la navigazione verso il fragment precedente
         back.setOnClickListener(v -> {
-            navController.navigateUp();
             neo4j.close();
+            navController.navigateUp();
         });
     }
 }

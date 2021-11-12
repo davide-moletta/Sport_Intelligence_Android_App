@@ -23,10 +23,12 @@ public class Neo4J {
         this.driver = GraphDatabase.driver(dbURL, AuthTokens.basic(username, password));
     }
 
+    //Chiude la comunicazione col database
     public void close() {
         driver.close();
     }
 
+    //Trova tutti i campionati presenti sul database
     public List<String> fetchChampionships() {
         Transaction transaction = driver.session().beginTransaction();
         Result result = transaction.run("MATCH (n:Championship) RETURN n");
@@ -46,6 +48,7 @@ public class Neo4J {
         return championships;
     }
 
+    //Trova tutte le edizioni presenti sul database relative ad uno specifico campionato
     public List<String> fetchTournamentEditions(String tournament) {
         Transaction transaction = driver.session().beginTransaction();
         Result result = transaction.run("MATCH (n:Championship), (m:Edition) WHERE n.name=$tournament AND (n)-[]-(m) RETURN m",
@@ -66,6 +69,7 @@ public class Neo4J {
         return editions;
     }
 
+    //Trova tutti i match presenti sul database relativi ad una specifica edizione
     public List<Match> fetchTournamentMatches(String edition) {
         Transaction transaction = driver.session().beginTransaction();
         Result result = transaction.run("MATCH (n:Edition), (m:Game) WHERE n.edName=$edition AND (n)-[]-(m) RETURN ID(m)",
@@ -92,6 +96,7 @@ public class Neo4J {
         return matches;
     }
 
+    //Trova tutti gli atleti presenti sul database
     public List<String> fetchAthletes() {
         Transaction transaction = driver.session().beginTransaction();
         Result result = transaction.run("MATCH (n:Player) RETURN n");
@@ -111,6 +116,7 @@ public class Neo4J {
         return athletes;
     }
 
+    //Trova tutte le edizioni in cui uno specifico atleta ha giocato
     public List<String> fetchAthletesEditions(String athlete) {
         Transaction transaction = driver.session().beginTransaction();
         Result result = transaction.run("MATCH (n:Player), (m:Edition) WHERE n.playerName=$athlete AND (n)-[]-()-[]-(m) RETURN m",
@@ -131,6 +137,7 @@ public class Neo4J {
         return athletesEditions;
     }
 
+    //Trova tutti i match giocati da un giocatore in una specifica edizione
     public List<Match> fetchAthletesMatches(String athlete, String edition) {
         Transaction transaction = driver.session().beginTransaction();
         Result result = transaction.run("MATCH (m:Game), (n:Edition) WHERE n.edName=$edition AND (n)-[]-(m) AND (m.firstPlayer=$athlete " +
@@ -157,7 +164,7 @@ public class Neo4J {
         return matches;
     }
 
-
+    //Trova alcune informazioni relative ad un match con uno specifico ID
     private Match fetchDataFromId(int id) {
         Transaction transaction = driver.session().beginTransaction();
         Result result = transaction.run("MATCH (n) WHERE ID(n)=$id RETURN n", parameters("id", id));
@@ -179,6 +186,7 @@ public class Neo4J {
         return match;
     }
 
+    //Trova le informazioni utili alla visualizzazione del amtch preferito relative ad un match con uno specifico ID
     public Match fetchFavouriteDataFromId(int id) {
         Transaction transaction = driver.session().beginTransaction();
         Result result = transaction.run("MATCH (n) WHERE ID(n)=$id RETURN n", parameters("id", id));
@@ -201,6 +209,7 @@ public class Neo4J {
         return match;
     }
 
+    //Trova l'edizione di appertenenza di un mathc con uno specifico ID
     public String fetchEditionFromId(int id) {
         Transaction transaction = driver.session().beginTransaction();
         Result result = transaction.run("MATCH (n), (m:Edition) WHERE ID(n)=$id AND (n)-[]-(m) RETURN m.edName", parameters("id", id));
@@ -221,6 +230,7 @@ public class Neo4J {
         return edition;
     }
 
+    //Trova tutte le informazioni relative ad un match con uno specifico ID
     public Match fetchAllDataFromId(int id) {
         Transaction transaction = driver.session().beginTransaction();
         Result DBresult = transaction.run("MATCH (n) WHERE ID(n)=$id RETURN n, keys(n)", parameters("id", id));
@@ -239,12 +249,14 @@ public class Neo4J {
             List[] setsFifteens = new List[10];
             List[] setsTiebreaks = new List[10];
 
-
+            //Salva le chiavi dei valori trovati
             Value keys = values.get(1);
+            //Salva i valori trovati
             Value node = values.get(0);
 
             List<Object> objects = keys.asList();
 
+            //Per ogni chiave controlla cos'è e in base a quello che trova decide dove inserirlo
             for (Object object : objects) {
                 if (object.equals("location")) {
                     location = node.get(object.toString()).asString();

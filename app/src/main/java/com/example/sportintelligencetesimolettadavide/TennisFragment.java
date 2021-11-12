@@ -17,6 +17,11 @@ import android.widget.TextView;
 
 public class TennisFragment extends Fragment {
 
+    ImageView back;
+    TextView tournamentSearch, athleteSearch, filterCreation, FilterEditing, favouriteMatches;
+
+    NavController navController;
+
     public TennisFragment() {
         // Required empty public constructor
     }
@@ -38,20 +43,21 @@ public class TennisFragment extends Fragment {
         String[] searchInfo = new String[3];
 
         //Controller per gestire la navigazione tra i vari fragment
-        NavController navController = Navigation.findNavController(view);
+        navController = Navigation.findNavController(view);
 
         //Ogni textView e imageView prende l'id dichiarato nel file xml
-        ImageView back = view.findViewById(R.id.back);
-        TextView tournamentSearch = view.findViewById(R.id.tournamentSearch);
-        TextView athleteSearch = view.findViewById(R.id.athleteSearch);
-        TextView filterCreation = view.findViewById(R.id.filterCreation);
-        TextView FilterEditing = view.findViewById(R.id.filterEditing);
-        TextView favouriteMatches = view.findViewById(R.id.favouriteMatches);
+        back = view.findViewById(R.id.back);
+        tournamentSearch = view.findViewById(R.id.tournamentSearch);
+        athleteSearch = view.findViewById(R.id.athleteSearch);
+        filterCreation = view.findViewById(R.id.filterCreation);
+        FilterEditing = view.findViewById(R.id.filterEditing);
+        favouriteMatches = view.findViewById(R.id.favouriteMatches);
 
         //Se l'utente clicca sulla freccia viene rimosso il fragment attuale e si torna al fragment precedente
         back.setOnClickListener(v -> navController.navigateUp());
 
         //Se l'utente clicca sugli altri pulsanti viene portato alle relative schermate
+        //Il vettore searchInfo viene passato di fragment in fragment e permette di capire a che punto della ricerca si è
         tournamentSearch.setOnClickListener(v -> {
             searchInfo[0] = "tournament";
             searchInfo[1] = "noData";

@@ -38,6 +38,7 @@
 
     <!-- MATCH PREFERITI -->
     <string name="noFavouriteMatches">NON CI SONO MATCH PREFERITI</string>
+    <string name="deleteMatch">MATCH RIMOSSO DAI PREFERITI</string>
 
     <!-- GENERALS -->
     <string name="search">Cerca…</string>

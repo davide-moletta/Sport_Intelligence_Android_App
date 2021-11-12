@@ -16,7 +16,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
-
 public class FavouriteMatchAdapter extends RecyclerView.Adapter<FavouriteMatchAdapter.ViewHolder> {
     private static final String FILE_NAME = "favouriteMatches.txt";
 
@@ -67,6 +66,7 @@ public class FavouriteMatchAdapter extends RecyclerView.Adapter<FavouriteMatchAd
         fullStar = holder.fullStar;
         constraintLayout = holder.constraintLayout;
 
+        //Crea un oggetto Match in cui inserisce i dati relativi al match preferito trovato prendendoli dal database
         Match match = neo4j.fetchFavouriteDataFromId(favouriteMatchId);
 
         String tournamentNameString = match.getLocation() + ", " + match.getField() + " - " + match.getRound();
@@ -76,15 +76,20 @@ public class FavouriteMatchAdapter extends RecyclerView.Adapter<FavouriteMatchAd
         result.setText(match.getResult());
         secondPlayer.setText(match.getSecondPlayer());
 
+        //Imposta un OnClickListener sul match preferito per permettere la navigazione verso la pagina per la visualizzazione completa dei dati
         constraintLayout.setOnClickListener(v -> {
             NavDirections action = FavouriteMatchesFragmentDirections.actionFavouriteMatchesFragmentToSearchResultFragment(Integer.parseInt(favouriteMatches.get(holder.getAbsoluteAdapterPosition())));
+            //Pulisce la lista dei match preferiti
             favouriteMatches.clear();
             navController.navigate(action);
         });
 
+        //Imposta un OnClickListener sulla stella per permettere l'eliminazione del match preferito
         fullStar.setOnClickListener(v -> {
+            //Cerca ed elimina il match selezionato
             String newFileData = fileOperations.searchAndDelete(favouriteMatch, fileData);
-            Toast.makeText(v.getContext(), R.string.deleteFilter, Toast.LENGTH_LONG).show();
+            Toast.makeText(v.getContext(), R.string.deleteMatch, Toast.LENGTH_LONG).show();
+            //Aggiorna i dati della recyclerView per una corretta visualizzazione
             setFileData(newFileData);
             favouriteMatches.remove(holder.getAbsoluteAdapterPosition());
             this.notifyItemRemoved(holder.getAbsoluteAdapterPosition());

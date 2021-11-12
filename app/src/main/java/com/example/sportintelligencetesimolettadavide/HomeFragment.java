@@ -18,6 +18,10 @@ public class HomeFragment extends Fragment {
 
     private Toast toast;
 
+    TextView tennisButton, soccerButton, volleyButton, basketButton;
+
+    NavController navController;
+
     public HomeFragment() {
         // Required empty public constructor
     }
@@ -38,13 +42,13 @@ public class HomeFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         //Controller per gestire la navigazione tra i vari fragment
-        NavController navController = Navigation.findNavController(view);
+        navController = Navigation.findNavController(view);
 
         //Ogni textView prende l'id dichiarato nel file xml
-        TextView tennisButton = view.findViewById(R.id.tennisButton);
-        TextView soccerButton = view.findViewById(R.id.soccerButton);
-        TextView volleyButton = view.findViewById(R.id.volleyButton);
-        TextView basketButton = view.findViewById(R.id.basketButton);
+        tennisButton = view.findViewById(R.id.tennisButton);
+        soccerButton = view.findViewById(R.id.soccerButton);
+        volleyButton = view.findViewById(R.id.volleyButton);
+        basketButton = view.findViewById(R.id.basketButton);
 
         //Creo il toast da mostrare
         toast = Toast.makeText(getContext(), "NON ANCORA IMPLEMENTATO", Toast.LENGTH_SHORT);

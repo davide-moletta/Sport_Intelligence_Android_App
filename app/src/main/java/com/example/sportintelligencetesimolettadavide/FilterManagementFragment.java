@@ -60,27 +60,36 @@ public class FilterManagementFragment extends Fragment {
         deleteAll = view.findViewById(R.id.deleteAll);
         recycler = view.findViewById(R.id.recycler);
 
+        //Crea un oggetto FileOperations per la scrittura e lettura su file di testo
         fileOperations = new FileOperations(FILE_NAME, view);
 
+        //Legge da file tutti i filtri salvati e li inserisce in una lista
         Collections.addAll(fileRows, fileOperations.load().split("\n"));
 
+        //Controlla se sono presenti filtri da mostrare
         if (fileRows.get(0).equals("")) {
+            //FILTRI NON PRESENTI
             Toast.makeText(view.getContext(), R.string.noFilters, Toast.LENGTH_LONG).show();
         } else {
+            //FILTRI PRESENTI
+            //Se trova dei filtri li passa ad un SavedFilterAdapter per poi inserirli nella recyclerView
             filterAdapter = new SavedFilterAdapter(fileRows, navController, fileOperations.load());
             recycler.setAdapter(filterAdapter);
             recycler.setLayoutManager(new LinearLayoutManager(this.getContext()));
         }
 
+        //Imposta un OnClickListener sul pulsante elimina tutti per l'eliminazione di tutti i filtri salvati
         deleteAll.setOnClickListener(v -> {
             fileOperations.clearFile();
             Toast.makeText(v.getContext(), R.string.allFilterDeleted, Toast.LENGTH_LONG).show();
+            //Pulisce la lista dei filtri e ricarica la recyclerView aggiornata
             fileRows.clear();
             filterAdapter = new SavedFilterAdapter(fileRows, navController, fileOperations.load());
             recycler.setAdapter(filterAdapter);
             recycler.setLayoutManager(new LinearLayoutManager(v.getContext()));
         });
 
+        //Imposta un OnClickListener sulla freccia per permettere la navigazione verso il fragment precedente
         back.setOnClickListener(v -> navController.navigateUp());
     }
 }
