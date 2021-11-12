@@ -16,10 +16,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import java.io.BufferedReader;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -28,11 +25,13 @@ public class FavouriteMatchesFragment extends Fragment {
 
     ImageView back;
     RecyclerView recycler;
+    FileOperations fileOperations;
 
-    List<String> fileRows;
+    List<String> fileRows = new ArrayList<>();
 
     FavouriteMatchAdapter favouriteMatchAdapter;
 
+    Neo4J neo4j;
     NavController navController;
 
     public FavouriteMatchesFragment() {
@@ -55,50 +54,27 @@ public class FavouriteMatchesFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         navController = Navigation.findNavController(view);
+        neo4j = new Neo4J();
+
+        fileOperations = new FileOperations(FILE_NAME, view);
         back = view.findViewById(R.id.back);
         recycler = view.findViewById(R.id.recycler);
 
-        Collections.addAll(fileRows, load(view).split("\n"));
+        System.out.println(fileOperations.load());
+
+        Collections.addAll(fileRows, fileOperations.load().split("\n"));
 
         if (fileRows.get(0).equals("")) {
             Toast.makeText(view.getContext(), R.string.noFavouriteMatches, Toast.LENGTH_LONG).show();
         } else {
-            favouriteMatchAdapter = new FavouriteMatchAdapter(fileRows, navController);
+            favouriteMatchAdapter = new FavouriteMatchAdapter(fileRows, navController, neo4j, fileOperations.load());
             recycler.setAdapter(favouriteMatchAdapter);
             recycler.setLayoutManager(new LinearLayoutManager(this.getContext()));
         }
 
-        back.setOnClickListener(v -> navController.navigateUp());
-    }
-
-    public String load(View v) {
-        FileInputStream fis = null;
-        String matchIds = "";
-
-        try {
-            fis = v.getContext().openFileInput(FILE_NAME);
-            InputStreamReader isr = new InputStreamReader(fis);
-            BufferedReader br = new BufferedReader(isr);
-            StringBuilder sb = new StringBuilder();
-            String text;
-
-            while ((text = br.readLine()) != null) {
-                sb.append(text).append("\n");
-            }
-
-            matchIds += sb.toString();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            if (fis != null) {
-                try {
-                    fis.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-        return matchIds;
+        back.setOnClickListener(v -> {
+            navController.navigateUp();
+            neo4j.close();
+        });
     }
 }

@@ -48,7 +48,8 @@ public class Neo4J {
 
     public List<String> fetchTournamentEditions(String tournament) {
         Transaction transaction = driver.session().beginTransaction();
-        Result result = transaction.run("MATCH (n:Championship), (m:Edition) WHERE n.name=$tournament AND (n)-[]-(m) RETURN m", parameters("tournament", tournament));
+        Result result = transaction.run("MATCH (n:Championship), (m:Edition) WHERE n.name=$tournament AND (n)-[]-(m) RETURN m",
+                parameters("tournament", tournament));
         List<String> editions = new ArrayList<>();
 
         while (result.hasNext()) {
@@ -67,7 +68,8 @@ public class Neo4J {
 
     public List<Match> fetchTournamentMatches(String edition) {
         Transaction transaction = driver.session().beginTransaction();
-        Result result = transaction.run("MATCH (n:Edition), (m:Game) WHERE n.edName=$edition AND (n)-[]-(m) RETURN ID(m)", parameters("edition", edition));
+        Result result = transaction.run("MATCH (n:Edition), (m:Game) WHERE n.edName=$edition AND (n)-[]-(m) RETURN ID(m)",
+                parameters("edition", edition));
 
         List<Integer> ids = new ArrayList<>();
         List<Match> matches = new ArrayList<>();
@@ -111,7 +113,8 @@ public class Neo4J {
 
     public List<String> fetchAthletesEditions(String athlete) {
         Transaction transaction = driver.session().beginTransaction();
-        Result result = transaction.run("MATCH (n:Player), (m:Edition) WHERE n.playerName=$athlete AND (n)-[]-()-[]-(m) RETURN m", parameters("athlete", athlete));
+        Result result = transaction.run("MATCH (n:Player), (m:Edition) WHERE n.playerName=$athlete AND (n)-[]-()-[]-(m) RETURN m",
+                parameters("athlete", athlete));
         List<String> athletesEditions = new ArrayList<>();
 
         while (result.hasNext()) {
@@ -130,7 +133,8 @@ public class Neo4J {
 
     public List<Match> fetchAthletesMatches(String athlete, String edition) {
         Transaction transaction = driver.session().beginTransaction();
-        Result result = transaction.run("MATCH (m:Game), (n:Edition) WHERE n.edName=$edition AND (n)-[]-(m) AND (m.firstPlayer=$athlete OR m.secondPlayer=$athlete) RETURN ID(m)", parameters("edition", edition, "athlete", athlete));
+        Result result = transaction.run("MATCH (m:Game), (n:Edition) WHERE n.edName=$edition AND (n)-[]-(m) AND (m.firstPlayer=$athlete " +
+                "OR m.secondPlayer=$athlete) RETURN ID(m)", parameters("edition", edition, "athlete", athlete));
 
         List<Integer> ids = new ArrayList<>();
         List<Match> matches = new ArrayList<>();
@@ -166,7 +170,30 @@ public class Neo4J {
             List<Value> values = record.values();
 
             for (Value value : values) {
-                match = new Match(id, value.get("location").asString(), value.get("firstPlayer").asString(), value.get("result").asString(), value.get("secondPlayer").asString(), value.get("length").asString());
+                match = new Match(id, value.get("location").asString(), value.get("firstPlayer").asString(),
+                        value.get("result").asString(), value.get("secondPlayer").asString(), value.get("length").asString());
+            }
+        }
+        transaction.commit();
+
+        return match;
+    }
+
+    public Match fetchFavouriteDataFromId(int id) {
+        Transaction transaction = driver.session().beginTransaction();
+        Result result = transaction.run("MATCH (n) WHERE ID(n)=$id RETURN n", parameters("id", id));
+
+        Match match = null;
+
+        while (result.hasNext()) {
+            Record record = result.next();
+
+            List<Value> values = record.values();
+
+            for (Value value : values) {
+                match = new Match(id, value.get("location").asString(), value.get("firstPlayer").asString(),
+                        value.get("result").asString(), value.get("secondPlayer").asString(),
+                        value.get("field").asString(), value.get("round").asString());
             }
         }
         transaction.commit();
@@ -278,7 +305,8 @@ public class Neo4J {
 
             }
 
-            match = new Match(id, location, firstPlayer, result, secondPlayer, duration, date, field, round, matchStats, setsStats, setsHistory, setsFifteens, setsTiebreaks, quotes);
+            match = new Match(id, location, firstPlayer, result, secondPlayer, duration, date, field,
+                    round, matchStats, setsStats, setsHistory, setsFifteens, setsTiebreaks, quotes);
         }
         transaction.commit();
 

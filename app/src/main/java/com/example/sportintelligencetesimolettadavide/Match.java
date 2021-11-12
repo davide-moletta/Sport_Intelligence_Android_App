@@ -5,11 +5,20 @@ import java.util.List;
 public class Match {
 
     private final int id;
-    private final String location, firstPlayer, result, secondPlayer, duration;
-    private String field, round;
-    private String date = "";
+    private final String location, firstPlayer, result, secondPlayer;
+    private String duration, field, round, date = "";
     private List[] setsStats, setsHistory, setsFifteens, setsTiebreaks;
     private List<Object> matchStats, quotes;
+
+    public Match(int id, String location, String firstPlayer, String result, String secondPlayer, String field, String round) {
+        this.id = id;
+        this.location = location;
+        this.firstPlayer = firstPlayer;
+        this.result = result;
+        this.secondPlayer = secondPlayer;
+        this.field = field;
+        this.round = round;
+    }
 
     public Match(int id, String location, String firstPlayer, String result, String secondPlayer, String duration) {
         this.id = id;
