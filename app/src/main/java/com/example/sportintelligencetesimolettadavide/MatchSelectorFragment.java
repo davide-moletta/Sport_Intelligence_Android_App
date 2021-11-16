@@ -1,5 +1,7 @@
 package com.example.sportintelligencetesimolettadavide;
 
+import static com.example.sportintelligencetesimolettadavide.MainActivity.neo4J;
+
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -21,7 +23,6 @@ import java.util.List;
 public class MatchSelectorFragment extends Fragment {
 
     String[] searchInfo;
-    Neo4J neo4j;
     List<Match> recyclerMatches;
 
     NavController navController;
@@ -49,8 +50,6 @@ public class MatchSelectorFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        neo4j = new Neo4J();
-
         navController = Navigation.findNavController(view);
 
         title = view.findViewById(R.id.title);
@@ -65,12 +64,12 @@ public class MatchSelectorFragment extends Fragment {
             //RICERCA MATCH PER TORNEO E EDIZIONE
 
             title.setText(searchInfo[2]);
-            recyclerMatches = neo4j.fetchTournamentMatches(searchInfo[2]);
+            recyclerMatches = neo4J.fetchTournamentMatches(searchInfo[2]);
         } else {
             //RICERCA MATCH PER GIOCATORE E EDIZIONE
 
             title.setText(searchInfo[1]);
-            recyclerMatches = neo4j.fetchAthletesMatches(searchInfo[1], searchInfo[2]);
+            recyclerMatches = neo4J.fetchAthletesMatches(searchInfo[1], searchInfo[2]);
         }
 
         //Imposta l'Adapter per la recyclerView cosi da permettere la visualizzazione degli elementi
@@ -81,7 +80,6 @@ public class MatchSelectorFragment extends Fragment {
         //Imposta un OnClickListenere sulla freccia per chiudera la comunicazione col database, aggiornare il vettore searchInfo e tornare al fragmnent precedente
         back.setOnClickListener(v -> {
             searchInfo[2] = "noData";
-            neo4j.close();
             navController.navigateUp();
         });
     }

@@ -12,6 +12,7 @@
         <entry key="..\:/Users/david/AndroidStudioProjects/SportIntelligenceTesiMolettaDavide/app/src/main/res/drawable/ic_emptystar.xml" value="0.3769230769230769" />
         <entry key="..\:/Users/david/AndroidStudioProjects/SportIntelligenceTesiMolettaDavide/app/src/main/res/drawable/ic_fullstar.xml" value="0.3769230769230769" />
         <entry key="..\:/Users/david/AndroidStudioProjects/SportIntelligenceTesiMolettaDavide/app/src/main/res/drawable/ic_launcher_background.xml" value="0.3769230769230769" />
+        <entry key="..\:/Users/david/AndroidStudioProjects/SportIntelligenceTesiMolettaDavide/app/src/main/res/drawable/ic_launcher_foreground.xml" value="0.3828125" />
         <entry key="..\:/Users/david/AndroidStudioProjects/SportIntelligenceTesiMolettaDavide/app/src/main/res/drawable/ic_logo.xml" value="0.3769230769230769" />
         <entry key="..\:/Users/david/AndroidStudioProjects/SportIntelligenceTesiMolettaDavide/app/src/main/res/drawable/ic_soccerball.xml" value="0.3828125" />
         <entry key="..\:/Users/david/AndroidStudioProjects/SportIntelligenceTesiMolettaDavide/app/src/main/res/drawable/ic_tennisball.xml" value="0.3828125" />
@@ -32,6 +33,8 @@
         <entry key="..\:/Users/david/AndroidStudioProjects/SportIntelligenceTesiMolettaDavide/app/src/main/res/layout/item_favourite_match.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/david/AndroidStudioProjects/SportIntelligenceTesiMolettaDavide/app/src/main/res/layout/item_match.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/david/AndroidStudioProjects/SportIntelligenceTesiMolettaDavide/app/src/main/res/layout/item_saved_filter.xml" value="0.33" />
+        <entry key="..\:/Users/david/AndroidStudioProjects/SportIntelligenceTesiMolettaDavide/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.22135416666666666" />
+        <entry key="..\:/Users/david/AndroidStudioProjects/SportIntelligenceTesiMolettaDavide/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.3828125" />
       </map>
     </option>
   </component>

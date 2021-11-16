@@ -1,5 +1,7 @@
 package com.example.sportintelligencetesimolettadavide;
 
+import static com.example.sportintelligencetesimolettadavide.MainActivity.neo4J;
+
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -31,7 +33,6 @@ public class FavouriteMatchesFragment extends Fragment {
 
     FavouriteMatchAdapter favouriteMatchAdapter;
 
-    Neo4J neo4j;
     NavController navController;
 
     public FavouriteMatchesFragment() {
@@ -54,7 +55,6 @@ public class FavouriteMatchesFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         navController = Navigation.findNavController(view);
-        neo4j = new Neo4J();
         fileOperations = new FileOperations(FILE_NAME, view);
 
         back = view.findViewById(R.id.back);
@@ -70,15 +70,12 @@ public class FavouriteMatchesFragment extends Fragment {
         } else {
             //MATCH TROVATI
             //Se trova dei match preferiti crea un FavouriteMatchAdapter e lo assegna alla recyclerView per la visualizzazione
-            favouriteMatchAdapter = new FavouriteMatchAdapter(fileRows, navController, neo4j, fileOperations.load());
+            favouriteMatchAdapter = new FavouriteMatchAdapter(fileRows, navController, neo4J, fileOperations.load());
             recycler.setAdapter(favouriteMatchAdapter);
             recycler.setLayoutManager(new LinearLayoutManager(this.getContext()));
         }
 
         //Imposta un OnClickListener sulla freccia per la chiusura della comunicazione col database e per la navigazione verso il fragment precedente
-        back.setOnClickListener(v -> {
-            neo4j.close();
-            navController.navigateUp();
-        });
+        back.setOnClickListener(v -> navController.navigateUp());
     }
 }

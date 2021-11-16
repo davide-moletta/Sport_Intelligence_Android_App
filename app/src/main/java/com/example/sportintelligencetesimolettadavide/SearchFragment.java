@@ -1,5 +1,7 @@
 package com.example.sportintelligencetesimolettadavide;
 
+import static com.example.sportintelligencetesimolettadavide.MainActivity.neo4J;
+
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -24,7 +26,6 @@ import java.util.List;
 import java.util.Locale;
 
 public class SearchFragment extends Fragment {
-
     ImageView back;
     EditText search;
     TextView title;
@@ -34,10 +35,7 @@ public class SearchFragment extends Fragment {
     List<String> recyclerData = new ArrayList<>();
 
     ButtonAdapter buttonAdapter;
-
     NavController navController;
-
-    Neo4J neo4j;
 
     public SearchFragment() {
         // Required empty public constructor
@@ -70,33 +68,30 @@ public class SearchFragment extends Fragment {
         //Prende il valore del vettore searchInfo passato dal fragment precedente
         searchInfo = SearchFragmentArgs.fromBundle(getArguments()).getSearchInfo();
 
-        //Crea un oggetto Neo4J che permette la comunicazione con il database
-        neo4j = new Neo4J();
-
         //Controlla che tipo di ricerca effettuare in base ai valori contenuti nel vettore SearchInfo
         if (searchInfo[0].equals("tournament")) {
             if (searchInfo[1].equals("noData")) {
                 //RICERCA TORNEO
 
                 title.setText(R.string.tournamentSearch);
-                recyclerData = neo4j.fetchChampionships();
+                recyclerData = neo4J.fetchChampionships();
             } else if (searchInfo[2].equals("noData")) {
                 //RICERCA EDIZIONI PER TORNEO
 
                 title.setText(searchInfo[1]);
-                recyclerData = neo4j.fetchTournamentEditions(searchInfo[1]);
+                recyclerData = neo4J.fetchTournamentEditions(searchInfo[1]);
             }
         } else if (searchInfo[0].equals("athlete")) {
             if (searchInfo[1].equals("noData")) {
                 //RICERCA GIOCATORI
 
                 title.setText(R.string.athleteSearch);
-                recyclerData = neo4j.fetchAthletes();
+                recyclerData = neo4J.fetchAthletes();
             } else if (searchInfo[2].equals("noData")) {
                 //RICERCA EDIZIONI PER GIOCATORE
 
                 title.setText(searchInfo[1]);
-                recyclerData = neo4j.fetchAthletesEditions(searchInfo[1]);
+                recyclerData = neo4J.fetchAthletesEditions(searchInfo[1]);
             }
         }
 
@@ -154,7 +149,6 @@ public class SearchFragment extends Fragment {
             } else if (!searchInfo[1].equals("noData")) {
                 searchInfo[1] = "noData";
             }
-            neo4j.close();
             navController.navigateUp();
         });
     }

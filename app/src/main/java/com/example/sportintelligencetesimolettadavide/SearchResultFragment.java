@@ -1,5 +1,7 @@
 package com.example.sportintelligencetesimolettadavide;
 
+import static com.example.sportintelligencetesimolettadavide.MainActivity.neo4J;
+
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -35,7 +37,6 @@ public class SearchResultFragment extends Fragment {
 
     NavController navController;
     FileOperations fileFilters, fileFavouriteMatches;
-    Neo4J neo4J;
     Match match;
     List<Object> matchStat, quotes;
     List[] setsStat, setsHistory, setsFifteens, setsTiebreaks;
@@ -62,7 +63,6 @@ public class SearchResultFragment extends Fragment {
         navController = Navigation.findNavController(view);
         fileFilters = new FileOperations(FILE_FILTERS_NAME, view);
         fileFavouriteMatches = new FileOperations(FILE_FAVOURITE_NAME, view);
-        neo4J = new Neo4J();
 
         //Ottiene l'id del match selezionato
         int matchId = SearchResultFragmentArgs.fromBundle(getArguments()).getMatchId();
@@ -201,7 +201,6 @@ public class SearchResultFragment extends Fragment {
         secondPlayer.setText(match.getSecondPlayer());
         duration.setText(match.getDuration());
 
-
         //Imposta on Listener sullo spinner dei filtri per controllare quando viene selezionato un elemento diverso
         filterSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -309,10 +308,7 @@ public class SearchResultFragment extends Fragment {
         });
 
         //Imposta un OnClickListener per permettere la navigazione verso il fragment precedente
-        back.setOnClickListener(v -> {
-            neo4J.close();
-            navController.navigateUp();
-        });
+        back.setOnClickListener(v -> navController.navigateUp());
     }
 
     //Trasforma una lista di oggetti in una stringa da inserire poi nelle label

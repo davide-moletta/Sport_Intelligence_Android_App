@@ -17,15 +17,11 @@ import java.util.List;
 public class Neo4J {
 
     Driver driver;
-    final String dbURL = "bolt://192.168.1.5:7687", username = "neo4j", password = "admin";
+    //dbURL è l'indirizzo IP esterno del server in cui è attivo il database neo4j
+    final String dbURL = "bolt://188.152.147.252:7687", username = "neo4j", password = "admin";
 
     public Neo4J() {
         this.driver = GraphDatabase.driver(dbURL, AuthTokens.basic(username, password));
-    }
-
-    //Chiude la comunicazione col database
-    public void close() {
-        driver.close();
     }
 
     //Trova tutti i campionati presenti sul database
