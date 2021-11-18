@@ -4,6 +4,7 @@
     <dimen name="littleMargin">4dp</dimen>
     <dimen name="mediumMargin">15dp</dimen>
     <dimen name="bigMargin">30dp</dimen>
+    <dimen name="superMargin">50dp</dimen>
     <dimen name="noPadding">0dp</dimen>
 
     <dimen name="arrowMargin">25dp</dimen>
@@ -29,6 +30,9 @@
     <dimen name="spinnerHeight">48dp</dimen>
     <dimen name="matchItemHeight">150dp</dimen>
     <dimen name="savedFilterItemHeight">75dp</dimen>
+    <dimen name="telegramBotLabelsWidth">380dp</dimen>
+    <dimen name="telegramBotLabelsHeight">50dp</dimen>
+    <dimen name="telegramBotInfoHeight">200dp</dimen>
 
     <dimen name="homeButton">40sp</dimen>
     <dimen name="title">30sp</dimen>
@@ -38,4 +42,6 @@
     <dimen name="subTitle">25sp</dimen>
     <dimen name="searchResultLabel">15sp</dimen>
     <dimen name="searchResultStatsLabel">20sp</dimen>
+    <dimen name="telegramBotLabel">20sp</dimen>
+    <dimen name="telegramBotInfo">15sp</dimen>
 </resources>

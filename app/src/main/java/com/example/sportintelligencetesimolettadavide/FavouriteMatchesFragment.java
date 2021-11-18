@@ -1,7 +1,9 @@
 package com.example.sportintelligencetesimolettadavide;
 
+import static android.content.Context.MODE_PRIVATE;
 import static com.example.sportintelligencetesimolettadavide.MainActivity.neo4J;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -24,12 +26,15 @@ import java.util.List;
 
 public class FavouriteMatchesFragment extends Fragment {
     private static final String FILE_NAME = "favouriteMatches.txt";
-
     ImageView back;
     RecyclerView recycler;
+
     FileOperations fileOperations;
+    FireBase fireBase;
 
     List<String> fileRows = new ArrayList<>();
+
+    SharedPreferences sharedPreferences;
 
     FavouriteMatchAdapter favouriteMatchAdapter;
 
@@ -54,6 +59,8 @@ public class FavouriteMatchesFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        sharedPreferences = this.requireActivity().getSharedPreferences("sharedPreferences", MODE_PRIVATE);
+        fireBase = new FireBase(view, this);
         navController = Navigation.findNavController(view);
         fileOperations = new FileOperations(FILE_NAME, view);
 
@@ -70,7 +77,7 @@ public class FavouriteMatchesFragment extends Fragment {
         } else {
             //MATCH TROVATI
             //Se trova dei match preferiti crea un FavouriteMatchAdapter e lo assegna alla recyclerView per la visualizzazione
-            favouriteMatchAdapter = new FavouriteMatchAdapter(fileRows, navController, neo4J, fileOperations.load());
+            favouriteMatchAdapter = new FavouriteMatchAdapter(fileRows, navController, neo4J, fileOperations.load(), fireBase, sharedPreferences);
             recycler.setAdapter(favouriteMatchAdapter);
             recycler.setLayoutManager(new LinearLayoutManager(this.getContext()));
         }

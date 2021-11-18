@@ -17,6 +17,13 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_homeFragment_to_telegramBotFragment"
+            app:destination="@id/telegramBotFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/tennisFragment"
@@ -149,4 +156,9 @@
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
     </fragment>
+    <fragment
+        android:id="@+id/telegramBotFragment"
+        android:name="com.example.sportintelligencetesimolettadavide.TelegramBotFragment"
+        android:label="fragment_telegram_bot"
+        tools:layout="@layout/fragment_telegram_bot" />
 </navigation>

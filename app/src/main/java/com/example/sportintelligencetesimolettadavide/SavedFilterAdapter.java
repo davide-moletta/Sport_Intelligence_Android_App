@@ -1,6 +1,9 @@
 package com.example.sportintelligencetesimolettadavide;
 
+import static com.example.sportintelligencetesimolettadavide.MainActivity.TELEGRAM_CHAT_ID;
+
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,7 +18,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
-
 public class SavedFilterAdapter extends RecyclerView.Adapter<SavedFilterAdapter.ViewHolder> {
     private static final String FILE_NAME = "filters.txt";
 
@@ -27,12 +29,17 @@ public class SavedFilterAdapter extends RecyclerView.Adapter<SavedFilterAdapter.
 
     String fileData;
 
+    SharedPreferences sharedPreferences;
+    FireBase fireBase;
     FileOperations fileOperations;
 
-    public SavedFilterAdapter(List<String> filters, NavController navController, String fileData) {
+    public SavedFilterAdapter(List<String> filters, NavController navController, String fileData,
+                              FireBase fireBase, SharedPreferences sharedPreferences) {
         this.filters = filters;
         this.navController = navController;
         this.fileData = fileData;
+        this.fireBase = fireBase;
+        this.sharedPreferences = sharedPreferences;
     }
 
     public void setFileData(String fileData) {
@@ -84,6 +91,9 @@ public class SavedFilterAdapter extends RecyclerView.Adapter<SavedFilterAdapter.
             setFileData(newFileData);
             filters.remove(holder.getAbsoluteAdapterPosition());
             this.notifyItemRemoved(holder.getAbsoluteAdapterPosition());
+            if (!sharedPreferences.getString(TELEGRAM_CHAT_ID, "").equals("no ID")) {
+                fireBase.updateUser();
+            }
         });
     }
 

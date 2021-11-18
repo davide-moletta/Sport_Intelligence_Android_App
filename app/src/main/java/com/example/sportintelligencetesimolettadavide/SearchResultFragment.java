@@ -1,7 +1,10 @@
 package com.example.sportintelligencetesimolettadavide;
 
+import static android.content.Context.MODE_PRIVATE;
+import static com.example.sportintelligencetesimolettadavide.MainActivity.TELEGRAM_CHAT_ID;
 import static com.example.sportintelligencetesimolettadavide.MainActivity.neo4J;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -36,7 +39,10 @@ public class SearchResultFragment extends Fragment {
     boolean favourite = false, matchStatsInfo = true, setStatInfo = true, setHistoryInfo = true, quotesInfo = true;
 
     NavController navController;
+
+    SharedPreferences sharedPreferences;
     FileOperations fileFilters, fileFavouriteMatches;
+    FireBase fireBase;
     Match match;
     List<Object> matchStat, quotes;
     List[] setsStat, setsHistory, setsFifteens, setsTiebreaks;
@@ -60,6 +66,8 @@ public class SearchResultFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        sharedPreferences = this.requireActivity().getSharedPreferences("sharedPreferences", MODE_PRIVATE);
+        fireBase = new FireBase(view, this);
         navController = Navigation.findNavController(view);
         fileFilters = new FileOperations(FILE_FILTERS_NAME, view);
         fileFavouriteMatches = new FileOperations(FILE_FAVOURITE_NAME, view);
@@ -304,6 +312,9 @@ public class SearchResultFragment extends Fragment {
                 fileFavouriteMatches.save(String.valueOf(matchId));
                 star.setBackgroundResource(R.drawable.ic_fullstar);
                 favourite = true;
+            }
+            if (!sharedPreferences.getString(TELEGRAM_CHAT_ID, "").equals("no ID")) {
+                fireBase.updateUser();
             }
         });
 

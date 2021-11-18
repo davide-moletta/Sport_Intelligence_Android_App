@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">SportIntelligenceTesiMolettaDavide</string>
 
     <!-- HOME -->
@@ -40,6 +40,22 @@
     <string name="noFavouriteMatches">NON CI SONO MATCH PREFERITI</string>
     <string name="deleteMatch">MATCH RIMOSSO DAI PREFERITI</string>
 
+    <!-- TELEGRAM BOT-->
+    <string name="telegramBotTitle">TELEGRAM BOT</string>
+    <string name="insertId">INSERISCI IL TUO CODICE CHAT TELEGRAM</string>
+    <string name="chatId">Chat ID…</string>
+    <string name="info" tools:ignore="Typos">Se non sai come trovare il tuo ID Telegram segui questi passi: \n
+        \t- Apri l\'app Telegram   \n
+        \t- Clicca sulla barra di ricerca  \n
+        \t- Cerca \"userinfobot\" e seleziona il primo risultato  \n
+        \t- Avvia il bot con il comando \\start  \n
+        \t- Copia il tuo ID e incollalo nello spazio apposito  \n
+        \t- Clicca il pulsante SALVA  \n
+        \t- Ora potrai visualizzare i tuoi dati tramite il bot  \n
+        \t  @botname
+    </string>
+    <string name="noChatID">INSERISCI IL TUO CODICE</string>
+
     <!-- GENERALS -->
     <string name="search">Cerca…</string>
     <string name="contentDescription">Image</string>
@@ -48,6 +64,8 @@
     <string name="savedFilter">FILTRO SALVATO</string>
     <string name="allFilterDeleted">FILTRI ELIMINATI</string>
     <string name="snackBarText">CONNETTENDO AL DATABASE…</string>
+    <string name="telegramAddedUser">BOT COLLEGATO CON SUCCESSO</string>
+    <string name="telegramNotAddedUser">ERRORE NEL COLLEGAMENTO CON IL BOT</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

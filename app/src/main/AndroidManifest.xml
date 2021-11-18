@@ -9,9 +9,7 @@
         android:icon="@mipmap/sports_logo"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
-        android:supportsRtl="true"
-        android:theme="@style/Theme.SportIntelligenceTesiMolettaDavide"
-        android:fullBackupContent="">
+        android:theme="@style/Theme.SportIntelligenceTesiMolettaDavide">
         <activity
             android:name=".MainActivity"
             android:exported="true">

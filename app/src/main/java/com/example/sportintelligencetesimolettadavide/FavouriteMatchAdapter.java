@@ -1,6 +1,9 @@
 package com.example.sportintelligencetesimolettadavide;
 
+import static com.example.sportintelligencetesimolettadavide.MainActivity.TELEGRAM_CHAT_ID;
+
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,16 +28,22 @@ public class FavouriteMatchAdapter extends RecyclerView.Adapter<FavouriteMatchAd
 
     Neo4J neo4j;
     FileOperations fileOperations;
+    FireBase fireBase;
+
+    SharedPreferences sharedPreferences;
 
     TextView tournamentName, firstPlayer, result, secondPlayer;
     ImageView fullStar;
     ConstraintLayout constraintLayout;
 
-    public FavouriteMatchAdapter(List<String> favouriteMatches, NavController navController, Neo4J neo4j, String fileData) {
+    public FavouriteMatchAdapter(List<String> favouriteMatches, NavController navController, Neo4J neo4j, String fileData,
+                                 FireBase fireBase, SharedPreferences sharedPreferences) {
         this.favouriteMatches = favouriteMatches;
         this.navController = navController;
         this.neo4j = neo4j;
         this.fileData = fileData;
+        this.fireBase = fireBase;
+        this.sharedPreferences = sharedPreferences;
     }
 
     public void setFileData(String fileData) {
@@ -93,6 +102,9 @@ public class FavouriteMatchAdapter extends RecyclerView.Adapter<FavouriteMatchAd
             setFileData(newFileData);
             favouriteMatches.remove(holder.getAbsoluteAdapterPosition());
             this.notifyItemRemoved(holder.getAbsoluteAdapterPosition());
+            if (!sharedPreferences.getString(TELEGRAM_CHAT_ID, "").equals("no ID")) {
+                fireBase.updateUser();
+            }
         });
     }
 

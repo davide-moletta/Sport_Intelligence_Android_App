@@ -1,5 +1,9 @@
 package com.example.sportintelligencetesimolettadavide;
 
+import static android.content.Context.MODE_PRIVATE;
+import static com.example.sportintelligencetesimolettadavide.MainActivity.TELEGRAM_CHAT_ID;
+
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -28,6 +32,8 @@ public class FilterCreatorFragment extends Fragment {
 
     NavController navController;
 
+    SharedPreferences sharedPreferences;
+    FireBase fireBase;
     FileOperations fileOperations;
 
     public FilterCreatorFragment() {
@@ -49,6 +55,8 @@ public class FilterCreatorFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        sharedPreferences = this.requireActivity().getSharedPreferences("sharedPreferences", MODE_PRIVATE);
+        fireBase = new FireBase(view, this);
         navController = Navigation.findNavController(view);
         //Ottiene il valore ricevuto dal fragment precedente che segnala se si sta creando un filtro o se si sta modificando un filtro esistente
         String editFilter = FilterCreatorFragmentArgs.fromBundle(getArguments()).getEditFilter();
@@ -85,6 +93,10 @@ public class FilterCreatorFragment extends Fragment {
                     fileOperations.save(filter);
                     Toast.makeText(view.getContext(), R.string.savedFilter, Toast.LENGTH_SHORT).show();
                     clearAll();
+                    if (!sharedPreferences.getString(TELEGRAM_CHAT_ID, "").equals("no ID")) {
+                        System.out.println("ci sono...............................................");
+                        fireBase.updateUser();
+                    }
                 }
             });
         } else {
@@ -110,6 +122,9 @@ public class FilterCreatorFragment extends Fragment {
                     fileOperations.replaceFilter(editFilter, newFilter);
                     Toast.makeText(v.getContext(), R.string.updateFilter, Toast.LENGTH_SHORT).show();
                     clearAll();
+                    if (!sharedPreferences.getString(TELEGRAM_CHAT_ID, "").equals("no ID")) {
+                        fireBase.updateUser();
+                    }
                 }
             });
         }

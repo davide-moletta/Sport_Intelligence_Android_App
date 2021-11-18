@@ -85,10 +85,21 @@
         android:text="@string/basketHome"
         android:textSize="@dimen/homeButton"
         app:drawableEndCompat="@drawable/ic_basketball"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/telegramIcon"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/volleyButton" />
 
+    <ImageView
+        android:id="@+id/telegramIcon"
+        android:layout_width="@dimen/bigImage"
+        android:layout_height="@dimen/bigImage"
+        android:contentDescription="@string/contentDescription"
+        android:src="@drawable/ic_telegramicon"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/basketButton"
+        tools:ignore="ImageContrastCheck" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

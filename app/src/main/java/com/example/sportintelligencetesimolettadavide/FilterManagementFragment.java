@@ -1,5 +1,9 @@
 package com.example.sportintelligencetesimolettadavide;
 
+import static android.content.Context.MODE_PRIVATE;
+import static com.example.sportintelligencetesimolettadavide.MainActivity.TELEGRAM_CHAT_ID;
+
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -31,7 +35,9 @@ public class FilterManagementFragment extends Fragment {
     SavedFilterAdapter filterAdapter;
     RecyclerView recycler;
 
+    SharedPreferences sharedPreferences;
     FileOperations fileOperations;
+    FireBase fireBase;
 
     NavController navController;
 
@@ -54,6 +60,8 @@ public class FilterManagementFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        sharedPreferences = this.requireActivity().getSharedPreferences("sharedPreferences", MODE_PRIVATE);
+        fireBase = new FireBase(view, this);
         navController = Navigation.findNavController(view);
 
         back = view.findViewById(R.id.back);
@@ -73,7 +81,7 @@ public class FilterManagementFragment extends Fragment {
         } else {
             //FILTRI PRESENTI
             //Se trova dei filtri li passa ad un SavedFilterAdapter per poi inserirli nella recyclerView
-            filterAdapter = new SavedFilterAdapter(fileRows, navController, fileOperations.load());
+            filterAdapter = new SavedFilterAdapter(fileRows, navController, fileOperations.load(), fireBase, sharedPreferences);
             recycler.setAdapter(filterAdapter);
             recycler.setLayoutManager(new LinearLayoutManager(this.getContext()));
         }
@@ -84,9 +92,12 @@ public class FilterManagementFragment extends Fragment {
             Toast.makeText(v.getContext(), R.string.allFilterDeleted, Toast.LENGTH_SHORT).show();
             //Pulisce la lista dei filtri e ricarica la recyclerView aggiornata
             fileRows.clear();
-            filterAdapter = new SavedFilterAdapter(fileRows, navController, fileOperations.load());
+            filterAdapter = new SavedFilterAdapter(fileRows, navController, fileOperations.load(), fireBase, sharedPreferences);
             recycler.setAdapter(filterAdapter);
             recycler.setLayoutManager(new LinearLayoutManager(v.getContext()));
+            if (!sharedPreferences.getString(TELEGRAM_CHAT_ID, "").equals("no ID")) {
+                fireBase.updateUser();
+            }
         });
 
         //Imposta un OnClickListener sulla freccia per permettere la navigazione verso il fragment precedente
