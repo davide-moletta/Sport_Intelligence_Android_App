@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "977580194493",
+    "project_id": "tesi-9c0d8",
+    "storage_bucket": "tesi-9c0d8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:977580194493:android:275f854b8f361381c615d4",
+        "android_client_info": {
+          "package_name": "com.example.sportintelligencetesimolettadavide"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "977580194493-cg31efstimfpqshfp4qus1kf0a22b6af.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDkxXquDqzrmZYyWraPaEhkmyxzLlxRCnI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "977580194493-cg31efstimfpqshfp4qus1kf0a22b6af.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

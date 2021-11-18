@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/TelegramBotFragment"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".TelegramBotFragment">
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/topBarHeight"
+        android:background="@drawable/background_topbar"
+        android:gravity="center"
+        android:padding="@dimen/paddingStandard"
+        android:text="@string/telegramBotTitle"
+        android:textSize="@dimen/title"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/marginStandard"
+        android:layout_marginTop="@dimen/arrowMargin"
+        android:contentDescription="@string/contentDescription"
+        android:src="@drawable/ic_backarrow"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/telegramBotSubtitle"
+        android:layout_width="@dimen/telegramBotLabelsWidth"
+        android:layout_height="@dimen/telegramBotLabelsHeight"
+        android:layout_marginStart="@dimen/marginStandard"
+        android:layout_marginTop="@dimen/superMargin"
+        android:layout_marginEnd="@dimen/marginStandard"
+        android:gravity="center"
+        android:text="@string/insertId"
+        android:textSize="@dimen/telegramBotLabel"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/title" />
+
+    <EditText
+        android:id="@+id/chatId"
+        android:layout_width="@dimen/telegramBotLabelsWidth"
+        android:layout_height="@dimen/telegramBotLabelsHeight"
+        android:layout_marginTop="@dimen/mediumMargin"
+        android:background="@drawable/background_button"
+        android:backgroundTint="@color/searchBackground"
+        android:hint="@string/chatId"
+        android:importantForAutofill="no"
+        android:inputType="number"
+        android:padding="@dimen/paddingStandard"
+        android:textColorHint="@color/searchText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/telegramBotSubtitle" />
+
+    <TextView
+        android:id="@+id/saveChatid"
+        android:layout_width="@dimen/saveButton"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/superMargin"
+        android:background="@drawable/background_button"
+        android:gravity="center"
+        android:padding="@dimen/paddingStandard"
+        android:paddingStart="@dimen/littlePadding"
+        android:paddingEnd="@dimen/bigPadding"
+        android:text="@string/save"
+        app:drawableStartCompat="@drawable/ic_floppy"
+        app:layout_constraintBottom_toTopOf="@+id/info"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/info"
+        android:layout_width="@dimen/telegramBotLabelsWidth"
+        android:layout_height="@dimen/telegramBotInfoHeight"
+        android:layout_marginStart="@dimen/marginStandard"
+        android:layout_marginEnd="@dimen/marginStandard"
+        android:layout_marginBottom="@dimen/superMargin"
+        android:text="@string/info"
+        android:textSize="@dimen/telegramBotInfo"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
