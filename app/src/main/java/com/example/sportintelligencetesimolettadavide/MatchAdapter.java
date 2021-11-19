@@ -1,6 +1,7 @@
 package com.example.sportintelligencetesimolettadavide;
 
 import android.content.Context;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,8 @@ import androidx.navigation.NavController;
 import androidx.navigation.NavDirections;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.snackbar.Snackbar;
+
 import java.util.List;
 
 public class MatchAdapter extends RecyclerView.Adapter<MatchAdapter.ViewHolder> {
@@ -21,11 +24,16 @@ public class MatchAdapter extends RecyclerView.Adapter<MatchAdapter.ViewHolder> 
 
     TextView tournamentNameView, firstPlayerView, resultView, secondPlayerView, durationView;
     ConstraintLayout constraintLayout;
+    View view;
     Match match;
 
-    public MatchAdapter(List<Match> matches, NavController navController) {
+    int progressStatus = 0;
+    Handler handler = new Handler();
+
+    public MatchAdapter(List<Match> matches, NavController navController, View view) {
         this.matches = matches;
         this.navController = navController;
+        this.view = view;
     }
 
     @NonNull
@@ -43,6 +51,8 @@ public class MatchAdapter extends RecyclerView.Adapter<MatchAdapter.ViewHolder> 
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         match = matches.get(position);
 
+        Snackbar snackbar = Snackbar.make(view, R.string.snackBarText, Snackbar.LENGTH_SHORT);
+
         tournamentNameView = holder.tournamentName;
         firstPlayerView = holder.firstPlayer;
         resultView = holder.result;
@@ -59,10 +69,17 @@ public class MatchAdapter extends RecyclerView.Adapter<MatchAdapter.ViewHolder> 
         constraintLayout = holder.constraintLayout;
 
         //Imposta un OnClickListener per passare alla completa visualizzazione dei dati del match selezionato
-        constraintLayout.setOnClickListener(v -> {
-            NavDirections action = MatchSelectorFragmentDirections.actionMatchSelectorFragmentToSearchResultFragment(matches.get(holder.getAbsoluteAdapterPosition()).getId());
-            navController.navigate(action);
-        });
+        constraintLayout.setOnClickListener(v -> new Thread(() -> {
+            while (progressStatus < 5) {
+                progressStatus++;
+                android.os.SystemClock.sleep(50);
+                handler.post(() -> snackbar.show());
+            }
+            handler.post(() -> {
+                NavDirections action = MatchSelectorFragmentDirections.actionMatchSelectorFragmentToSearchResultFragment(matches.get(holder.getAbsoluteAdapterPosition()).getId());
+                navController.navigate(action);
+            });
+        }).start());
     }
 
     @Override

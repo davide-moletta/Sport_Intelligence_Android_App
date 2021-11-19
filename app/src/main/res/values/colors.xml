@@ -10,6 +10,7 @@
 
     <!-- MY COLORS -->
     <color name="tennis">#F2D56F</color>
+    <color name="statusBar">#E6D186</color>
     <color name="soccer">#90B44F</color>
     <color name="volley">#4A95B8</color>
     <color name="basket">#D87059</color>

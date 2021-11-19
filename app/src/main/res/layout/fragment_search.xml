@@ -43,6 +43,7 @@
         android:inputType="text"
         android:paddingStart="@dimen/littlePadding"
         android:paddingEnd="@dimen/littlePadding"
+        android:textColor="@color/black"
         android:textColorHint="@color/searchText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

@@ -8,15 +8,19 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
+
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.List;
 
@@ -30,6 +34,9 @@ public class MatchSelectorFragment extends Fragment {
     TextView title;
     ImageView back;
     RecyclerView recycler;
+
+    int progressStatus = 0;
+    Handler handler = new Handler();
 
     public MatchSelectorFragment() {
         // Required empty public constructor
@@ -52,6 +59,8 @@ public class MatchSelectorFragment extends Fragment {
 
         navController = Navigation.findNavController(view);
 
+        Snackbar snackbar = Snackbar.make(view, R.string.snackBarText, Snackbar.LENGTH_SHORT);
+
         title = view.findViewById(R.id.title);
         back = view.findViewById(R.id.back);
         recycler = view.findViewById(R.id.recycler);
@@ -73,14 +82,21 @@ public class MatchSelectorFragment extends Fragment {
         }
 
         //Imposta l'Adapter per la recyclerView cosi da permettere la visualizzazione degli elementi
-        MatchAdapter matchAdapter = new MatchAdapter(recyclerMatches, navController);
+        MatchAdapter matchAdapter = new MatchAdapter(recyclerMatches, navController, view);
         recycler.setAdapter(matchAdapter);
         recycler.setLayoutManager(new LinearLayoutManager(this.getContext()));
 
         //Imposta un OnClickListenere sulla freccia per chiudera la comunicazione col database, aggiornare il vettore searchInfo e tornare al fragmnent precedente
-        back.setOnClickListener(v -> {
-            searchInfo[2] = "noData";
-            navController.navigateUp();
-        });
+        back.setOnClickListener(v -> new Thread(() -> {
+            while (progressStatus < 5) {
+                progressStatus++;
+                android.os.SystemClock.sleep(50);
+                handler.post(() -> snackbar.show());
+            }
+            handler.post(() -> {
+                searchInfo[2] = "noData";
+                navController.navigateUp();
+            });
+        }).start());
     }
 }

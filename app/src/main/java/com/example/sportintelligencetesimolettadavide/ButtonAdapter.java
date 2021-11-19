@@ -1,11 +1,11 @@
 package com.example.sportintelligencetesimolettadavide;
 
 import android.content.Context;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.navigation.NavController;
@@ -21,11 +21,16 @@ public class ButtonAdapter extends RecyclerView.Adapter<ButtonAdapter.ViewHolder
     private final List<String> values;
     private final String[] searchInfo;
     private final NavController navController;
+    private final View view;
 
-    public ButtonAdapter(List<String> values, String[] searchInfo, NavController navController) {
+    int progressStatus = 0;
+    Handler handler = new Handler();
+
+    public ButtonAdapter(List<String> values, String[] searchInfo, NavController navController, View view) {
         this.values = values;
         this.searchInfo = searchInfo;
         this.navController = navController;
+        this.view = view;
     }
 
     @NonNull
@@ -43,24 +48,32 @@ public class ButtonAdapter extends RecyclerView.Adapter<ButtonAdapter.ViewHolder
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         String value = values.get(position);
 
+        Snackbar snackbar = Snackbar.make(view, R.string.snackBarText, Snackbar.LENGTH_SHORT);
+
         //Adapter che andrà inserito nella recyclerView del frgamnet SearchFragment
         TextView textView = holder.textLabel;
         textView.setText(value);
 
         //Imposta un OnClickListener sull'elemento della recyclerView che permette di aggiornare il vettore searchInfo
         //e di navigare nella ricerca per poi arrivare ai risultati cercati
-        textView.setOnClickListener(v -> {
-            //Snackbar.make(v, R.string.snackBarText, Snackbar.LENGTH_SHORT).show();
-            if (searchInfo[1].equals("noData")) {
-                searchInfo[1] = textView.getText().toString();
-                NavDirections action = SearchFragmentDirections.actionTournamentSearchFragmentSelf2(searchInfo);
-                navController.navigate(action);
-            } else {
-                searchInfo[2] = textView.getText().toString();
-                NavDirections action = SearchFragmentDirections.actionTournamentSearchFragmentToMatchSelectorFragment(searchInfo);
-                navController.navigate(action);
+        textView.setOnClickListener(v -> new Thread(() -> {
+            while (progressStatus < 5) {
+                progressStatus++;
+                android.os.SystemClock.sleep(50);
+                handler.post(() -> snackbar.show());
             }
-        });
+            handler.post(() -> {
+                if (searchInfo[1].equals("noData")) {
+                    searchInfo[1] = textView.getText().toString();
+                    NavDirections action = SearchFragmentDirections.actionTournamentSearchFragmentSelf2(searchInfo);
+                    navController.navigate(action);
+                } else {
+                    searchInfo[2] = textView.getText().toString();
+                    NavDirections action = SearchFragmentDirections.actionTournamentSearchFragmentToMatchSelectorFragment(searchInfo);
+                    navController.navigate(action);
+                }
+            });
+        }).start());
     }
 
     @Override

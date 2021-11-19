@@ -1,5 +1,5 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <string name="app_name">SportIntelligenceTesiMolettaDavide</string>
+    <string name="app_name">SportIntelligence</string>
 
     <!-- HOME -->
     <string name="tennisHome">TENNIS</string>
@@ -52,7 +52,7 @@
         \t- Copia il tuo ID e incollalo nello spazio apposito  \n
         \t- Clicca il pulsante SALVA  \n
         \t- Ora potrai visualizzare i tuoi dati tramite il bot  \n
-        \t  @botname
+        \t  @SportIntelligenceBot
     </string>
     <string name="noChatID">INSERISCI IL TUO CODICE</string>
 

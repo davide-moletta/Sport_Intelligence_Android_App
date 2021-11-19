@@ -14,6 +14,7 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,6 +23,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
+
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,6 +50,9 @@ public class SearchResultFragment extends Fragment {
     List<Object> matchStat, quotes;
     List[] setsStat, setsHistory, setsFifteens, setsTiebreaks;
 
+    int progressStatus = 0;
+    Handler handler = new Handler();
+
     public SearchResultFragment() {
         // Required empty public constructor
     }
@@ -65,6 +71,8 @@ public class SearchResultFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        Snackbar snackbar = Snackbar.make(view, R.string.snackBarText, Snackbar.LENGTH_SHORT);
 
         sharedPreferences = this.requireActivity().getSharedPreferences("sharedPreferences", MODE_PRIVATE);
         fireBase = new FireBase(view, this);
@@ -319,7 +327,16 @@ public class SearchResultFragment extends Fragment {
         });
 
         //Imposta un OnClickListener per permettere la navigazione verso il fragment precedente
-        back.setOnClickListener(v -> navController.navigateUp());
+        back.setOnClickListener(v -> new Thread(() -> {
+            while (progressStatus < 5) {
+                progressStatus++;
+                android.os.SystemClock.sleep(50);
+                handler.post(() -> snackbar.show());
+            }
+            handler.post(() -> {
+                navController.navigateUp();
+            });
+        }).start());
     }
 
     //Trasforma una lista di oggetti in una stringa da inserire poi nelle label

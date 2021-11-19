@@ -19,6 +19,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -96,7 +97,7 @@ public class SearchFragment extends Fragment {
         }
 
         //Una volta ottenuti i dati dal database imposta l'adapter per la recyclerView come un buttonAdapter per la visualizzazione degli elementi
-        buttonAdapter = new ButtonAdapter(recyclerData, searchInfo, navController);
+        buttonAdapter = new ButtonAdapter(recyclerData, searchInfo, navController, view);
         recycler.setAdapter(buttonAdapter);
         recycler.setLayoutManager(new LinearLayoutManager(this.getContext()));
 
@@ -128,7 +129,7 @@ public class SearchFragment extends Fragment {
                         }
                     }
                     if (!searchedList.isEmpty()) {
-                        recycler.setAdapter(new ButtonAdapter(searchedList, searchInfo, navController));
+                        recycler.setAdapter(new ButtonAdapter(searchedList, searchInfo, navController, view));
                     }
                 } else {
                     recycler.setAdapter(buttonAdapter);
