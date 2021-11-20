@@ -37,6 +37,7 @@ public class SearchResultFragment extends Fragment {
     TextView tournamentName, tournamentInfo, firstPlayer, result, secondPlayer, duration, subTitleSetStats, subTitleHistory,
             matchStatsLabel, setStatsLabel, setHistoryLabel, quotesLabel;
     Spinner filterSpinner, setSpinner;
+
     ConstraintLayout matchInfoLayout, matchStatsLayout, setStatsLayout, setHistoryLayout, quotesLayout;
 
     boolean favourite = false, matchStatsInfo = true, setStatInfo = true, setHistoryInfo = true, quotesInfo = true;
@@ -183,30 +184,30 @@ public class SearchResultFragment extends Fragment {
         //se non sono presenti dati nasconde le relative finestre
         if (ObjectListToString(matchStat).equals("")) {
             matchStatsInfo = false;
-            matchStatsLayout.setVisibility(View.INVISIBLE);
+            matchStatsLayout.setVisibility(View.GONE);
         } else {
             matchStatsLabel.setText(ObjectListToString(matchStat));
         }
 
         if (ObjectListToString(quotes).equals("no data")) {
             quotesInfo = false;
-            quotesLayout.setVisibility(View.INVISIBLE);
+            quotesLayout.setVisibility(View.GONE);
         } else {
             quotesLabel.setText(ObjectListToString(quotes));
         }
 
         if (stat.length == 0) {
             setStatInfo = false;
-            setStatsLayout.setVisibility(View.INVISIBLE);
+            setStatsLayout.setVisibility(View.GONE);
         }
 
         if (history.length == 0) {
             setHistoryInfo = false;
-            setHistoryLayout.setVisibility(View.INVISIBLE);
+            setHistoryLayout.setVisibility(View.GONE);
         }
 
         if (!setStatInfo && !setHistoryInfo) {
-            setSpinner.setVisibility(View.INVISIBLE);
+            setSpinner.setVisibility(View.GONE);
         }
 
         //Assegna i dati raccolti alle verie textView
@@ -239,11 +240,12 @@ public class SearchResultFragment extends Fragment {
                     }
                 } else {
                     String filter = filters[i - 1];
-                    matchInfoLayout.setVisibility(View.INVISIBLE);
-                    matchStatsLayout.setVisibility(View.INVISIBLE);
-                    setStatsLayout.setVisibility(View.INVISIBLE);
-                    setHistoryLayout.setVisibility(View.INVISIBLE);
-                    quotesLayout.setVisibility(View.INVISIBLE);
+                    matchInfoLayout.setVisibility(View.GONE);
+                    matchStatsLayout.setVisibility(View.GONE);
+                    setStatsLayout.setVisibility(View.GONE);
+                    setHistoryLayout.setVisibility(View.GONE);
+                    quotesLayout.setVisibility(View.GONE);
+                    setSpinner.setVisibility(View.GONE);
 
                     String[] filterTypes = filter.split(":")[1].split("-");
 
@@ -256,9 +258,11 @@ public class SearchResultFragment extends Fragment {
                         }
                         if (type.equals("setStats") && setStatInfo) {
                             setStatsLayout.setVisibility(View.VISIBLE);
+                            setSpinner.setVisibility(View.VISIBLE);
                         }
                         if (type.equals("setHistory") && setHistoryInfo) {
                             setHistoryLayout.setVisibility(View.VISIBLE);
+                            setSpinner.setVisibility(View.VISIBLE);
                         }
                         if (type.equals("quotes") && quotesInfo) {
                             quotesLayout.setVisibility(View.VISIBLE);
@@ -333,9 +337,7 @@ public class SearchResultFragment extends Fragment {
                 android.os.SystemClock.sleep(50);
                 handler.post(() -> snackbar.show());
             }
-            handler.post(() -> {
-                navController.navigateUp();
-            });
+            handler.post(() -> navController.navigateUp());
         }).start());
     }
 
@@ -353,6 +355,7 @@ public class SearchResultFragment extends Fragment {
         return fullString.toString();
     }
 
+    //Trasforma la lista delle statistiche dei set in un vettore dove ogni posizione è un set e le stringhe sono pronte per essere aggiunte alla textView
     private String[] setListToString(List<String> listToConvert, int setNumber) {
         String[] sets = new String[setNumber];
         StringBuilder fullString;
@@ -374,6 +377,12 @@ public class SearchResultFragment extends Fragment {
         return sets;
     }
 
+    //Trasforma le liste games, fifteens e tiebreaks in un vettore dove ogni posizione è un set
+    //Le stringhe vengono unite seguendo il modello diretta.it
+    //game
+    //fifteens
+    //...
+    //tiebreaks
     private String[] setHistoryStringBuilder(List<String> games, List<String> fifteens, List<String> tiebreaks, int setNumber) {
         String[] sets = new String[setNumber];
         StringBuilder fullString;

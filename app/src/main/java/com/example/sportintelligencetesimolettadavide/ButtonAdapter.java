@@ -56,6 +56,7 @@ public class ButtonAdapter extends RecyclerView.Adapter<ButtonAdapter.ViewHolder
 
         //Imposta un OnClickListener sull'elemento della recyclerView che permette di aggiornare il vettore searchInfo
         //e di navigare nella ricerca per poi arrivare ai risultati cercati
+        //Avvia inoltre un Thread per la corretta visualizzazione della snackbar
         textView.setOnClickListener(v -> new Thread(() -> {
             while (progressStatus < 5) {
                 progressStatus++;

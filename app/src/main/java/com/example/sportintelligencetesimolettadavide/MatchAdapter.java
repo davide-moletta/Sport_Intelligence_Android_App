@@ -69,6 +69,7 @@ public class MatchAdapter extends RecyclerView.Adapter<MatchAdapter.ViewHolder> 
         constraintLayout = holder.constraintLayout;
 
         //Imposta un OnClickListener per passare alla completa visualizzazione dei dati del match selezionato
+        //Avvia un Thread per la corretta visualizzazione della snackbar
         constraintLayout.setOnClickListener(v -> new Thread(() -> {
             while (progressStatus < 5) {
                 progressStatus++;

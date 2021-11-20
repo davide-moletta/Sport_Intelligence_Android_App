@@ -20,8 +20,11 @@ public class MainActivity extends AppCompatActivity {
         //Nasconde l'action bar
         Objects.requireNonNull(getSupportActionBar()).hide();
         setContentView(R.layout.activity_main);
+
+        //Crea delle SharedPreferences in modo da salvare in locale i'ID della chat telegram
         sharedPreferences = getSharedPreferences("sharedPreferences", MODE_PRIVATE);
         editor = sharedPreferences.edit();
+        //Se non è ancora stato inserito nulla inserisce la stringa no ID
         if (!sharedPreferences.contains(TELEGRAM_CHAT_ID)){
             editor.putString(TELEGRAM_CHAT_ID, "no ID").commit();
         }

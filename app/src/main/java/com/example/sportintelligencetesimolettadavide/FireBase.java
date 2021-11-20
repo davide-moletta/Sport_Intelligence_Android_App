@@ -13,10 +13,13 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
 
+//Oggetto per la comunicazione con il database FireBase (usato per la comunicazione dei dati tra bot e app)
+
 public class FireBase {
     private static final String FILE_FILTERS_NAME = "filters.txt";
     private static final String FILE_FAVOURITE_NAME = "favouriteMatches.txt";
 
+    //Apre la comunicazione con il database grazie al file json aggiunto al progetto (vedi documentazione ufficiale firebase)
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     DocumentReference documentReference;
 
@@ -31,10 +34,12 @@ public class FireBase {
     }
 
     public void updateUser() {
+        //Crea una HashMap con i dati contenuti nei file
         HashMap<String, Object> user = new HashMap<>();
         user.put("Filters", fileFilter.load());
         user.put("FavouriteMatches", fileFavouriteMatches.load());
 
+        //Invia i dati al database creando un nuovo utente o sovrascrivendo i dati se già esistente
         documentReference = db.collection("Users").document(sharedPreferences.getString(TELEGRAM_CHAT_ID, ""));
         documentReference.set(user);
     }

@@ -52,11 +52,10 @@ public class TelegramBotFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        //Ottiene il valore della chat telegram tramite le SharedPreferences
         sharedPreferences = this.requireActivity().getSharedPreferences("sharedPreferences", MODE_PRIVATE);
         editor = sharedPreferences.edit();
         telegramChatID = sharedPreferences.getString(TELEGRAM_CHAT_ID, "");
-
-        System.out.println(telegramChatID);
 
         fireBase = new FireBase(view, this);
         navController = Navigation.findNavController(view);
@@ -65,21 +64,26 @@ public class TelegramBotFragment extends Fragment {
         saveButton = view.findViewById(R.id.saveChatid);
         back = view.findViewById(R.id.back);
 
+        //Se il valore della chat telegram era già stato impostato disabilita l'edit text e il bottone salva
         if (!telegramChatID.equals("no ID")) {
             chatId.setText(telegramChatID);
             chatId.setEnabled(false);
             saveButton.setEnabled(false);
         }
 
+        //Se l'utente clicca su salva viene controllato se è stato inserito qualcosa nel campo chatID
         saveButton.setOnClickListener(v -> {
             if (chatId.getText().toString().equals("")) {
                 Toast.makeText(v.getContext(), R.string.noChatID, Toast.LENGTH_SHORT).show();
             } else {
+                //Se l'utente ha inserito qualcosa viene aggiornato il valore della chatID
                 editor.putString(TELEGRAM_CHAT_ID, chatId.getText().toString()).commit();
 
+                //edit text e bottone sono disabilitati
                 chatId.setEnabled(false);
                 saveButton.setEnabled(false);
 
+                //L'utente viene inserito nel database FireBase
                 fireBase.updateUser();
             }
         });

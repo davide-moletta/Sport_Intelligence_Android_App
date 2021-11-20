@@ -87,6 +87,7 @@ public class MatchSelectorFragment extends Fragment {
         recycler.setLayoutManager(new LinearLayoutManager(this.getContext()));
 
         //Imposta un OnClickListenere sulla freccia per chiudera la comunicazione col database, aggiornare il vettore searchInfo e tornare al fragmnent precedente
+        //Avvia un Thread per la corretta zisualizzazione della snackbar
         back.setOnClickListener(v -> new Thread(() -> {
             while (progressStatus < 5) {
                 progressStatus++;

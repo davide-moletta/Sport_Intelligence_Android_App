@@ -70,6 +70,7 @@ public class HomeFragment extends Fragment {
         //Mostra il toast con il messaggio "NON ANCORA IMPLEMENTATO"
         basketButton.setOnClickListener(v -> toast.show());
 
+        //Naviga verso il fragment relativo al bot telegram
         telegramIcon.setOnClickListener(v -> navController.navigate(R.id.action_homeFragment_to_telegramBotFragment));
     }
 }
