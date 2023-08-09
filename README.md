@@ -1,5 +1,4 @@
-
-[embed]https://github.com/davide-moletta/Sport_Intelligence_Android_App/blob/master/Thesis.pdf[/embed] 
+https://github.com/davide-moletta/Sport_Intelligence_Android_App/blob/master/Thesis.pdf 
 
 # SportIntelligenceTesiMolettaDavide
 
