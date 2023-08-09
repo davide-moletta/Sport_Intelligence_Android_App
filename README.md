@@ -1,3 +1,6 @@
+
+[embed]https://github.com/davide-moletta/Sport_Intelligence_Android_App/blob/master/Thesis.pdf[/embed] 
+
 # SportIntelligenceTesiMolettaDavide
 
 #### NEO4J .CONF FILE TO ALLOW NON LOCAL CONNECTION
