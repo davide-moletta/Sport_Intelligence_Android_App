@@ -1,6 +1,9 @@
-https://github.com/davide-moletta/Sport_Intelligence_Android_App/blob/master/Thesis.pdf 
-
 # Sport Intelligence
+
+Project for the BSc thesis.
+
+[Thesis](Thesis.pdf)
+[Slides](Slides.pdf)
 
 #### NEO4J .CONF FILE TO ALLOW NON LOCAL CONNECTION
 
